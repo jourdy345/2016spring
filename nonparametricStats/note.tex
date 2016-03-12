@@ -1,0 +1,283 @@
+\documentclass[11pt]{article}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=0.6in]{geometry} % set the margins to 1in on all sides
+\usepackage{graphicx} % to include figures
+\usepackage{amsmath} % great math stuff
+\usepackage{amsfonts} % for blackboard bold, etc
+\usepackage{amsthm} % better theorem environments
+% various theorems, numbered by section
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{courier}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{titlesec}
+\usepackage{empheq}
+\usepackage{tikz}
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bd}[1]{\mathbf{#1}} % for bolding symbols
+\newcommand{\RR}{\mathbb{R}} % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}} % for Integers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+\begin{document}
+\nocite{*}
+
+\title{Nonparametric Statistics}
+
+\author{Daeyoung Lim\thanks{Prof. Sangbum Choi} \\
+Department of Statistics \\
+Korea University}
+
+\maketitle
+
+\section{Regression analysis}
+\begin{itemize}
+  \item It is a method for investigating functional relationships among variables.
+  \item (Ex1.) Whether the sale price of a home is related to physical characteristics of the building and taxes paid on the building.
+  \item (Ex2.) Whether cigarette consumption is related to socioeconomic an demographic variables (such as ag, sex, education, income and price of cigarette).
+  \item The relationship is expressed in the form of an equation connecting:
+  $$
+    \text{response variable} \leftarrow \text{predictor variables}.
+  $$
+  \item response variable = dependent variable, output
+  \item predictor variables = covariates, regressors, factors, carriers, input etc
+  \item $Y$: response variable
+  \item $X_{1}, X_{2}, \ldots , X_{p}$: predictor variables
+  \item The relationship between $Y$ and $X_{1}, X_{2}, \ldots , X_{p}$ can be approximated by the regression model
+  $$
+    Y = f\left(X_{1}, X_{2}, \ldots , X_{p}\right) +\epsilon,
+  $$
+  where $\epsilon$ is a random error.
+  \item The function $f\left(X_{1}, X_{2}, \ldots , X_{p}\right)$ describes the relationship between $Y$ and $X_{1}, X_{2}, \ldots , X_{p}$.
+  \item In essence, statistical modeling(or learning) refers to a set of approaches for estimating $f$.
+  \item (\textbf{Parametric models}) An example is the linear regression model. Interpretable but less flexible. More appropriate for inference.
+  \item (\textbf{Nonparametric models}) \begin{itemize} \item Does not make explicit assumptions about the functional form of $f$. \item Very flexible but less interpretable. more appropriate for prediction. \item May require a very large number of observations to obtain an accurate estimate. \item If the sample size is small, then parametric models are recommended. \end{itemize}
+  \item The simple and convenient approach is to consider a linear model. However, there is no general reason to think linear approximations ought to be good.
+  \item If $X$ takes on only a finite set of values, one can use
+  $$
+    \hat{f}\left(x\right) = \frac{1}{\#\left\{i: x_{i}= x \right\}}\sum_{i:x_{i}=x} y_{i}.
+  $$
+  \item Unfortunately, this only works if $X$ has a finite set of values. If $X$ is continuous, the function will always be undersampled.
+  \item k-nearest neighbor(KNN) fit for $\widehat{Y}$:
+  $$
+    \widehat{Y}\left(x\right) = \frac{1}{k}\sum_{x_{i}\in N_{k}\left(x\right)} y_{i},
+  $$
+  where $N_{k}\left(x\right)$ is the neighbourhood of $x$ dened by the $k$ closest points $x_{i}$. If $k$ is small, the estimated regression line will be wriggly, statistically speaking, `\emph{overfitted}'. On the other hand, if $k$ is large, then the function will be too smooth, statistically, `\emph{underfitted}'. The main focus when using KNN regression is to choose the optimal value for $k$, which can be obtained in a data-driven fashion. In nonparametric statistics, $k$ is called the `\emph{tuning parameter}'. Other nonparametric models will also have some kind of tuning parameter(s).
+  \item To use a KNN regression, we need to pick $k$ somehow. This means we need to decide the degree of smoothing.
+  \item As we increase $k$, we get smoother functions; in the limit $k=n$ and we just get back to constant.
+  \item Thus, many nonparametric methods involve smoothing techniques.
+  \item There will always exist a trade-off between flexibility and interpretability where one should sacrifice either one to gain more of the other.
+  \item LASSO, which is used to select a meaningful subset of variables, is very much inclined toward interpretability. On the diametrical opposite, support vector machine or bagging drop most of the requirement for interpretability but attempt to achieve a high degree of flexibility.
+\end{itemize}
+\subsection{Mean squared error or risk}
+\begin{itemize}
+  \item Suppose $Y$ is a random variable and we try to predict $Y$ by guessing a single value.
+  \item What is the best guess? More formally, what is the optimal point forecast for $Y$?
+  \item A reasonable starting point is to consider the (expected) mean squared error (MSE):
+  $$
+    \text{Risk} = \text{MSE}\left(a\right) = \mathbb{E}\left[ \left(Y-a\right)^{2}\right].
+  $$
+  \item (\emph{Bias-Variance Trade-off}) \begin{align*} \text{MSE}\left(a\right) &= \mathbb{E}\left[\left(Y-a\right)^{2} \right]= \left[\mathbb{E}\left(Y-a\right)\right]^{2} + \opn{Var}\left(Y\right)\\ &= \left[\mathbb{E}Y -a \right]^{2} + \opn{Var}\left(Y\right)\\ \text{Risk(MSE)} &= \text{Bias}^{2} + \text{Variance} \end{align*}
+  \item Now imagine we have two random variables $\left(X,Y\right)$.
+  \item We may want our prediction to be a function $f\left(X\right)$. Consider
+  \begin{align*}
+    \opn{MSE}\left[f\left(x\right)\right] &= \equiv \mathbb{E}\left[ \left(Y-f\left(x\right)\right)^{2}\right]\\
+    &= \mathbb{E}\left[\mathbb{E}\left[\left(Y-f\left(X\right)\right)^{2}\middle|X\right]\right]\\
+    &= \mathbb{E}\left[\opn{Var}\left(Y|X\right)+\mathbb{E}\left[Y-f\left(X\right)|X\right]\right]
+  \end{align*}
+  \item \textbf{Inference} procedures concern constructing the estimate $\hat{f}$ for $f$, using a set of data sets:
+  $$
+    \left\{\left(x_{1}, y_{1}\right), \ldots , \left(x_{n}, y_{n}\right) \right\},
+  $$
+  which is often called as training data in statistical learning.
+  \item \textbf{Prediction} procedures make a prediction with $\hat{f}\left(x_{0}\right)$ for $y_{0}$, where $\left(x_{0}, y_{0}\right)$ is a new observation. Note that $\left(x_{0},y_{0}\right)$ has no contribution to estimating $\hat{f}$.
+  \item In many situations, a set of inputs $X$ are readily available, but the output $Y$ cannot be easily obtained.
+  \item In this setting, we can predict $Y=f\left(X\right) + \epsilon$ using $\widehat{Y}=\hat{f}\left(X\right)$ where $\hat{f}$ represents our estimate for $f$.
+  \item The accuracy of $\widehat{Y}$ as a prediction for $Y$ depends on two quantities: reducible error and irreducible error.
+  \item The best prediction can minimize the MSE:
+  \begin{align*}
+    \mathbb{E}\left[\left(Y-\widehat{Y}\right)^{2}\right] &= \mathbb{E}\left[f\left(X\right)+\epsilon - \hat{f}\left(X\right)\right]^{2} \\
+    &= \underbrace{\left[f\left(X\right) - \hat{f}\left(X\right)\right]^{2}}_{\text{reducible error}} + \underbrace{\opn{Var}\left(\epsilon\right)}_{\text{irreducible error}}
+  \end{align*}
+\end{itemize}
+After fitting the model with the training dataset, we can evaluate how well the fitted model works with newly obtained test data. In a very simplistic manner, inference refers to the process where we use the training data to fit the model whereas prediction refers to using new data to get the predicted values.
+
+\subsection{Supervised vs Unsupervised learning}
+\begin{itemize}
+  \item Most statistical learning problems fall into one of two categories: supervised or unsupervised.
+  \item \textbf{Supervised} learning: For predictor measurement(s) $x_{i}, i = i, \ldots , n$, there is an associated response $y_{i}$.
+  \item \textbf{Unsupervised} learning: For every observation $i = 1, \ldots , n$, we observe a vector of measurements $x_{i}$ but no associated response $y_{i}$.
+  \begin{itemize}\item It includes clustering analysis, which is to ascertain whether the observations fall into relatively distinct groups.  \end{itemize}
+\end{itemize}
+\subsection{Regression vs. Classification}
+\begin{itemize}
+  \item Variables can be characterized as either quantitative or qualitative:
+  \begin{itemize}
+    \item \textbf{Quantitative}: height, income, age, stock price, etc
+    \item \textbf{Qualitative}: gender (male, female), marital status (single, married, or divorced)
+  \end{itemize}
+  \item We tend to refer to problems with a quantitative response as regression problems, while those involving a qualitative response are often referred to as classification problems.
+\end{itemize}
+\subsection{Measuring the quality of fit}
+\begin{itemize}
+  \item In order to evaluate the performance of a statistical method, we need some way to measure how well its predictions actually match the observed data.
+  \item To this aim, one might consider the MSE.
+  $$
+    \text{MSE} = \frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\hat{f}\left(x_{i}\right)\right)^{2}
+  $$
+  \item Note that estimation of $\hat{f}$ is based on the training data. But in general, we do not really care how well the method works on the training data.
+  \item Rather, we are interested in the accuracy of the predictions when applying the method to previously unseen test data.
+  \item We wish our estimate $\hat{f}$ has a good predictive power:
+  $$
+    y_{0}\approx \hat{f}\left(x_{0}\right),
+  $$
+  where $\left(x_{0},y_{0}\right)$ is a new observation.
+  \item If we had a large number of test observations, then we could compute the so-called test MSE:
+  $$
+    \opn{Ave}\left\{\hat{f}\left(x_{0}\right)-y_{0} \right\}^{2} = \frac{1}{m}\sum_{i=1}^{m}\left\{\hat{f}\left(x_{0}^{i}-y_{0}^{i}\right) \right\}^{2},
+  $$
+  which is the average squared prediction error for these test observations.
+  \item We'd like to select the model for which \textbf{the test MSE is as small as possible}.
+  \item We should select a model that minimizes test mse is as small as possible.
+  \item Instead, can we simply select a statistical method that minimizes the training MSE? DOes it also minimize the test MSE?
+  \item Unfortunately, there is a fundamental problem with this strategy. (The answer is NO!)
+  \item For example, suppose that data were generated from
+  $$
+    \text{true}: Y = 10 + 2x + x^{2} + \epsilon
+  $$
+  \item Then we applied the following models to the data:
+  \begin{itemize}
+    \item (a) $Y = \beta_{0}+\beta_{1}x + \epsilon $
+    \item (b) $Y = \beta_{0} + \beta_{1}x + \beta_{2}x^{2} + \epsilon $
+    \item (c) $Y = \beta_{0} + \beta_{1}x + \beta_{2}x^{2} + \beta_{3}x^{3} + \epsilon $
+    \item (d) $Y = \beta_{0} + \beta_{1}x + \beta_{2}x^{2} + \beta_{3}x^{3} + \beta_{4}x^{4} + \epsilon $
+  \end{itemize}
+  \item Obviously, model (b) should be selected, because it includes the case of the true model.
+  \item You can minimize the training MSE as much as possible by using more flexible models (i.e., letting $d \to \infty$).
+  \item This is not a sensible model selection approach.
+  \item Instead, we \textbf{should} use the test MSE to measure the performance of the method.
+  \item As model flexibility increases, the training MSE will decrease but the test MSE may not.
+  \item Too flexible a model will result in overfitting. Too restrictive a model will result in underfitting.
+\end{itemize}
+\section{Bias-Variance trade-off}
+\begin{itemize}
+  \item The (expected test) MSE can be decomposed as, for a given $x_{0}$,
+  $$
+    \mathbb{E}\left(y_{0}-\hat{f}\left(x_{0}\right)\right)^{2} = \opn{Var}\left(\hat{f}\left(x_{0}\right)\right) + \left[\opn{Bias}\left(\hat{f}\left(x_{0}\right)\right) \right]^{2} + \opn{Var}\left(\epsilon\right)
+  $$
+  where the bias is the difference between the fitted value and the true value for each data point. It is well-observed that a model with high bias will have low variance and vice versa.
+  \item To understand the bias-variance trade-off better, let $f$ be a pdf and consider estimating $f(0)$. Let $h>0$ be a small number.
+  \item Then we can show that
+  $$
+    \opn{Bias}\approx \frac{f''\left(0\right)h^{2}}{24}, \opn{Variance}\approx \frac{f\left(0\right)}{nh}.
+  $$
+  \item Therefore,
+  $$
+    \opn{MSE} = \text{Bias}^{2} + \text{Variance} \approx \frac{\left(f''\left(0\right)\right)^{2}h^{4}}{576} + \frac{f\left(0\right)}{nh} \equiv Ah^{4} + \frac{B}{nh}.
+  $$
+  To prove this,
+  \begin{align*}
+    \mathbb{P}_{h}&\equiv \mathbb{P}\left(-\frac{h}{2} < x < \frac{h}{2}\right) = \int_{-h/2}^{h/2} f\left(x\right)\, dx \approx f\left(0\right)h\\
+    f\left(0\right) &\approx \frac{\mathbb{P}_{h}}{h}\\
+    X &= \text{\# of observations in }\left(-\frac{h}{2}, \frac{h}{2}\right) \sim \opn{Bin}\left(n, \mathbb{P}_{h}\right)\\
+    \mathbb{E}\left[X\right] &= n\mathbb{P}_{h}, \opn{Var}\left[X\right] = n\mathbb{P}_{h}\left(1-\mathbb{P}_{h}\right)\\
+    \hat{f}\left(0\right) &\approx \frac{\widehat{\mathbb{P}_{h}}}{h} = \frac{X}{nh}
+  \end{align*}
+  By Taylor expansion,
+  \begin{align*}
+    f\left(X\right) &\approx f\left(0\right) + Xf'\left(0\right) + \frac{X^{2}}{2}f''\left(0\right)\\
+    \mathbb{P}_{h} &= \int_{-h/2}^{h/2}f\left(x\right) \, dx \approx \int_{-h/2}^{h/2} \left(f\left(0\right)+xf'\left(0\right)+\frac{x^{2}}{2}f''\left(0\right)\right)\,dx\\
+    &\approx hf\left(0\right) +\frac{h^{3}}{24}f''\left(0\right)\\
+    \mathbb{E}\left[\hat{f}\left(0\right)\right] &\approx \frac{\mathbb{E}\left[X\right]}{nh} = \frac{\mathbb{P}_{h}}{h}\approx f\left(0\right) + \frac{h^{2}}{24}f''\left(0\right)\\
+    \text{Bias} &= \mathbb{E}\left[\hat{f}\left(0\right)\right] - f\left(0\right) \approx \frac{h^{2}}{24}f''\left(0\right)\\
+    \opn{Var}\left[\hat{f}\left(0\right)\right] &\approx \frac{\opn{Var}\left[X\right]}{n^{2}h^{2}} = \frac{n\left(1-\mathbb{P}_{h}\right)\mathbb{P}_{h}}{n^{2}h^{2}}\\
+    &\approx \frac{\mathbb{P}_{h}}{nh^{2}} \quad (\because \mathbb{P}_{1}\approx 0, \; 1-\mathbb{P}_{h} \approx 1)\\
+    &\approx \frac{hf\left(0\right) + \frac{h^{3}}{24}f''\left(0\right)}{nh^{2}}\\
+    &= \frac{f\left(0\right)}{nh} + \frac{f''\left(0\right)h}{24n}\\
+    &\approx \frac{f\left(0\right)}{nh}\\
+    \text{MSE} &= \text{Bias}^{2} + \text{Variance}\\
+    &= \frac{h^{4}}{24}\left(f''\left(0\right)\right)^{2} + \frac{f\left(0\right)}{nh}\\
+    &\equiv Ah^{4} + \frac{B}{nh}
+  \end{align*}
+\end{itemize}
+\section{Classification Problems}
+\begin{itemize}
+  \item A severely injured patient is admitted to a trauma center. Should treat massibe blood transfusion or not?
+  $$
+    y_{i} = \begin{cases}1, & \text{massive transfusion}\\ 0, & \text{no massive transfusion}  \end{cases}
+  $$
+  \item (\emph{Training error rate})
+  $$
+    \text{Training error rate}= \frac{1}{n}\sum_{i=1}^{n}I\left(y_{i}\neq \hat{y}_{i}\right)
+  $$
+  \item (\emph{Testing error rate})
+  $$
+    \text{Testing error rate} = \opn{Ave}\left(I\left(y_{i}\neq \hat{y}_{i}\right)\right)
+  $$
+  \item (\emph{Bayes classifier}) Bayes classifier assign a subject with $x_{0}$ to the class $j$, for which $\mathbb{P}\left(Y=j|X=x_{0}\right) $ is the largest.
+  \item In theory, the Bayes classifier is optimal.
+  \item The Bayes classifier produces the lowest possible test error rate, called the \emph{Bayes error rate}.
+  \item In general, the overall Bayes error rate is given by
+  $$
+    1 - \mathbb{E}\left(\max_{j}\mathbb{P}\left(Y=j|X=x_{0}\right) \right)
+  $$
+  \item However, it depends on unknown conditional probability $\mathbb{P}\left(Y=j|X=x_{0} \right)$, so computing Bayes classifier is impossible for real data. One alternative to Bayes classifier would be again KNN classifier.
+  \item (\emph{KNN}) Choosing too small a number for $k$, the model will end up overfitting the data. This may yield small bias but recall the bias-variance trade-off. If overfitting occurs, the model will most likely not be able to capture enough variability thereby firing errors once new data come in. On the other hand, if too large a number for $k$ is chosen, the model will wind up underfitting the data, only to find that it does not give us satisfactory performance or accuracy.
+\end{itemize}
+\end{document}

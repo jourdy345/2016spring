@@ -1,0 +1,212 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[usenames, dvipsnames]{color}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Real Analysis \\ HW1}
+\runningheader{Daeyoung Lim}{Real Analysis}{HW1}
+\begin{questions}
+   \question
+   If $G$ is open and $P$ is a special polygon with $P \subset G$, prove there exists a special polygon $P'$ such that $P \subset P' \subset G$ and $\lambda\left(P\right) <\lambda\left(P'\right)$.
+   \begin{solution}
+      Recall the definition of a measure on an open set $G$:
+      $$
+         \lambda\left(G\right) := \sup \left\{\lambda\left(P\right): P \subset G, P \text{ is a special polygon} \right\}.
+      $$
+      We have two occasions: 
+      \begin{enumerate}
+      \item $\lambda\left(G\right) < \infty$.
+      \item $\lambda\left(G\right) = \infty$. \end{enumerate}
+      Let's address the first case.
+      \begin{enumerate}
+         \item If $\lambda\left(G\right) < \infty$, according to the definition of \emph{supremum}, it satisfies the following property:
+         $$
+            \lambda\left(G\right) - \epsilon = \lambda\left(P\right)
+         $$
+         for some $\epsilon > 0$. Then by the definition of \emph{supremum}, there exists an element $\lambda\left(P'\right) \in \left\{\lambda\left(P\right): P \subset G, P \text{ is a special polygon} \right\}$ such that
+         $$
+            \underbrace{\lambda\left(G\right) - \epsilon < \lambda\left(P'\right)}_{\lambda\left(P\right) < \lambda\left(P'\right)} < \lambda\left(G\right).
+         $$
+         \item If $\lambda\left(G\right) = \infty$, the set $\left\{\lambda\left(P\right): P \subset G, P\text{ is a special polygon} \right\}$ is not bounded above. Therefore, it immediately follows that there exists an element $$\lambda\left(P'\right) \in \left\{\lambda\left(P\right): P \subset G, P\text{ is a special polygon} \right\}$$ such that $\lambda\left(P\right) < \lambda\left(P'\right)$.
+      \end{enumerate}
+   \end{solution}
+   \question
+   \textbf{(a)} Prove that if $G$ is a bounded open set, then $\lambda\left(G\right)<\infty$.\\
+   \textbf{(b)} In the plane $\mathbb{R}^{2}$ let
+   $$
+      G = \left\{\left(x,y\right): 1<x \text{ and } 0<y<\frac{1}{x} \right\}.
+   $$
+   Prove that $\lambda\left(G\right) = \infty$\\
+   \textbf{(c)} In the plane $\mathbb{R}^{2}$ let
+   $$
+      G = \left\{\left(x,y\right): 0<x \text{ and } 0<y<e^{-x} \right\}.
+   $$
+   Prove that $\lambda\left(G\right)=1$. \\
+   \textbf{(d)} In the plane $\mathbb{R}^{2}$ let
+   $$
+      G = \left\{\left(x,y\right): 1<x \text{ and } 0<y<x^{-a} \right\},
+   $$
+   where $a$ is a real number satisfying $a>1$. Prove that $\lambda\left(G\right) = 1/\left(a-1\right)$.
+   \begin{solution}
+
+   \end{solution}
+
+   \begin{solution}
+
+   \end{solution}
+
+   \begin{solution}
+
+   \end{solution}
+
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Let $G_{i}, i \in \mathcal{I}$, be a collection of disjoint open sets in $\mathbb{R}^{n}$. Prove that only countably many of these sets are nonempty.
+   \begin{solution}
+      We can use the fact that $\mathbb{Q}^{n}$ is dense in $\mathbb{R}^{n}$, which is put another way as such: every neighbourhood in $\mathbb{R}^{n}$ contains a point of $\mathbb{Q}^{n}$. Therefore, if $G_{i}$ is a nonempty open set, every point in $G_{i}$ is an interior point with a neighbourhood with a point in $\mathbb{Q}^{n}$ contained in $G_{i}$. Since $G_{i}$ are disjoint, they must not share a point in $\mathbb{Q}^{n}$, which concludes that the number of nonempty open sets in the collection $\left\{G_{i}\right\}$ is as large as the cardinality of $\mathbb{Q}^{n}$. $\mathbb{Q}^{n}$ has the same cardinality as $\mathbb{N}^{n}$ thereby lending itself to the definition of \emph{countability}. 
+   \end{solution}
+   \question
+   \emph{The structure of open sets in} $\mathbb{R}$.\\
+   Prove that every nonempty open subset of $\mathbb{R}$ can be expressed as a countable disjoint union of open intervals:
+   $$
+      G = \bigcup\limits_{k} \left(a_{k}, b_{k}\right),
+   $$
+   where the range on $k$ can be finite or infinite. Furthermore, show that this expression is unique except for the numbering of the component intervals.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   In the notation of the previous problem, prove that $\lambda\left(G\right) = \sum_{k} \left(b_{k}-a_{k}\right)$.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Prove that the open disk $B\left(0,1\right)$ in $\mathbb{R}^{2}$ cannot be expressed as a disjoint union of open rectangles.
+   \begin{solution}
+
+   \end{solution}
+
+   \question
+   Prove that every nonempty open subset of $\mathbb{R}^{n}$ can be expressed as a countable union of nonoverlapping special rectangles, which may be taken to be cubes:
+   $$
+      G = \bigcup_{k=1}^{\infty}I_{k}.
+   $$
+   The range on $k$ must be infinite. Why?\\
+   (HINT: First pave $\mathbb{R}^{n}$ with cubes of side 1. Select those cubes which are contained in $G$. Then bisect the sides of the remaining cubes to obtain cubes with side $1/2$. Select those cubes which are contained in $G$.)
+   \begin{solution}
+
+   \end{solution}
+   \question
+      In the notation of Problem 2, calculate the measure of the totality of discarded open sets. That is, calculate $\lambda \left(\bigcup_{k=1}^{\infty} G_{k} \right)$.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   let $\epsilon > 0$. Prove that there exists an open set $G \subset \mathbb{R}$ such that $\mathbb{Q} \subset G$ and $\lambda\left(G\right) < \epsilon$. (This result will probably surprise you: Although $G$ is open and contains every rational number, ``most'' of $\mathbb{R}$ is in $G^{c}$.)
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Use your method of working Problem 12 to give a proof that $\mathbb{R}$ is uncountable (cf. Section 1B).
+   \begin{solution}
+
+   \end{solution}
+\end{questions}
+\end{document}

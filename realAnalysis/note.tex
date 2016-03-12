@@ -1,0 +1,127 @@
+\documentclass[11pt]{article}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=0.6in]{geometry} % set the margins to 1in on all sides
+\usepackage{graphicx} % to include figures
+\usepackage{amsmath} % great math stuff
+\usepackage{amsfonts} % for blackboard bold, etc
+\usepackage{amsthm} % better theorem environments
+% various theorems, numbered by section
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{courier}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{titlesec}
+\usepackage{empheq}
+\usepackage{tikz}
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bd}[1]{\mathbf{#1}} % for bolding symbols
+\newcommand{\RR}{\mathbb{R}} % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}} % for Integers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+\begin{document}
+\nocite{*}
+
+\title{Real Analysis}
+
+\author{Daeyoung Lim\thanks{Prof. Kyunghun Kim} \\
+Department of Statistics \\
+Korea University}
+
+\maketitle
+
+\section{Lebesgue Measure}
+\begin{itemize}
+  \item \emph{(Stage 3)} Let $G$ be an open set such that $\lambda\left(G\right)=\sup \left\{\lambda\left(p\right): p\subset G \right\}$ where $p$ is a special polygon.
+  \item \emph{(State 4)} Let $K$ be a compact set such that $\lambda\left(K\right)=\inf\left\{\lambda\left(G\right): K \subset G \right\} $ where $G$ is an open set. If $K$ is a special polygon, then we have 2 definitions of $\lambda\left(K\right)$. Let $K=\bigcup_{i=1}^{n} I_{i}$ where $I_{i}$ are non-overlapping.
+  \begin{align*}
+    \text{old } \lambda\left(K\right) &\equiv \sum_{i=1}^{n}\lambda\left(I_{i}\right) = \alpha\\
+    \text{new } \lambda\left(K\right) &= \beta = \inf \left\{\lambda\left(G\right): K \subset G \right\}
+  \end{align*}
+  $\alpha \leq \beta \leftarrow$ If $G \supset K, \lambda\left(G\right) \geq \lambda\left(K\right) = \alpha $. To prove, $\beta \leq \alpha$, we will show $\forall \epsilon > 0$, $\exists \text{open } G \supset K$ such that $\lambda\left(G\right) \leq \alpha + \epsilon$. Choose $I_{k}'$ such that $I_{k} \subset \left(I_{k}'\right)^{\circ}$ and $\lambda\left(I_{k}'\right) <\lambda\left(I_{k}\right) + \epsilon/N$, then $K = \bigcup_{k=1}^{N}I_{k} \subset \bigcup_{k=1}^{N}\left(I_{k}'\right)^{\circ}$. Then,
+  $$
+    \beta \leq \overbrace{\lambda\left(\bigcup\limits_{k=1}^{N}\left(I_{k}'\right)^{\circ}\right) \leq \lambda\left(I_{k}'\right)^{\circ}}^{\text{O5}} = \sum_{k=1}^{N}\lambda\left(I_{k}'\right)
+  $$
+\end{itemize}
+\subsection{Properties}
+\begin{itemize}
+  \item \emph{(C1)} $0\leq \lambda\left(K\right) < \infty$: A measure of a compact set is by definition the infimum of the open sets that contain the compact set. Therefore, if we can define a measure that is finite with respect to one of the open sets, then the measure of the compact set also has to be finite.
+  \item \emph{(C2)} $K_{1} \subset K_{2} \implies \lambda\left(K_{1}\right) \leq \lambda\left(K_{2}\right)$: $\left\{\lambda\left(G\right): K_{1}\subset G \right\} \supset \left\{\lambda\left(G\right): K_{2}\subset G \right\}$.
+  \item \emph{(C3)} $\lambda\left(K_{1}\cup K_{2}\right) \leq \lambda\left(K_{1}\right) + \lambda\left(K_{2}\right)$: enough to show $\lambda\left(K_{1}\cup K_{2}\right) \leq \lambda\left(G_{1}\right) + \lambda\left(G_{2}\right)$ where $\forall G \supset K_{1}$ and $\forall G \supset K_{2}$. \underline{Proof is as follows}. $\lambda\left(K_{1}\cup K_{2}\right) \leq \lambda\left(G_{1}\cup G_{2}\right)$ since the measures of $K_{1}$ and $K_{2}$ are defined to be the infimum of the measures assigned on $G_{1}, G_{2}$ that contain them. Further, $\lambda\left(G_{1}\cup G_{2}\right) \leq \lambda\left(G_{1}\right) +\lambda\left(G_{2}\right)$ by O5. (Q.E.D.)
+  \item \emph{(C4)} If $K_{1}, K_{2}$ are disjoint, $\lambda\left(K_{1}\cup K_{2}\right) \geq \lambda\left(K_{1}\right)+\lambda\left(K_{2}\right)$: Recall that $\lambda\left(K_{1}\cup K_{2}\right) = \inf \left\{\lambda\left(G\right): K_{1}\cup K_{2}\subset G \right\}$. We need $\lambda\left(K_{1}\right) +\lambda\left(K_{2}\right) \leq \lambda\left(G\right)$ for any open $G$ containing $K_{1}\cup K_{2}$. Let $K_{1}\cup K_{2} \subset G$. Then $\exists G_{1}, G_{2}$ disjoint open sets such that $K_{1} \subset G_{1} \subset G \; \& \; K_{2} \subset G_{2} \subset G$.
+\end{itemize}
+\subsection{Outer and Inner measures}
+\textbf{Definition} For $A \subset \mathbb{R}^{n}$, define 
+\begin{align*}
+  \lambda^{*}\left(A\right) &= \inf \left\{\lambda\left(G\right): A\subset G^{\text{open}} \right\}:\text{ outer measure}\\
+  \lambda_{*}\left(A\right) &= \sup \left\{\lambda\left(K\right): A \supset K^{\text{cpt}} \right\}:\text{ inner measure}
+\end{align*}
+\textbf{Properties}
+\begin{itemize}
+  \item \emph((*1)) $\lambda_{*}\left(A\right)\leq \lambda^{*}\left(A\right)$ if $K^{\text{cmp}} \subset A \subset G^{\text{open}}$ because $\lambda\left(K\right) \leq \lambda\left(G\right)$.
+  \item \emph{(*2)} $A \subset B  \implies \lambda^{*}\left(A\right) \leq \lambda^{*}\left(B\right) \& \lambda_{*}\left(A\right) \leq \lambda_{*}\left(B\right)$.
+  \item \emph{(*3)} $\lambda^{*}\left(\bigcup_{k=1}^{\infty}A_{k}\right) \leq \sum_{k=1}^{\infty}\lambda^{*}\left(A_{k}\right)$.
+\end{itemize}
+The proof for \emph{(*2)} is as follows.
+\begin{align*}
+  \left\{\lambda\left(G\right): A \subset G^{\text{open}} \right\} &\supseteq \left\{\lambda\left(G\right): B \subset G \right\}\\
+  \left\{\lambda\left(K\right): K^{\text{cpt}} \subset A \right\} &\subseteq \left\{\lambda\left(K\right): K^{\text{cpt}} \subset B \right\}
+\end{align*}
+The proof for \emph{(*3)} is as follows. Let $\epsilon > 0$. Take open $G_{k} \supset A_{k}$ such that $\lambda^{*}\left(A_{k}\right) + \epsilon 2^{-k} \geq \lambda\left(G_{k}\right)$. 
+\end{document}

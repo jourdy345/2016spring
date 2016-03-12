@@ -1,0 +1,155 @@
+\documentclass[11pt]{article}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=0.6in]{geometry} % set the margins to 1in on all sides
+\usepackage{graphicx} % to include figures
+\usepackage{amsmath} % great math stuff
+\usepackage{amsfonts} % for blackboard bold, etc
+\usepackage{amsthm} % better theorem environments
+% various theorems, numbered by section
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{courier}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{titlesec}
+\usepackage{empheq}
+\usepackage{tikz}
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bd}[1]{\mathbf{#1}} % for bolding symbols
+\newcommand{\RR}{\mathbb{R}} % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}} % for Integers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+\begin{document}
+\nocite{*}
+
+\title{Math For Social Sciences}
+
+\author{Daeyoung Lim\thanks{Prof. Junghwan Choi} \\
+Department of Statistics \\
+Korea University}
+
+\maketitle
+
+\section{Functions}
+\subsection{Definition}
+Given two sets $A, B$, a rule that maps $\forall x \in A$ to $y \in B$ is called a \emph{function}. The standard notation is
+$$
+  y = f\left(x\right), f:x\mapsto y\text{ or } f:A\mapsto B.
+$$
+
+\subsection{Inverse function}
+For an inverse function to be defined, the original function should be one-to-one by which switching the domain and range still satisfies the definition of a function.
+
+\begin{align*}
+  f\left(x\right) &= \underbrace{\frac{f\left(x\right) +f\left(-x\right)}{2}}_{f_{1}\left(x\right)} +\underbrace{\frac{f\left(x\right)-f\left(-x\right)}{2}}_{f_{2}\left(x\right)}\\
+  &= f_{1}\left(x\right) +f_{2}\left(x\right)\\
+  f_{1}\left(-x\right) &= \frac{f\left(-x\right)+f\left(x\right)}{2} = f_{1}\left(x\right) \\
+  f_{2}\left(-x\right) &= \frac{f\left(-x\right) -f\left(x\right)}{2} = -f_{2}\left(x\right)
+\end{align*}
+
+\subsection{Polynomials}
+$$
+  P\left(x\right) = a_{n}x^{n} + a_{n-1}a^{n-1} + \cdots +a_{2}x^{2} + a_{1}x + a_{0},\quad n \in \mathbb{Z}_{+}
+$$
+There are several properties of polynomials.
+\begin{enumerate}
+  \item $P\left(x\right) = x^{n}$ is an even function if $x = 2k$ and an odd function if $n = 2k +1$.
+  \item $P\left(a\right) = 0 \implies \left(x-a\right)|P\left(x\right)$.
+  \item \emph{(Weierstrauss approximation theorem)} If a function $f\left(x\right)$ is continuous on a closed interval $\left[a,b\right]$, then there exists an approximation for $f\left(x\right)$ on the same closed interval $\left[a,b\right]$.
+\end{enumerate}
+Suppose there are two circles with radii $r_{1}, r_{2}$ respectively such that $r_{1} > r_{2}$. If the same length $\Delta$ was added to the circumferences of the two circles, how larger have the radii of both circles become?
+\begin{align*}
+  \frac{2\pi r_{1} + \Delta}{2\pi} &= r_{1}'\\
+  \frac{2\pi r_{2} + \Delta}{2\pi} &= r_{2}'\\
+  r_{1}' - r_{1} &= \frac{\Delta}{2\pi}\\
+  r_{2}' - r_{2} &= \frac{\Delta}{2\pi}
+\end{align*}
+Thus the lengths that are added to both radii are equal.
+
+\begin{itemize}
+  \item The formula for finding the roots of a polynomial exists up to the $4^{\text{th}}$ order. Starting from $5^{\text{th}}$ order, Galoi and Abel proved that there does not exist a fixed formula that expresses the roots with respect to the coefficients of a polynomial. 
+  \item Suppose there are $(n+1)$ data points. How can we find a $n^{\text{th}}$ order polynomial that passes through all the data points? Formally in mathematical notation,
+  $$
+    P_{n}\left(x\right) = a_{n}x^{n} + a_{n-1}x^{n-1} + \cdots + a_{1}x + a_{0}
+  $$
+  and $\left\{\left(x_{1}, y_{1}\right), \left(x_{2}, y_{2}\right), \ldots , \left(x_{n}, y_{n}\right) \right\}$ is the set of all data points. Let's think of the following:
+  \begin{align*}
+    L_{n,0}\left(x\right) &= \frac{\left(x-x_{1}\right)\left(x-x_{2}\right)\cdots \left(x-x_{n}\right)}{\left(x_{0}-x_{1}\right)\left(x_{0}-x_{2}\right)\cdots \left(x_{0}-x_{n}\right)}\\
+    L_{n,0}\left(x_{0}\right) &= 1\\
+    L_{n,0}\left(x_{1}\right) &= 0\\
+    L_{n,0}\left(x_{2}\right) &= 0\\
+    \therefore L_{n,0}\left(x_{i}\right) &= \begin{cases} 1, & \text{if $i=0$}\\
+    0, & \text{if $i\neq 0$} \end{cases}\\
+    L_{n,1}\left(x_{i}\right) &= \begin{cases} 1, & \text{if $i=1$}\\
+    0, & \text{if $i \neq i$} \end{cases}\\
+    L_{n,j}\left(x_{i}\right) &= \begin{cases} 1, & \text{if $i=j$}\\
+    0, & \text{if $i \neq j$} \end{cases}
+  \end{align*}
+  Now let's define the following:
+  \begin{align*}
+    L_{n}\left(x\right) &= y_{0}L_{n, 0}\left(x\right) + y_{1}L_{n,1}\left(x\right) + \cdots + y_{n}L_{n,n}\left(x\right)\\
+    &= \sum_{i=0}^{n} L_{n,i}\left(x\right)y_{i}
+  \end{align*}
+This polynomial has been named after \emph{Lagrange}. 
+
+$$
+  P\left(x\right)|_{x=a}  = 0
+$$
+\end{itemize}
+\end{document}
