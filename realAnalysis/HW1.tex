@@ -143,7 +143,10 @@
    $$
    where $a$ is a real number satisfying $a>1$. Prove that $\lambda\left(G\right) = 1/\left(a-1\right)$.
    \begin{solution}
-
+      \textbf{(a)} Let $G'$ be the set of all limit points of $G$. Then the closure $\overline{G} = G \bigcup G'$ is compact because it is a closed and bounded set. Since $\overline{G}$ is compact, there exists a finite subcover $\bigcup_{i=1}^{k}V_{i}$ of $\overline{G}$. If a set is closed and bounded in $\mathbb{R}^{n}$, then it can be contained in $I$ for some $n$-cell $I$, i.e., $\overline{G} \subset I$. Because $n$-cell is a special rectangle, $\lambda\left(I\right)$ is well-defined to be finite. Thus,
+      $$
+         \lambda\left(G\right) \leq \lambda\left(\overline{G}\right) \leq \lambda\left(I\right) < \infty.
+      $$
    \end{solution}
 
    \begin{solution}
@@ -170,7 +173,16 @@
    $$
    where the range on $k$ can be finite or infinite. Furthermore, show that this expression is unique except for the numbering of the component intervals.
    \begin{solution}
-
+      For every point $x \in G$, we define $A_{x}$ to be the largest interval contained within $G$. We can construct $A_{x}$ by making use of supremum and infimum.
+      \begin{align*}
+         b_{x} &:= \sup\left\{b: b>x \text{ and } \left(x,b\right) \subset G \right\}\\
+         a_{x} &:= \inf \left\{a: a < x \text{ and } \left(a, x\right) \subset G \right\}
+      \end{align*}
+      Then $A_{x} := \left(a_{x}, b_{x}\right)$. By construction, $G = \bigcup_{x\in G} A_{x}$. Now we are left with two problems: (1) $A_{x}$ is uniquely defined. (2) The collection $\left\{A_{x} \right\}_{x\in G}$ is countable.
+      \begin{enumerate}
+         \item Suppose there exist two distinct points $x,x' \in G$ whose defined $A_{x}$ and $A_{x'}$ overlap, i.e., $A_{x} \bigcap A_{x'} \neq \emptyset$. It follows that $A_{x} \bigcup A_{x'} \subset A_{x}$ since $A_{x}$ is by definition the largest interval containing $x$ within $G$. Likewise, $A_{x} \bigcup A_{x'} \subset A_{x'}$. Together, they suggest $A_{x} = A_{x'}$. This implies that if two $A_{x}, A_{x'}$ overlap, they do not overlap partially. They overlap entirely which makes them the same interval. Otherwise, they are disjoint, which makes each of them unique in the collection $\left\{A_{x} \right\}_{x\in G}$.
+         \item Recall that the set of rational numbers $\mathbb{Q}$ is dense in $\mathbb{R}$. This states that every set in the collection $\left\{A_{x} \right\}_{x\in G}$ has at least one rational number. Since they are disjoint, there exists an injection $\left\{A_{x} \right\}_{x\in G} \mapsto \mathbb{Q}$. Therefore, the cardinality of the collection $\left\{A_{x} \right\}_{x\in G}$ is at its largest the same as that of $\mathbb{Q}$. 
+      \end{enumerate}
    \end{solution}
    \question
    In the notation of the previous problem, prove that $\lambda\left(G\right) = \sum_{k} \left(b_{k}-a_{k}\right)$.
@@ -199,7 +211,7 @@
 
    \end{solution}
    \question
-   let $\epsilon > 0$. Prove that there exists an open set $G \subset \mathbb{R}$ such that $\mathbb{Q} \subset G$ and $\lambda\left(G\right) < \epsilon$. (This result will probably surprise you: Although $G$ is open and contains every rational number, ``most'' of $\mathbb{R}$ is in $G^{c}$.)
+   Let $\epsilon > 0$. Prove that there exists an open set $G \subset \mathbb{R}$ such that $\mathbb{Q} \subset G$ and $\lambda\left(G\right) < \epsilon$. (This result will probably surprise you: Although $G$ is open and contains every rational number, ``most'' of $\mathbb{R}$ is in $G^{\mathsf{c}}$.)
    \begin{solution}
 
    \end{solution}

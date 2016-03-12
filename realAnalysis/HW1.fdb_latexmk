@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1457776744 "HW1.tex" "HW1.pdf" "HW1" 1457776745
+["pdflatex"] 1457796638 "HW1.tex" "HW1.pdf" "HW1" 1457796639
   "/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -29,6 +29,8 @@
   "/usr/local/texlive/2014/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm" 1254269338 11868 4f81e9b6033c032bdaf9884f4d7ef412 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/tfm/public/lm/rm-lmr5.tfm" 1254269338 11804 aefb10c002e6492c25236524a447f969 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/tfm/public/lm/rm-lmr7.tfm" 1254269338 11852 5a9022f105fd1ee2797df861e79ae9a0 ""
+  "/usr/local/texlive/2014/texmf-dist/fonts/tfm/public/lm/rm-lmss10.tfm" 1254269338 10976 59d4d2acacc56ba9abc92645023932ec ""
+  "/usr/local/texlive/2014/texmf-dist/fonts/tfm/public/lm/rm-lmss8.tfm" 1254269338 10976 d5243dcaf5ba5ee7825c8438c6b7a7ea ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmbx10.pfb" 1255129361 121021 1bf809ce4a594679006bd72263eba59b ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmbx12.pfb" 1255129361 116908 1fca96723793882c2e0160350c192fc8 ""
@@ -38,6 +40,7 @@
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmr10.pfb" 1255129361 119235 f35b44530a1d90eb90fe15d9cba67ea0 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmr7.pfb" 1255129361 121145 68312a933e2c689ed40ec0aba373e279 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmri10.pfb" 1255129361 112593 fda2373ba4420af33949610de4c28fe8 ""
+  "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmss8.pfb" 1255129361 94400 e33ecfb646a9f148e2e53da01a9168fe ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy10.pfb" 1254269338 27863 09ce3735688ffde955e72da27c95b61a ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy5.pfb" 1254269338 28210 987b40585e9bcf6463d6155bb4219492 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy7.pfb" 1254269338 27941 d1f5d03f61a46c3fcc3a2ba904ddda52 ""
@@ -84,6 +87,7 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/lm/omslmsy.fd" 1257296302 805 af340a8260c447aa315cfc740ff0152f ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/lm/omxlmex.fd" 1257296302 566 a94661f7b66063f191960bb7935b6ba2 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/lm/ot1lmr.fd" 1257296302 1880 bae7b659316f7344a86218ad38b01d91 ""
+  "/usr/local/texlive/2014/texmf-dist/tex/latex/lm/ot1lmss.fd" 1257296302 1655 27274ffd69942383838a2081fd5be3d1 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/lm/t1lmr.fd" 1257296302 1865 afbfccbe7fda9c2dc5078ad7c486bbed ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/courier.sty" 1156702453 804 52ceb7e4cfdff7c69f852f42880bf040 ""
@@ -92,11 +96,11 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/tools/enumerate.sty" 1399675188 3255 42d834dc82171769c16badd22df87021 ""
   "/usr/local/texlive/2014/texmf-dist/web2c/texmf.cnf" 1398200874 31722 4f52421e59a4b9e910cf18e64c1f2b4a ""
   "/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1401025944 1445653 26a0aacf3d70032b1ec192e8c7792117 ""
-  "/usr/local/texlive/2014/texmf-var/web2c/pdftex/pdflatex.fmt" 1432105912 3832012 6f7eff98593f880114f876938cb37f01 ""
+  "/usr/local/texlive/2014/texmf-var/web2c/pdftex/pdflatex.fmt" 1432518958 3832012 ce6f4d271f48619711da7bdad833796f ""
   "/usr/local/texlive/2014/texmf.cnf" 1401025936 577 a59edbde8d3a8c549d0eeaab1739e2ff ""
-  "HW1.aux" 1457776745 1632 c0307a4a9429035ce2858d7b23f0e969 ""
-  "HW1.tex" 1457776744 9085 6aeaa954562faa07c80a50fcaea98858 ""
+  "HW1.aux" 1457796639 1632 79702ea21df13ffc833269b85d2aa77c ""
+  "HW1.tex" 1457796638 11460 7f37a51659a420781c9a74f2b011c08c ""
   (generated)
+  "HW1.pdf"
   "HW1.aux"
   "HW1.log"
-  "HW1.pdf"
