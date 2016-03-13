@@ -187,12 +187,19 @@
    \question
    In the notation of the previous problem, prove that $\lambda\left(G\right) = \sum_{k} \left(b_{k}-a_{k}\right)$.
    \begin{solution}
-
+      By property O6, for disjoint sets $A_{x}$,
+      $$
+         \lambda\left(G\right) = \lambda\left(\bigcup_{x\in G}A_{x}\right) = \sum_{x\in G}\lambda\left(A_{x}\right).
+      $$
+      Since $\lambda\left(A_{x}\right)$ is defined to be $b_{x} - a_{x}$, it follows that
+      $$
+         \lambda\left(G\right) = \sum_{x}\left(b_{x}-a_{x}\right).
+      $$
    \end{solution}
    \question
    Prove that the open disk $B\left(0,1\right)$ in $\mathbb{R}^{2}$ cannot be expressed as a disjoint union of open rectangles.
    \begin{solution}
-
+      Recall the fact that a unit ball is a \emph{connected} set, i.e., it is not a union of two nonempty separated sets. However, if we suppose nonempty disjoint open rectangles $\left\{G_{k} \right\}_{k=1}^{\infty}$ can be coupled to create the unit ball $B\left(0,1\right)$, then it violates the connectedness of a unit ball. Let $A_{1} = G_{1}$ and $A_{2} = \bigcup_{i=2}^{\infty} G_{i}$. Then $A_{1} \bigcap A_{2} = \emptyset$ but $A_{1} \bigcup A_{2} = B\left(0,1\right)$, which is a contradiction.
    \end{solution}
 
    \question
@@ -205,20 +212,28 @@
    \begin{solution}
 
    \end{solution}
-   \question
-      In the notation of Problem 2, calculate the measure of the totality of discarded open sets. That is, calculate $\lambda \left(\bigcup_{k=1}^{\infty} G_{k} \right)$.
-   \begin{solution}
-
-   \end{solution}
+   
    \question
    Let $\epsilon > 0$. Prove that there exists an open set $G \subset \mathbb{R}$ such that $\mathbb{Q} \subset G$ and $\lambda\left(G\right) < \epsilon$. (This result will probably surprise you: Although $G$ is open and contains every rational number, ``most'' of $\mathbb{R}$ is in $G^{\mathsf{c}}$.)
    \begin{solution}
-
+      From the fact that $\mathbb{Q}$ is countable, we can construct a sequence $\left\{x_{n} \right\}, n \in \mathbb{Z}^{+}$ for which a bijection $f$ exists with $\mathbb{Q}$. Therefore, if we take sequence to be equivalent to the set of rational numbers, take a neighbourhood around each element in $\left\{x_{n} \right\}$ and denote it by $B\left(x_{n}, \epsilon/3^{n}\right)$ for some $\epsilon>0$. In $\mathbb{R}$, a neighbourhood is an open interval. Once we set $G$ to be the union of these neighbourhoods, it is then followed by
+      $$
+         \mathbb{Q} \subset \bigcup_{n=1}^{\infty}B\left(x_{n}, \frac{\epsilon}{3^{n}}\right).
+      $$
+      An infinite union of open sets is also an open set. Therefore, $G$ is also open. Since
+      $$
+         \lambda\left(G\right) = \lambda\left(\bigcup_{n=1}^{\infty} B\left(x_{n}, \frac{\epsilon}{3^{n}}\right) \right) \leq \sum_{n=1}^{\infty}\lambda\left(B\left(x_{n}, \frac{\epsilon}{3^{n}}\right)\right) = \sum_{n=1}^{\infty} \frac{\epsilon}{3^{n}},
+      $$
+      $\lambda\left(G\right) \leq \epsilon/2$.
    \end{solution}
    \question
    Use your method of working Problem 12 to give a proof that $\mathbb{R}$ is uncountable (cf. Section 1B).
    \begin{solution}
-
+      Assume $\mathbb{R}$ is countable. Then using the method in the previous problem, we can construct a sequence with a bijection with $\mathbb{Z}^{+}$. Equally, there exists an open cover of countably many open intervals for $\mathbb{R}$. From this, there exists $\epsilon > 0$ which satisfies the following relation:
+      $$
+         \lambda\left(\mathbb{R}\right) < \epsilon.
+      $$
+      This is a violation of the property O3, stating $\lambda\left(\mathbb{R}\right)=\infty$.
    \end{solution}
 \end{questions}
 \end{document}

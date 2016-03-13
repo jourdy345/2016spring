@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1457796638 "HW1.tex" "HW1.pdf" "HW1" 1457796639
+["pdflatex"] 1457872699 "HW1.tex" "HW1.pdf" "HW1" 1457872700
   "/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -98,9 +98,9 @@
   "/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1401025944 1445653 26a0aacf3d70032b1ec192e8c7792117 ""
   "/usr/local/texlive/2014/texmf-var/web2c/pdftex/pdflatex.fmt" 1432518958 3832012 ce6f4d271f48619711da7bdad833796f ""
   "/usr/local/texlive/2014/texmf.cnf" 1401025936 577 a59edbde8d3a8c549d0eeaab1739e2ff ""
-  "HW1.aux" 1457796639 1632 79702ea21df13ffc833269b85d2aa77c ""
-  "HW1.tex" 1457796638 11460 7f37a51659a420781c9a74f2b011c08c ""
+  "HW1.aux" 1457872699 1497 0acaa25c09da1a495e6373c0cba4abaa ""
+  "HW1.tex" 1457872696 13651 01200c66be5dec744a5cf7e5f7a10407 ""
   (generated)
+  "HW1.log"
   "HW1.pdf"
   "HW1.aux"
-  "HW1.log"
