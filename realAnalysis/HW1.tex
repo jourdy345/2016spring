@@ -180,12 +180,22 @@
    \end{solution}
 
    \begin{solution}
-      \textbf{(d)} In this problem, splitting the abscissa equidistantly will make it even worse. We will cut the points where $x=r^{k}$ where $0<r<1$. Then, 
+      \textbf{(d)} In this problem, splitting the abscissa equidistantly will make it even worse. We will cut the points where $x=r^{n}$ where $r>1$. Then, 
       \begin{align*}
-         \lambda\left(\bigcup_{k=1}^{\infty}I_{k}\right) &= \sum_{k=1}^{\infty} \left(r^{k}\right)^{-a}\left(r^{k}-r^{k-1}\right)\\
-         &= \sum_{k=1}^{\infty}r^{k\left(-a+1\right)} -r^{k\left(-a+1\right)-1}\\
-         &= \sum
+         \lambda\left(\bigcup_{n=1}^{\infty}I_{n}\right) &= r^{-a}\left(r-1\right) + \left(r^{2}\right)^{-a}\left(r^{2}-r\right) + \cdots +\left(r^{n}\right)^{-a}\left(r^{n}-r^{n-1}\right)+\cdots \\
+         &= \sum_{n=1}^{\infty}r^{-na}\left(r^{n}-r^{n-1}\right)\\
+         &= \frac{r-1}{r}\sum_{n=1}^{\infty}r^{-n\left(a-1\right)}\\
+         &= \frac{r^{-a}\left(r-1\right)}{1-r^{-a+1}}\\
+         &= \frac{r-1}{r\left(r^{a-1}-1\right)}.
       \end{align*}
+      Since the supremum of the measures of these special polygons is when an arbitrary interval $r^{n}-r^{n-1} \to 0$, we can conclude that $r \to 1$.
+      $$
+         \lim\limits_{r\to 1} \frac{r-1}{r\left(r^{a-1}-1\right)} = \lim\limits_{r\to 1} \frac{\cancel{r-1}}{r\cancel{\left(r-1\right)}\left(1+r+r^{2}+\cdots + r^{a-2}\right)}.
+      $$
+      Therefore, the measure is
+      $$
+         \lambda\left(G\right) = \frac{1}{1 \cdot \left(\underbrace{1 + 1+ \cdots + 1}_{a-1 \text{ ones}}\right)} = \frac{1}{a-1}.
+      $$
    \end{solution}
    \question
    Let $G_{i}, i \in \mathcal{I}$, be a collection of disjoint open sets in $\mathbb{R}^{n}$. Prove that only countably many of these sets are nonempty.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.20)  14 MAR 2016 18:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.25)  15 MAR 2016 19:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -675,12 +675,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ] [2] [3] [4]
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 244
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 255
 .
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [5]
+) [5] [6]
 This exam contains 9 questions with 0 parts, 0 subparts, and 0 subsubparts.
 (./HW1.aux) ) 
 Here is how much of TeX's memory you used:
@@ -690,27 +690,28 @@ Here is how much of TeX's memory you used:
  9601 multiletter control sequences out of 15000+600000
  44037 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,12n,32p,731b,385s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,13n,32p,731b,385s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{
 /usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
 live/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2014/
 texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2014/texmf-dist
 /fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2014/texmf-dist/fonts/typ
-e1/public/lm/lmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/
-lm/lmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmex10.
-pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texli
-ve/2014/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2014/texmf-dist/font
-s/type1/public/lm/lmri10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pu
-blic/lm/lmss8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lms
-y10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on HW1.pdf (5 pages, 176140 bytes).
+e1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2014/texmf-dist/font
+s/type1/public/lm/lmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pu
+blic/lm/lmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lm
+ex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2014/texmf-dist
+/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2014/texmf-dist/fonts/typ
+e1/public/lm/lmss8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/l
+m/lmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy5.pf
+b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on HW1.pdf (6 pages, 181194 bytes).
 PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 88 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
