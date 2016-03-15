@@ -150,15 +150,42 @@
    \end{solution}
 
    \begin{solution}
-
+      \textbf{(b)} Let us equidistantly split the abscissa into length $1/n$. With each piece starting from $\left[1, 1+1/n\right]$ to $\left[1+\left(k-1\right)/n, 1+k/n \right]$ for $k^{\text{th}}$ piece, the height of the $k^{\text{th}}$ piece should be $\left(1+k/n \right)^{-1}$ to fit in $G$. Then
+      $$
+         \lambda\left(\bigcup_{k=1}^{\infty} I_{k}\right) = \sum_{k=1}^{\infty}\frac{1}{1+k/n} \cdot \frac{1}{n} = \sum_{k=1}^{\infty}\frac{1}{n+k}.
+      $$
+      This sum already diverges. Therefore, the supremum is apparently $\infty$.
    \end{solution}
 
    \begin{solution}
-
+      Likewise, split the abscissa equidistantly into pieces of lengths $1/n$. Then the measure of all the special rectangles are
+      $$
+         \lambda\left(\bigcup_{k=1}^{\infty}I_{k}\right) = \sum_{k=1}^{\infty}\frac{e^{-k/n}}{n} = \frac{1}{ne^{1/n}-n}.
+      $$
+      Since we need the supremum of the sum of these rectangles, we take the limit:
+      $$
+         \lim_{n\to\infty} \frac{1}{ne^{1/n}-n}.
+      $$
+      By power rule, we can write
+      $$
+         1\Big/\left(\lim\limits_{n\to\infty} \frac{e^{1/n}-1}{1/n}\right).
+      $$
+      By l'Hôpital's rule,
+      \begin{align*}
+         \lim_{n\to\infty}\frac{e^{1/n}-1}{1/n} &= \lim_{n\to\infty} \frac{-e^{1/n}/n^{2}}{-1/n^{2}}\\
+         &= \lim_{n\to\infty} e^{1/n}\\
+         &= 1.
+      \end{align*}
+      Therefore, the supremum is 1.
    \end{solution}
 
    \begin{solution}
-
+      \textbf{(d)} In this problem, splitting the abscissa equidistantly will make it even worse. We will cut the points where $x=r^{k}$ where $0<r<1$. Then, 
+      \begin{align*}
+         \lambda\left(\bigcup_{k=1}^{\infty}I_{k}\right) &= \sum_{k=1}^{\infty} \left(r^{k}\right)^{-a}\left(r^{k}-r^{k-1}\right)\\
+         &= \sum_{k=1}^{\infty}r^{k\left(-a+1\right)} -r^{k\left(-a+1\right)-1}\\
+         &= \sum
+      \end{align*}
    \end{solution}
    \question
    Let $G_{i}, i \in \mathcal{I}$, be a collection of disjoint open sets in $\mathbb{R}^{n}$. Prove that only countably many of these sets are nonempty.
@@ -210,7 +237,8 @@
    The range on $k$ must be infinite. Why?\\
    (HINT: First pave $\mathbb{R}^{n}$ with cubes of side 1. Select those cubes which are contained in $G$. Then bisect the sides of the remaining cubes to obtain cubes with side $1/2$. Select those cubes which are contained in $G$.)
    \begin{solution}
-
+      As the hint states, first imagine a lattice with grids of side 1 --- grids are special rectangles ---. Pick all the rectangles that are contained in $G$. Of the remaining grids, halve the length of each rectangle. Again, pick the ones that are contained in $G$. Because of the property proven in Problem 3($P \subset P' \subset G$), we can keep doing this while making all the special rectangles non-overlapping.\par
+      Now since $G$ is an open set, each point in $G$ has a neighbourhood (open ball) contained in $G$. As we proceed the process constructing a fine lattice, there must exist a rectangle that contains the point while being contained in the neighbourhood. 
    \end{solution}
    
    \question
