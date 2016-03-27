@@ -1,0 +1,258 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[usenames, dvipsnames]{color}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Real Analysis \\ HW2}
+\runningheader{Daeyoung Lim}{Real Analysis}{HW2}
+\begin{questions}
+   \question
+   Prove M6. (You must use the assumption $\lambda\left(A_{1}\right) <\infty$.) If the $A_{k}$'s are measurable and $A_{1} \supset A_{2} \supset A_{3} \supset \cdots$, and if $\lambda\left(A_{1}\right) < \infty$, then
+   $$
+   \lambda\left(\bigcap\limits_{k=1}^{\infty}A_{k} \right) = \lim_{k\to\infty} \lambda\left(A_{k}\right).
+   $$
+   \begin{solution}
+   In order to use M5, let us define $B_{k} = A_{1} \setminus A_{k}$. According to the Corollary, if $A_{1}, A_{k} \in \mathcal{L}_{0}$, then $A_{1}\setminus A_{k} \in \mathcal{L}_{0}$ as well. Also $B_{k}$ has the following property:
+   $$
+   B_{1} \subset B_{2} \subset B_{3} \subset \cdots.
+   $$
+   This is because
+   \begin{align*}
+   B_{1} &= A_{1} \setminus A_{1} = \emptyset\\
+   B_{2} &= A_{1} \setminus A_{2} = A_{1} \cap A_{2}^{\mathsf{c}}\\
+   &\vdots\\
+   B_{k} &= A_{1} \setminus A_{k} = A_{1} \cap A_{k}^{\mathsf{c}}
+   \end{align*}
+   and $A_{1}^{\mathsf{c}} \subset A_{2}^{\mathsf{c}} \subset \cdots $.
+   Therefore, we can apply M5 to $B_{k}$:
+   $$
+   \lambda\left(\bigcup_{k=1}^{\infty}B_{k}\right) = \lim_{k\to\infty} \lambda\left(B_{k}\right).
+   $$
+   Rewriting the LHS in terms of its original representation,
+   \begin{align*}
+   \bigcup_{k=1}^{\infty}B_{k} &= \left(A_{1}\cap A_{1}^{\mathsf{c}}\right) \cup \left(A_{1}\cap A_{1}^{\mathsf{c}}\right) \cup \cdots = A_{1} \cap \left(A_{1}^{\mathsf{c}}\cup A_{2}^{\mathsf{c}}\cup \cdots \right)\\
+   &= A_{1} \cap \left(\bigcup_{k=1}^{\infty}A_{k}^{\mathsf{c}} \right)\\
+   &= A_{1} \cap \left(\bigcap_{k=1}^{\infty}A_{k} \right)^{\mathsf{c}}\qquad \text{(By DeMorgan's Law)}\\
+   &= A_{1}\setminus \left(\bigcap_{k=1}^{\infty}A_{k} \right)
+   \end{align*}
+   By M2, $\bigcap_{k=1}^{\infty}A_{k} \in \mathcal{L}$ and thus $A_{1}\setminus \bigcap_{k=1}^{\infty}A_{k} \in \mathcal{L}$. Now we will use M11 since $\bigcap_{k=1}^{\infty}A_{k} \subset A_{1}$:
+   $$
+   \lambda^{*}\left(\bigcap_{k=1}^{\infty}A_{k}\right) + \lambda_{*}\left(A_{1}\setminus \bigcap_{k=1}^{\infty}A_{k}\right) = \lambda\left(A_{1}\right).
+   $$
+   Because they are all measurable, outer measure, inner measure, and measure are all same:
+   \begin{equation}
+   \lambda\left(\bigcap_{k=1}^{\infty}A_{k}\right) + \lim_{k\to\infty}\lambda\left(B_{k}\right) = \lambda\left(A_{1}\right).
+   \end{equation}
+   Apply M11 again to $B_{k}=A_{1}\setminus A_{k}$ using the fact that $A_{k} \subset A_{1}$,
+   $$
+   \lambda^{*}\left(A_{k}\right) + \lambda_{*}\left(A_{1}\setminus A_{k}\right) = \lambda\left(A_{1}\right).
+   $$
+   Likewise, they are all measurable and thus inner measure, outer measure are all same. Taking the limit on both sides after rearrangement,
+   \begin{equation}
+      \lim_{k\to\infty}\lambda\left(A_{k}\right)  = \lambda\left(A_{1}\right) - \lim_{k\to\infty} \lambda\left(B_{k}\right).
+   \end{equation}
+   Plugging eqn (2) back to eqn (1), we obtain
+   $$
+      \lambda\left(\bigcap_{k=1}^{\infty}A_{k}\right) = \lim_{k\to\infty}\lambda\left(A_{k}\right).
+   $$
+   \end{solution}
+   \question
+   Let $A \subset \mathbb{R}^{n}$ be arbitrary. Prove that
+   $$
+   \lambda^{*}\left(A\right) = \inf \left\{\sum_{k=1}^{\infty}\lambda\left(I_{k}\right): A \subset \bigcup_{k=1}^{\infty}I_{k} \right\}
+   $$
+   where the $I_{k}$'s are special rectangles.\\
+   (HINT: If $A \subset \bigcup_{k=1}^{\infty} I_{k}$, the $\lambda^{*}\left(A\right)\leq \sum_{k=1}^{\infty}\lambda\left(I_{k}\right)$ (why?). This will establish that $\lambda^{*}\left(A\right) \leq \inf \left\{\; \right\}$. To establish the reverse inequality, consider a well chosen $G \supset A$, and apply Problem 9.)
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Suppose that $A \cup B$ is measurable and that
+   $$
+   \lambda\left(A\cup B\right) = \lambda^{*}\left(A\right) + \lambda^{*}\left(B\right) < \infty.
+   $$
+   Prove that $A$ and $B$ are measurable.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Prove that if $A$ and $B$ are measurable , then
+   $$
+   \lambda\left(A\right) + \lambda\left(B\right) = \lambda\left(A\cup B\right) + \lambda\left(A\cap B\right).
+   $$
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Prove that in general
+   $$
+   \lambda^{*}\left(A\right) + \lambda^{*}\left(B\right) \geq \lambda^{*}\left(A\cup B\right)+\lambda^{*}\left(A \cap B\right)
+   $$
+   and
+   $$
+   \lambda_{*}\left(A\right) + \lambda_{*}\left(B\right) \leq \lambda_{*}\left(A\cup B\right)+\lambda_{*}\left(A \cap B\right).
+   $$
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Prove that if $A$ is countable, then $\lambda\left(A\right)= 0$. (In particular, $\lambda\left(\mathbb{Q}\right)=0$.)
+   \begin{solution}
+   Let $A \subset \mathbb{R}^{n}$. Since a countable set can be indexed as a sequence, let $\left\{x_{k} \right\}_{k=1}^{\infty}$ be the indexed sequence of the set $A$. Then for every $x_{k}$, there exists a neighbourhood $B\left(x_{k}, 2^{-k}\epsilon\right)$ such that $B\left(x_{k},2^{-k}\epsilon\right) \subset I_{k}$ where
+   $$
+   I_{k} = \left[x_{k1}-2^{-k}\epsilon, x_{k1}+2^{-k}\epsilon\right]\times \left[x_{k2}-2^{-k}\epsilon, x_{k2}+2^{-k}\epsilon\right] \times \cdots \times \left[x_{kn}-2^{-k}\epsilon, x_{kn}+2^{-k}\epsilon\right].
+   $$
+   It holds that $A \subset \bigcup_{k=1}^{\infty}B\left(x_{k},2^{-k}\epsilon\right)$ and $\bigcup_{k=1}^{\infty}B\left(x_{k},2^{-k}\epsilon\right) \subset \bigcup_{k=1}^{\infty}I_{k}$. Therefore,
+   $$
+   \lambda\left(A\right) \leq \lambda\left(\bigcup_{k=1}^{\infty}B\left(x_{k},2^{-k}\epsilon\right)\right) \leq \lambda\left(\bigcup_{k=1}^{\infty}I_{k}\right)\leq \sum_{k=1}^{\infty}\lambda\left(I_{k}\right) 
+   $$
+   where
+   \begin{align*}
+   \sum_{k=1}^{\infty}\lambda\left(I_{k}\right) &= 2^{n}\epsilon\sum_{k=1}^{\infty}2^{-nk}\\
+   &= 2^{n}\epsilon \dfrac{2^{-n}}{1-2^{-n}}\\
+   &= \epsilon \frac{2^{n}}{2^{n}-1} < \left(2\epsilon\right)^{n}.
+   \end{align*}
+   Since $\epsilon$ is arbitrary, 
+   $$
+   \lambda\left(A\right) \leq \lambda\left(\bigcup_{k=1}^{\infty}B\left(x_{k},2^{-k}\epsilon\right)\right) \leq \lambda\left(\bigcup_{k=1}^{\infty}I_{k}\right)\leq \sum_{k=1}^{\infty}\lambda\left(I_{k}\right) \leq \left(2\epsilon\right)^{n} \leq 0.
+   $$
+   Therefore, $\lambda\left(A\right) = 0$.
+   \end{solution}
+   \question
+   Let $A \in \mathbb{R}$ be fixed. Prove that
+   $$
+   \lambda\left(\left\{a \right\} \times \mathbb{R}^{n-1} \right) = 0.
+   $$
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Prove that if $E\subset \mathbb{R}^{n}$ and $\lambda^{*}\left(E\right)<\infty $, then a measurable set $A$ exists such that
+   $$
+   E \subset A \text{ and } \lambda^{*}\left(E\right) = \lambda\left(A\right).
+   $$
+   (The set $A$ is called a \emph{measurable hull} of E.)\\
+   (HINT: Choose open sets $G_{k}$ such that $\lambda\left(G_{k}\right) < \lambda^{*}\left(E\right)+k^{-1}$ and $E \subset G_{k}$. Then let $A = \bigcap_{k=1}^{\infty}G_{k}$.)
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Let $\lambda^{*}\left(E\right) < \infty$, $E \subset A \in \mathcal{L}$. Prove that $A$ is a measurable hull of $E \iff \lambda_{*}\left(A\setminus E\right) = 0$.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Prove that if $E_{1} \subset E_{2} \subset E_{3} \subset \cdots $, then
+   $$
+   \lambda^{*}\left(\bigcup_{k=1}^{\infty}E_{k} \right) = \lim_{k\to\infty}\lambda^{*}\left(E_{k}\right).
+   $$
+   (HINT: Let $A_{k}$ be a measurable hull of $E_{k}$, and define $B_{k}=\bigcap_{j=k}^{\infty}A_{j}$. Then $B_{k}$ is also a measurable hull of $E_{k}$, and furthermore $B_{1} \subset B_{2} \subset B_{3} \subset \cdots$. Apply Property M5.)
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Suppose $A_{1}, A_{2}, A_{3}, \ldots$ are measurable sets and
+   $$
+   \sum_{k=1}^{\infty}\lambda\left(A_{k}\right) <\infty.
+   $$
+   Prove that $\lambda\left(\limsup A_{k}\right) = 0$.
+   \begin{solution}
+
+   \end{solution}
+\end{questions}
+\end{document}

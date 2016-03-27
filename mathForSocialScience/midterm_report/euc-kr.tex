@@ -1,0 +1,950 @@
+\def\filedate{2005/03/30}
+\def\fileversion{1.0}
+
+\ProvidesPackage{hangul}[\filedate\space Document Package for 한글LaTeX]
+\typeout{한글 문서 꾸러미 `\filename' <\filedate>.}
+
+%% 추가 선택 처리
+%% --------------
+%%
+%% 추가 선택 "hanja"는 단원의 이름들을 한자로 표시한다.
+
+\newif\if@hanja\@hanjafalse
+
+\DeclareOption{hanja}{\@hanjatrue}
+
+%% 용지 규격
+\DeclareOption{국반판}{%국반판(105x148)<105x148>
+  \setlength\paperheight{148mm}
+  \setlength\paperwidth {105mm}
+  \@resetpapersize
+}
+\DeclareOption{국판}{%국판(148x210)<148x210>
+  \setlength\paperheight{210mm}
+  \setlength\paperwidth {148mm}
+  \@resetpapersize
+}
+\DeclareOption{신국판}{%상하=20/25, 좌우=22.5/22.5,머리꼬리=0/0
+  \setlength\paperheight{225mm}
+  \setlength\paperwidth {152mm}
+  \@resetpapersize
+}
+\DeclareOption{국배판}{%국배판(210x297)<210x297>
+  \setlength\paperheight{297mm}
+  \setlength\paperwidth {210mm}
+  \@resetpapersize
+}
+\DeclareOption{사륙판}{%사륙판(128x188)<128x182>
+  \setlength\paperheight{182mm}
+  \setlength\paperwidth {128mm}
+  \@resetpapersize
+}
+\DeclareOption{사륙배판}{%상하=25/30, 좌우=30/30 머리꼬리=15/0
+  \setlength\paperheight{257mm}
+  \setlength\paperwidth {182mm}
+  \@resetpapersize
+}
+\DeclareOption{크라운판}{%크라운판(176x248)<176x248>
+  \setlength\paperheight{248mm}
+  \setlength\paperwidth {176mm}
+  \@resetpapersize
+}
+\DeclareOption{신서판}{%신서판(삼륙판)(103x182)<103x182>
+  \setlength\paperheight{182mm}
+  \setlength\paperwidth {103mm}
+  \@resetpapersize
+}
+\DeclareOption{삼륙판}{%삼륙판
+  \setlength\paperheight{182mm}
+  \setlength\paperwidth {103mm}
+  \@resetpapersize
+}
+\DeclareOption{타블로이드판}{%<타블로이드>
+  \setlength\paperheight{364mm}
+  \setlength\paperwidth {257mm}
+  \@resetpapersize
+}
+\DeclareOption{사륙반판}{%사륙반판%
+  \setlength\paperheight{128mm}
+  \setlength\paperwidth {94mm}
+  \@resetpapersize
+}
+\DeclareOption{사륙배배판}{%사륙배배판
+  \setlength\paperheight{374mm}
+  \setlength\paperwidth {254mm}
+  \@resetpapersize
+}
+\DeclareOption{대국전판}{%대국전판
+  \setlength\paperheight{244mm}
+  \setlength\paperwidth {172mm}
+  \@resetpapersize
+}
+\DeclareOption{삼십절판}{%삼십절판
+  \setlength\paperheight{205mm}
+  \setlength\paperwidth {125mm}
+  \@resetpapersize
+}
+\DeclareOption{삼오판}{%삼오판
+  \setlength\paperheight{148mm}
+  \setlength\paperwidth {84mm}
+  \@resetpapersize
+}
+\def\@resetpapersize{
+  \setlength\@tempdima{\paperwidth}
+  \divide\@tempdima by9
+  \if@twoside
+    %% 제본 여백: 0.3\@tempdima
+    \setlength\oddsidemargin{1.3\@tempdima}
+    \setlength\evensidemargin{1.7\@tempdima}
+  \else
+    \setlength\oddsidemargin{1.5\@tempdima}
+    \setlength\evensidemargin{1.5\@tempdima}
+  \fi
+  \setlength\marginparwidth{\evensidemargin}
+  \addtolength{\marginparwidth}{-3\marginparsep}
+  \setlength\textwidth{\paperwidth}
+  \addtolength\textwidth{-3\@tempdima}
+  \addtolength\oddsidemargin{-1in}
+  \addtolength\evensidemargin{-1in}
+  \setlength\topmargin{\paperheight}
+  \divide\topmargin by9
+  \setlength\headheight{12\p@}
+%  \setlength\headsep{14.65pt}
+  \setlength\headsep{25\p@}
+  \addtolength\topmargin{-\headheight}
+  \addtolength\topmargin{-\headsep}
+  \setlength\textheight{\paperheight}
+  \addtolength\textheight{-2\topmargin}
+  \addtolength\textheight{-\headheight}
+  \addtolength\textheight{-\headsep}
+  \addtolength\textheight{-\footskip}
+  \addtolength\topmargin{-1in}
+}
+
+%% LaTeX을 쓸 때에는 다음과 같은 추가 선택이 더 있다.
+%% 추가 선택 "nojosa"는 자동조사처리기능을 마비시킨다.
+%% 추가 선택 "hardbold"는 이미 만들어진 bfseries 한글 글자체를 사용하고,
+%% 추가 선택 "softbold"는 bfseries 글자체를 설치하지 않은 상태에서
+%%   mdseries 글자체를 사용하여 모듬명령을 통해 bfseries가
+%%   만들어지도록 한다.
+%%   이 둘중 아무 것도 지정하지 않으면 "softbold"가 된다.
+%%
+%% 추가 선택의 지정은 다음과 같이 한다.
+%%       \documentclass[hanja,...]{...}
+%%       \usepackage{hangul,...}
+%% 혹은 \documentclass의 다음에
+%%       \usepackage[hanja]{hangul}
+\newif\if@makebold
+\newif\if@josa
+\@hanjafalse \@makeboldfalse \@josatrue
+
+\DeclareOption{hardbold}{\@makeboldfalse}
+\DeclareOption{softbold}{\@makeboldtrue}
+\DeclareOption{nojosa}{\@josafalse}
+
+\ProcessOptions
+
+%% 한글 글자체의 정의
+\input hfont.tex
+
+%%% From File: lterror.dtx
+\def\@latex@warning@no@line#1{\let\protect\relax%
+   \@latex@warning{#1\@gobble}}
+
+%%% From File: ltfsstrc.dtx
+\def\@font@warning#1{\let\protect\relax%
+         \GenericWarning{(Font)\@spaces\@spaces\@spaces\space\space}%
+                        {LaTeX Font Warning: #1}}%
+
+%%% From File: ltmiscen.dtx
+\expandafter\def\expandafter\centering\expandafter{\centering\ks@break}
+\expandafter\def\expandafter\raggedright\expandafter{\raggedright\ks@break}
+\expandafter\def\expandafter\raggedleft\expandafter{\raggedleft\ks@break}
+
+%%% From File: ltsect.dtx
+\def\thanks#1{\footnotemark\let\KSC@\noexpand
+    \protected@xdef\@thanks{\@thanks
+        \protect\footnotetext[\the\c@footnote]{#1}}%
+}
+
+%%% From File: ltpage.dtx
+\def\markboth#1#2{\gdef\@themark{{#1}{#2}}{%
+     \let\protect\@unexpandable@protect \let\KSC@\noexpand
+     \let\label\relax \let\index\relax \let\glossary\relax
+     \mark{\@themark}}\if@nobreak\ifvmode\nobreak\fi\fi}
+\def\@markright#1#2#3{\let\KSC@\noexpand \gdef\@themark{{#1}{#3}}}
+
+%% hfont.sty은 여기서 끝난다.
+\@nameuse{hfont.sty}
+
+%% EUC-KR 부호를 전개하는데에는 주의가 요구된다.
+\def\ks@noexpand{\ifx\protect\@typeset@protect\relax\else
+  \expandafter\noexpand\fi}
+
+%% 우리말 문서의 곳곳에서 사용될 이름들은 \ksnamedef 모듬으로 정의된다.
+%%
+%% 다른 꾸러미가 이 이름들을 다시 정하게 될 경우도 있으므로 아래의
+%% 정의는 모든 꾸러미를 다 처리하고 난 후 \begin{document}가 나올 때
+%% 효력을 갖도록 한다.  이런 이름들은 \begin{document} 앞에서
+%% \renewcommand를 통해 변경할 수 있다.
+
+\def\ksnamedef#1#2{%
+\AtBeginDocument{\@namedef{ks#1}{#2\protect\make@josa{#2}}
+                 \@namedef{#1}{\expandafter\protect\csname ks#1\endcsname}}}
+
+\if@hanja
+  \ksnamedef{today}{\number\year 年~\number\month 月~\number\day 日}
+  \ksnamedef{enclname}{同封物}
+  \ksnamedef{ccname}{寫本}
+  \ksnamedef{headtoname}{受信人}
+  \def\seename{\을~參考}
+  \ksnamedef{contentsname}{目~次}
+  \ksnamedef{listfigurename}{그림~目次}
+  \ksnamedef{listtablename}{表~目次}
+  \ksnamedef{refname}{參考~文獻}
+  \ksnamedef{indexname}{索~引}
+  \ksnamedef{tablename}{表}
+  \ksnamedef{abstractname}{要~約}
+  \ksnamedef{bibname}{參考~文獻}
+  \ksnamedef{appendixname}{附錄}
+  \ksnamedef{ksTHE}{第}
+  \ksnamedef{partname}{篇}
+  \ksnamedef{chaptername}{章}
+  \ksnamedef{sectionname}{節}
+  \ksnamedef{colorlayer}{幻燈版~色相}
+  \ksnamedef{glossaryname}{語~彙}
+\else
+  \ksnamedef{today}{\number\year 년~\number\month 월~\number\day 일}
+  \ksnamedef{enclname}{동봉물}
+  \ksnamedef{ccname}{사본}
+  \ksnamedef{headtoname}{받는이}
+  \def\seename{\을~참고}
+  \ksnamedef{contentsname}{목~차}
+  \ksnamedef{listfigurename}{그림~목차}
+  \ksnamedef{listtablename}{표~목차}
+  \ksnamedef{refname}{참고~문헌}
+  \ksnamedef{indexname}{찾아보기}
+  \ksnamedef{tablename}{표}
+  \ksnamedef{abstractname}{요~약}
+  \ksnamedef{bibname}{참고~문헌}
+  \ksnamedef{appendixname}{부록}
+  \ksnamedef{ksTHE}{제}
+  \ksnamedef{partname}{편}
+  \ksnamedef{chaptername}{장}
+  \ksnamedef{sectionname}{절}
+  \ksnamedef{colorlayer}{환등판~색깔}
+  \ksnamedef{glossaryname}{용어~풀이}
+\fi
+\ksnamedef{pagename}{쪽}
+\ksnamedef{figurename}{그림}
+
+%% 단원의 한글화
+%% =============
+%%
+%% Part I       --> 제 I 편, 第 I 篇
+%% Chapter 1    --> 제 1 장, 第 1 章   <book,report>
+%% Section 1    --> 제 1 절, 第 1 節
+%% Appendix A   --> 부록  A, 附綠  A
+%%
+%% 위와 같은 단원의 한글화는 절(節)까지 영향을 미친다. 그러므로 우리는
+%% 목차에 \subsubsection까지 단원이 번호와 함께 나오도록 한다.
+%% article에서는 이미 3으로 지정되었으나, 그외에서는 2로 지정되어
+%% \subsection까지만 번호가 목차에 나오도록 되어 있다.
+\setcounter{secnumdepth}{\thr@@}
+
+\@ifclassloaded{article}{% <article>
+  \renewcommand{\appendix}{\par
+    \setcounter{section}{0}%
+    \setcounter{subsection}{0}%
+    \def\@chapapp{\appendixname}% 부록의 한글화에 의해 필요.
+    \kscntformat{section}{\appendixname~}{}
+    \gdef\thesection{\@Alph\c@section}}%
+}{\@ifundefined{@chapapp}{}{% <report|book>
+    \renewcommand\thesection{\@arabic\c@section}
+    \renewcommand\appendix{\par
+      \setcounter{chapter}{0}%
+      \setcounter{section}{0}%
+      \gdef\@chapapp{\appendixname}%
+      \kscntformat{chapter}{\appendixname~}{}
+      \gdef\thechapter{\@Alph\c@chapter}}%
+}}
+
+%% 위와같은 재정의로 다음과 같은 문제가 발생한다.
+%% 1. \part는 \partname~\thepart로 나오게 된다. 편~I
+%% 2. \chapter는 \@chapapp{} \thechapter로. 장~1
+%% 3. \section은 \sectionname~\thesection으로. 절~1
+%% 4. 목차작성의 들여쓰기가 우리말 환경에 적당하지 않다.
+%% 5. 페이지 heading의 글자체가 \slshape으로 바뀜으로서 우리말이
+%%    불안정해진다.
+%%
+%% 이런 약점을 보완하기 위해 단원의 일련번호의 앞과 뒤에 끼워넣을
+%% 모듬을 다음과 같이 설정한다.
+\def\kscntformat#1#2#3{\@namedef{pre@#1cnt}{#2}
+                       \@namedef{post@#1cnt}{#3}}
+\kscntformat{part}{\ksTHE~}{~\partname}
+\kscntformat{chapter}{\ksTHE~}{~\chaptername}
+\kscntformat{section}{\ksTHE~}{~\sectionname}
+
+\@ifclassloaded{article}{% <article>
+  \def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}%
+        {\pre@partcnt\thepart\post@partcnt\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+       \Large\bfseries \pre@partcnt\thepart\post@partcnt
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+   \nobreak
+   \vskip 3ex
+   \@afterheading}
+}{% <report|book>
+  \@ifundefined{@part}{}{%
+    \def\@part[#1]#2{%
+      \ifnum \c@secnumdepth >-2\relax
+        \refstepcounter{part}%
+        \addcontentsline{toc}{part}%
+          {\pre@partcnt\thepart\post@partcnt\hspace{1em}#1}%
+      \else
+        \addcontentsline{toc}{part}{#1}%
+      \fi
+      \markboth{}{}%
+      {\centering
+       \interlinepenalty \@M
+       \normalfont
+       \ifnum \c@secnumdepth >-2\relax
+         \huge\bfseries \pre@partcnt\thepart\post@partcnt
+         \par
+         \vskip 20\p@
+       \fi
+       \Huge \bfseries #2\par}%
+     \@endpart}
+  }
+}
+
+\@ifclassloaded{book}{%
+  \def\@chapter[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \refstepcounter{chapter}%
+        \begingroup
+        \let\protect\string
+        \edef\reserved@a{\pre@chaptercnt\thechapter\post@chaptercnt}
+        \typeout{\expandafter\strip@prefix\meaning\reserved@a}%
+        \endgroup
+        \addcontentsline{toc}{chapter}%
+          {\protect\numberline{%
+             \pre@chaptercnt\thechapter\post@chaptercnt}#1}%
+      \else
+        \addcontentsline{toc}{chapter}{#1}%
+      \fi
+    \else
+      \addcontentsline{toc}{chapter}{#1}%
+    \fi
+    \chaptermark{#1}%
+    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+    \if@twocolumn
+      \@topnewpage[\@makechapterhead{#2}]%
+    \else
+      \@makechapterhead{#2}%
+      \@afterheading
+    \fi}
+  \def\@makechapterhead#1{%
+    \vspace*{50\p@}%
+    {\parindent \z@ \raggedright \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+       \if@mainmatter
+         \huge\bfseries
+         \pre@chaptercnt\thechapter\post@chaptercnt
+         \par\nobreak
+         \vskip 20\p@
+       \fi
+     \fi
+     \interlinepenalty\@M
+     \Huge \bfseries #1\par\nobreak
+     \vskip 40\p@
+     }}}{}%
+\@ifclassloaded{report}{%
+  \def\@chapter[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{chapter}%
+      \typeout{\pre@chaptercnt\thechapter\post@chaptercnt}
+      \addcontentsline{toc}{chapter}%
+        {\protect\numberline{%
+           \pre@chaptercnt\thechapter\post@chaptercnt}#1}%
+    \else
+      \addcontentsline{toc}{chapter}{#1}%
+    \fi
+    \chaptermark{#1}%
+    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+    \if@twocolumn
+      \@topnewpage[\@makechapterhead{#2}]%
+    \else
+      \@makechapterhead{#2}%
+      \@afterheading
+    \fi}
+  \def\@makechapterhead#1{%
+    \vspace*{50\p@}%
+    {\parindent \z@ \raggedright \normalfont
+      \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries
+        \pre@chaptercnt\thechapter\post@chaptercnt
+        \par\nobreak
+        \vskip 20\p@
+      \fi
+      \interlinepenalty\@M
+      \Huge \bfseries #1\par\nobreak
+      \vskip 40\p@
+    }}}{}
+
+\@ifundefined{chapter}{}{%
+  \renewcommand*\l@chapter[2]{%
+    \ifnum \c@tocdepth >\m@ne
+      \addpenalty{-\@highpenalty}%
+      \vskip 1.0em \@plus\p@%
+      \setbox\z@=\hbox{\c@chapter=1\relax\bfseries\pre@chaptercnt\thechapter\post@chaptercnt~}
+      \setlength\@tempdima{1.5em}
+      \advance\@tempdima\wd\z@
+      \begingroup
+        \parindent \z@ \rightskip \@pnumwidth
+        \parfillskip -\@pnumwidth
+        \leavevmode \bfseries
+        \advance\leftskip \@tempdima
+        \hskip -\leftskip
+        #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+        \penalty\@highpenalty
+      \endgroup
+    \fi}}
+
+\@ifundefined{section}{}{%
+  \def\section{%
+    \if@noskipsec \leavevmode \fi
+    \par
+    \@afterindentfalse
+    \if@nobreak
+      \everypar{}%
+    \else
+      \addpenalty\@secpenalty\addvspace{3.5ex \@plus 1ex \@minus .2ex\relax}
+    \fi
+    \secdef\ks@sect\ks@ssect}
+  \def\ks@sect[#1]#2{%
+    \ifnum \c@secnumdepth<1
+      \let\@svsec\@empty
+    \else
+      \refstepcounter{section}%
+      \protected@edef\@svsec{%
+        \noexpand\pre@sectioncnt\thesection\noexpand\post@sectioncnt
+        \quad\relax}%
+    \fi
+    \begingroup
+      \normalfont\Large\bfseries{%
+        \@hangfrom{\hskip \z@\relax\@svsec}%
+        \interlinepenalty \@M #2\@@par}%
+    \endgroup
+    \sectionmark{#1}%
+    \addcontentsline{toc}{section}{%
+      \ifnum\c@secnumdepth<1 \else
+        \protect\numberline{\pre@sectioncnt\thesection\post@sectioncnt}%
+      \fi
+      #1}
+    \@xsect{2.3ex \@plus.2ex}}
+  \def\ks@ssect#1{%
+    \begingroup
+      \normalfont\Large\bfseries{%
+        \@hangfrom{\hskip \z@}%
+        \interlinepenalty \@M #1\@@par}%
+    \endgroup
+    \@xsect{2.3ex \@plus.2ex}}
+}
+
+\def\@startsection#1#2#3#4#5#6{%
+  \if@noskipsec \leavevmode \fi
+  \par
+  \@tempskipa #4\relax
+  \@afterindenttrue
+  \ifdim \@tempskipa <\z@
+    \@tempskipa -\@tempskipa \@afterindentfalse
+  \fi
+  \if@nobreak
+    \everypar{}%
+  \else
+    \addpenalty\@secpenalty\addvspace\@tempskipa
+  \fi
+  \@ifstar
+    {\@ssect{#3}{#4}{#5}{#6}}%
+    {\@dblarg{\@sect{#1}{#2}{#3}{#4}{#5}{#6}}}}
+
+\@ifclassloaded{article}{%
+  \renewcommand*\l@section[2]{%
+    \ifnum \c@tocdepth >\z@
+      \addpenalty{\@secpenalty}%
+      \addvspace{1.0em \@plus\p@}%
+      \settowidth{\@tempdima}{\bfseries\pre@sectioncnt\post@sectioncnt}
+      \addtolength{\@tempdima}{1.5em}
+      \begingroup
+        \parindent \z@ \rightskip \@pnumwidth
+        \parfillskip -\@pnumwidth
+        \leavevmode \bfseries
+        \advance\leftskip\@tempdima
+        \hskip -\leftskip
+        #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \endgroup
+    \fi}
+}{\@ifundefined{l@section}{}{%
+    \renewcommand*\l@section{%
+      \settowidth{\@tempdima}{\bfseries\pre@sectioncnt\post@sectioncnt}
+      \addtolength{\@tempdima}{2.3em}
+      \@dottedtocline{1}{1em}{\@tempdima}}}%1.5em 2.3em
+}
+
+%% 다음은 \ps@headings과 \ps@myheadings를 한글에 맞게 수정한 것이다.
+%% 각각의 class들이 서로 다르게 쪽 머리의 판을 짜므로 우리는
+%% 여기서 각각을 따로따로 정의해 주어야 한다.
+%% \LaTeXe에 새로 도입된 \MakeUpperCase는 8비트 문자를 쓰는
+%% iso-latin과 같은 다른 꾸러미를 사용할 때 유용하다. -- 아직
+%% β-상태이므로 단순히 \uppercase로 대치한다.
+\DeclareRobustCommand{\MakeUppercase}[1]{\uppercase{#1}}
+\DeclareRobustCommand{\MakeLowercase}[1]{\lowercase{#1}}
+
+\@ifclassloaded{article}{%
+  \if@twoside
+    \renewcommand\ps@headings{%
+      \let\@oddfoot\@empty\let\@evenfoot\@empty
+      \def\@evenhead{\thepage\hfil\slshape\leftmark}%
+      \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
+      \let\@mkboth\markboth
+      \def\sectionmark##1{%
+        \markboth {\MakeUppercase{%
+          \ifnum \c@secnumdepth >\z@
+            \pre@sectioncnt\thesection\post@sectioncnt\quad
+          \fi
+          ##1}}{}}%
+      \def\subsectionmark##1{%
+        \markright {%
+          \ifnum \c@secnumdepth >\@ne
+            \thesubsection\quad
+          \fi
+          ##1}}}
+  \else
+    \def\ps@headings{%
+      \let\@oddfoot\@empty
+      \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
+      \let\@mkboth\markboth
+      \def\sectionmark##1{%
+        \markright {\MakeUppercase{%
+          \ifnum \c@secnumdepth >\m@ne
+            \pre@sectioncnt\thesection\post@sectioncnt\quad
+          \fi
+          ##1}}}}
+  \fi
+}{}
+
+\@ifclassloaded{book}{%
+  \if@twoside
+    \def\ps@headings{%
+      \let\@oddfoot\@empty\let\@evenfoot\@empty
+      \def\@evenhead{\thepage\hfil\slshape\leftmark}%
+      \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
+      \let\@mkboth\markboth
+      \def\chaptermark##1{%
+        \markboth {\MakeUppercase{%
+            \ifnum \c@secnumdepth >\m@ne
+              \if@mainmatter
+                 \pre@chaptercnt\thechapter\post@chaptercnt\quad%
+              \fi
+            \fi
+            ##1}}{}}%
+      \def\sectionmark##1{%
+        \markright {\MakeUppercase{%
+            \ifnum \c@secnumdepth >\z@
+              \pre@sectioncnt\thesection\post@sectioncnt\quad%
+            \fi
+            ##1}}}}
+  \else
+    \def\ps@headings{%
+      \let\@oddfoot\@empty
+      \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
+      \let\@mkboth\markboth
+      \def\chaptermark##1{%
+        \markright {\MakeUppercase{%
+          \ifnum \c@secnumdepth >\m@ne
+            \if@mainmatter
+              \pre@chaptercnt\thechapter\post@chaptercnt\quad%
+            \fi
+          \fi
+          ##1}}}}
+  \fi
+  \pagestyle{headings}
+  }{}
+
+\@ifclassloaded{report}{%
+  \if@twoside
+    \def\ps@headings{%
+      \let\@oddfoot\@empty\let\@evenfoot\@empty
+      \def\@evenhead{\thepage\hfil\slshape\leftmark}%
+      \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
+      \let\@mkboth\markboth
+      \def\chaptermark##1{%
+        \markboth {\MakeUppercase{%
+          \ifnum \c@secnumdepth >\m@ne
+            \pre@chaptercnt\thechapter\post@chaptercnt\quad%
+          \fi
+          ##1}}{}}%
+      \def\sectionmark##1{%
+        \markright {\MakeUppercase{%
+          \ifnum \c@secnumdepth >\z@
+            \pre@sectioncnt\thesection\post@sectioncnt\quad%
+          \fi
+          ##1}}}}
+  \else
+    \def\ps@headings{%
+      \let\@oddfoot\@empty
+      \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
+      \let\@mkboth\markboth
+      \def\chaptermark##1{%
+        \markright {\MakeUppercase{%
+          \ifnum \c@secnumdepth >\m@ne
+            \pre@chaptercnt\thechapter\post@chaptercnt\quad%
+          \fi
+          ##1}}}}
+  \fi
+}{}
+
+%%% From File: ltcounts.dtx
+%% 영문숫자에서 우리말 조사처리
+\def\@arabic#1{\number #1\ifx\protect\relax\ks@num{\number #1}\fi}
+\def\@roman#1{\romannumeral #1\ifx\protect\relax\ks@num{\number #1}\fi}
+\def\@Roman#1{\expandafter\uppercase\expandafter{\romannumeral #1}%
+  \ifx\protect\relax\ks@num{\number #1}\fi}
+\def\@alph#1{%
+  \ifcase#1\or a\or b\or c\or d\or e\or f\or g\or h\or i\or j\or
+   k\or l\or m\or n\or o\or p\or q\or r\or s\or t\or u\or v\or w\or x\or
+    y\or z\else\@ctrerr\fi\ifx\protect\relax\alph@josa{#1}\fi}
+\def\@Alph#1{%
+  \ifcase#1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or
+   K\or L\or M\or N\or O\or P\or Q\or R\or S\or T\or U\or V\or W\or X\or
+    Y\or Z\else\@ctrerr\fi\ifx\protect\relax\alph@josa{#1}\fi}
+\def\@fnsymbol#1{\ensuremath{\ifcase#1\or *\or \dagger\or \ddagger\or
+   \mathchar "278\or \mathchar "27B\or \|\or **\or \dagger\dagger
+   \or \ddagger\ddagger \else\@ctrerr\fi}\ifx\protect\relax\@jung\fi}
+\def\alph@josa#1{%
+  \ifnum#1=12 \ri@ul\else
+  \ifnum#1=13 \@jong\else
+  \ifnum#1=14 \@jong\else
+  \ifnum#1=18 \ri@ul\else\@jung
+  \fi\fi\fi\fi}
+
+%% 조사자동처리명령:
+%%   \은/\는 \이/\가 \을/\를 \와/\과 \으로/\로 (\으로서/\로서 \으로써/\로써)
+\DeclareRobustCommand*{\@jung}{\gdef\is@rieul{n}%
+  \global\let\@josa\@firstoftwo\ignorespaces}
+\DeclareRobustCommand*{\@jong}{\gdef\is@rieul{n}%
+  \global\let\@josa\@secondoftwo\ignorespaces}
+\DeclareRobustCommand*{\ri@ul}{\gdef\is@rieul{y}%
+  \global\let\@josa\@secondoftwo\ignorespaces}
+\DeclareRobustCommand*{\ks@num}[1]{{\count@#1%
+  \ifnum\count@<\z@ \count@-\count@ \fi\count2\count@
+  \divide\count2 10 \multiply\count2 10 \advance\count@-\count2
+  \ifcase\count@\@jong\or\ri@ul\or\@jung\or\@jong\or\@jung\or
+  \@jung\or\@jong\or\ri@ul\or\ri@ul\or\@jung\fi}\ignorespaces}
+
+%% 조사결정방법
+\if@josa
+\begingroup
+\IfFileExists{josa.tab}{%
+  \newread\JS@tab
+  \endlinechar\m@ne
+  \def\JS@{\read\JS@tab to\@t \expandafter\split@t\@t\relax
+    \ifnum\count@=2 \let\next\relax \else
+      \ifcase\count@\let\next\@jung\or\let\next\ri@ul\fi
+      \global\expandafter\let\csname\reserved@a\endcsname\next
+      \let\next\JS@ \fi\next}
+  \def\split@t##1,##2,##3\relax{\count@##1\def\reserved@a{##2|##3}}%
+  \openin\JS@tab=josa.tab \JS@ \closein\JS@tab}%
+{\PackageWarningNoLine{\string\HLaTeX}{``josa.tab''이 없읍니다!!!^^J
+  \@spaces\@spaces\@spaces\@spaces\@spaces\@spaces
+  인용에 사용되는 자동조사는 잘못 처리될 수 있읍니다.}}
+\endgroup
+\fi
+
+%% 우리말숫자
+\def\jaso#1{\@jaso{\@nameuse{c@#1}}}
+\def\@jaso#1{\ifcase#1\or ㄱ\@jong\or ㄴ\@jong\or ㄷ\@jong\or ㄹ\ri@ul
+  \else\@ijaso{#1}\fi}
+\def\@ijaso#1{\ifcase#1\or\or\or\or\or ㅁ\or ㅂ\or ㅅ\or ㅇ\or ㅈ\or
+  ㅊ\or ㅋ\or ㅌ\or ㅍ\or ㅎ\else\@ctrerr\fi\ifx\protect\relax\@jong\fi}
+\def\gana#1{\@gana{\@nameuse{c@#1}}}
+\def\@gana#1{\ifcase#1\or 가\or 나\or 다\or 라\else\@igana{#1}\fi
+  \ifx\protect\relax\@jung\fi}
+\def\@igana#1{\ifcase#1\or\or\or\or\or 마\or 바\or 사\or 아\or 자\or
+  차\or 카\or 타\or 파\or 하\else\@ctrerr\fi}
+\def\ojaso#1{\@ojaso{\@nameuse{c@#1}}}
+\def\@ojaso#1{\ifcase#1\or ㉠\@jung\or ㉡\@jung\or ㉢\@jung\or
+  ㉣\ri@ul\else\@iojaso{#1}\fi}
+\def\@iojaso#1{\ifcase#1\or\or\or\or\or ㉤\or ㉥\or ㉦\or ㉧\or ㉨\or
+  ㉩\or ㉪\or ㉫\or ㉬\or ㉭\else\@ctrerr\fi\ifx\protect\relax\@jong\fi}
+\def\ogana#1{\@ogana{\@nameuse{c@#1}}}
+\def\@ogana#1{\ifcase#1\or ㉮\or ㉯\or ㉰\or ㉱\else\@iogana{#1}\fi
+  \ifx\protect\relax\@jung\fi}
+\def\@iogana#1{\ifcase#1\or\or\or\or\or ㉲\or ㉳\or ㉴\or ㉵\or ㉶\or
+  ㉷\or ㉸\or ㉹\or ㉺\or ㉻\else\@ctrerr\fi}
+\def\pjaso#1{\@pjaso{\@nameuse{c@#1}}}
+\def\@pjaso#1{\ifcase#1\or ㈀\@jong\or ㈁\@jong\or ㈂\@jong\or
+  ㈃\ri@ul\else\@ipjaso{#1}\fi}
+\def\@ipjaso#1{\ifcase#1\or\or\or\or\or ㈄\or ㈅\or ㈆\or ㈇\or ㈈\or
+  ㈉\or ㈊\or ㈋\or ㈌\or ㈍\else\@ctrerr\fi\ifx\protect\relax\@jong\fi}
+\def\pgana#1{\@pgana{\@nameuse{c@#1}}}
+\def\@pgana#1{\ifcase#1\or ㈎\or ㈏\or ㈐\or ㈑\else\@ipgana{#1}\fi
+  \ifx\protect\relax\@jung\fi}
+\def\@ipgana#1{\ifcase#1\or\or\or\or\or ㈒\or ㈓\or ㈔\or ㈕\or ㈖\or
+  ㈗\or ㈘\or ㈙\or ㈚\or ㈛\else\@ctrerr\fi}
+\def\onum#1{\@onum{\@nameuse{c@#1}}}
+\def\@onum#1{\ifcase#1\or ①\or ②\or ③\or ④\else\@ionum{#1}\fi
+  \ifnum#1<\sixt@@n\ifx\protect\relax\ks@num{\number #1}\fi\fi}
+\def\@ionum#1{\ifcase#1\or\or\or\or\or ⑤\or ⑥\or ⑦\or ⑧\or ⑨\or
+  ⑩\or ⑪\or ⑫\or ⑬\or ⑭\or ⑮\else\@ctrerr\fi}
+\def\pnum#1{\@pnum{\@nameuse{c@#1}}}
+\def\@pnum#1{\ifcase#1\or ⑴\or ⑵\or ⑶\or ⑷\else\@ipnum{#1}\fi
+  \ifnum#1<\sixt@@n\ifx\protect\relax\ks@num{\number #1}\fi\fi}
+\def\@ipnum#1{\ifcase#1\or\or\or\or\or ⑸\or ⑹\or ⑺\or ⑻\or ⑼\or
+  ⑽\or ⑾\or ⑿\or ⒀\or ⒁\or ⒂\else\@ctrerr\fi}
+\def\oeng#1{\@oeng{\@nameuse{c@#1}}}
+\def\@oeng#1{\ifcase#1\or ⓐ\or ⓑ\or ⓒ\or ⓓ\else\@ioeng{#1}\fi
+  \ifx\protect\relax\alph@josa{#1}\fi}
+\def\@ioeng#1{\ifcase#1\or\or\or\or\or ⓔ\or ⓕ\or ⓖ\or ⓗ\or ⓘ\or
+  ⓙ\or ⓚ\or ⓛ\or ⓜ\or ⓝ\or ⓞ\or ⓟ\or ⓠ\or ⓡ\or ⓢ\or ⓣ\or
+  ⓤ\or ⓥ\or ⓦ\or ⓧ\or ⓨ\or ⓩ\else\@ctrerr\fi}
+\def\peng#1{\@peng{\@nameuse{c@#1}}}
+\def\@peng#1{\ifcase#1\or ⒜\or ⒝\or ⒞\or ⒟\else\@ipeng{#1}\fi
+  \ifx\protect\relax\alph@josa{#1}\fi}
+\def\@ipeng#1{\ifcase#1\or\or\or\or\or ⒠\or ⒡\or ⒢\or ⒣\or ⒤\or
+  ⒥\or ⒦\or ⒧\or ⒨\or ⒩\or ⒪\or ⒫\or ⒬\or ⒭\or ⒮\or ⒯\or
+  ⒰\or ⒱\or ⒲\or ⒳\or ⒴\or ⒵\else\@ctrerr\fi}
+\def\hnum#1{\@hnum{\@nameuse{c@#1}}}
+\def\@hnum#1{\ifcase#1\or 하나\or 둘\or 셋\or 넷\or\@ihnum{#1}\fi}
+\def\@ihnum#1{\ifcase#1\or\or\or\or\or 다섯\or 여섯\or 일곱\or 여덟\or
+  아홉\or 열\or 열하나\or 열둘\or 열셋\or 열넷\or 열다섯\or 열여섯\or
+  열일곱\or 열여덟\or 열아홉\or 스물\or 스물하나\or 스물둘\or
+  스물셋\or 스물넷\else\@ctrerr\fi\ifx\protect\relax\@tempcnta#1%
+  \ifnum\@tempcnta>9\advance\@tempcnta-10\fi
+  \ifnum\@tempcnta>9\advance\@tempcnta-10\fi
+  \ifcase\@tempcnta\ri@ul\or\@jung\or\ri@ul\else\@jong\fi\fi}
+\def\Hnum#1{\@Hnum{\@nameuse{c@#1}}}
+\def\@Hnum#1{\ifcase#1\or 첫\or 둘\or 세\or 네\or\@iHnum{#1}\fi
+  째\ifx\protect\relax\@jung\fi}
+\def\@iHnum#1{\ifcase#1\or\or\or\or\or 다섯\or 여섯\or 일곱\or 여덟\or
+  아홉\or 열\or 열하나\or 열둘\or 열셋\or 열넷\or 열다섯\or 열여섯\or
+  열일곱\or 열여덟\or 열아홉\or 스물\or 스물하나\or 스물둘\or 스물셋\or
+  스물넷\else\@ctrerr\fi}
+
+%% 색인작성시 makeidx.sty을 쓰면 \see와 \seealso가 정의된다.
+\AtBeginDocument{%
+  \@ifundefined{see}{}{%
+    \renewcommand*\see[2]{#1\emph{\make@josa{#1}\seename}}
+    \providecommand*\seealso[2]{#1\emph{\make@josa{#1}\alsoname}}}
+}
+
+%% 한글LaTeX의 logo는 이렇게.
+\DeclareRobustCommand{\HLaTeX}{한\kern-.4ex\lower.3ex\hbox{글}\kern-.4ex\LaTeX}
+
+%% \LaTeX의 한글화:
+%% ----------------
+%%% From File: ltbibl.dtx
+\def\@lbibitem[#1]#2{\item[\@biblabel{#1}\hfill]\if@filesw
+      {\let\protect\noexpand
+       \immediate
+       \write\@auxout{\string\bibcite{#2}%
+        {#1\string\make@josa{#1}}}}\fi\ignorespaces}
+\def\@bibitem#1{\item\if@filesw
+       {\let\protect\noexpand\immediate\write\@auxout
+        {\string\bibcite{#1}{\the\value{\@listctr}%
+         \string\ks@num{\the\value{\@listctr}}}}}\fi\ignorespaces}
+\def\bibcite{\let\protect\string\@newl@bel b}
+\def\@citex[#1]#2{\let\protect\string%
+  \let\@citea\@empty
+  \@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{,\penalty\@m\ }%
+     \edef\@citeb{\expandafter\@firstofone\@citeb\@empty}%
+     \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}\fi
+     \let\protect\@typeset@protect
+     \@ifundefined{b@\@citeb}{\mbox{\reset@font\bfseries ?}%
+       \G@refundefinedtrue
+       \@latex@warning
+         {Citation `\@citeb' on page \thepage \space undefined}}%
+       {\@cite@ofmt{\csname b@\@citeb\endcsname}}}}{#1}
+       \let\protect\@typeset@protect}
+\def\nocite#1{\@bsphack\let\protect\string%
+  \@for\@citeb:=#1\do{%
+    \edef\@citeb{\expandafter\@firstofone\@citeb\@empty}%
+    \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}\fi
+    \let\protect\relax
+    \@ifundefined{b@\@citeb}{\G@refundefinedtrue
+        \@latex@warning{Citation `\@citeb' undefined}}{}}%
+  \@esphack}
+%%
+\if@josa
+  \def\make@josa#1{%
+    \begingroup\set@display@protect
+    \xdef\reserved@a{#1}%
+    \endgroup
+    \expandafter\last@two@codes\reserved@a\endjosa
+    \ifnum\k@second>160
+      \@tempcnta\k@first \divide\@tempcnta\sixt@@n
+      \@tempcntb\@tempcnta \multiply\@tempcntb\sixt@@n
+      \advance\k@first-\@tempcntb
+      \edef\reserved@a{\hexnumber@{\@tempcnta}\hexnumber@{\k@first}}%
+      \@tempcnta\k@second \divide\@tempcnta\sixt@@n
+      \@tempcntb\@tempcnta \multiply\@tempcntb\sixt@@n
+      \advance\k@second-\@tempcntb
+      \edef\reserved@b{\hexnumber@{\@tempcnta}\hexnumber@{\k@second}}%
+      \expandafter\ifx\csname\reserved@a|\reserved@b\endcsname\relax\@jong
+      \else\expandafter\csname\reserved@a|\reserved@b\endcsname\fi
+    \else
+      \ifnum`0=\k@second\@jong\else
+      \ifnum`1=\k@second\ri@ul\else
+      \ifnum`3=\k@second\@jong\else
+      \ifnum`6=\k@second\@jong\else
+      \ifnum`7=\k@second\ri@ul\else
+      \ifnum`8=\k@second\ri@ul\else
+      \ifnum`l=\k@second\ri@ul\else
+      \ifnum`m=\k@second\@jong\else
+      \ifnum`n=\k@second\@jong\else
+      \ifnum`r=\k@second\ri@ul\else
+      \ifnum`L=\k@second\ri@ul\else
+      \ifnum`M=\k@second\@jong\else
+      \ifnum`N=\k@second\@jong\else
+      \ifnum`R=\k@second\ri@ul\else\@jung
+      \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \fi
+  }
+  \def\last@two@codes{\afterassignment\loop@josa\let\next= }
+  \def\loop@josa{%
+    \ifx\next\endjosa\let\next\relax
+    \else
+      \k@first\k@second
+      \expandafter\next@char\meaning\next\@nil
+      \let\next\last@two@codes
+    \fi\next
+  }
+  \newcount\k@first \newcount\k@second
+  \def\next@char#1 #2 #3\@nil{\k@second`#3}
+\else
+  \def\make@josa#1{\@jong}
+\fi
+
+%%%% From File: ltxref.dtx
+\def\@setref#1#2#3{%
+  \let\protect\relax
+  \ifx#1\relax
+   \protect\G@refundefinedtrue
+   \nfss@text{\reset@font\bfseries ??}%
+   \@latex@warning{Reference `#3' on page \thepage \space
+             undefined}%
+  \else
+   \expandafter#2#1\null
+  \fi}
+\def\label#1{\@bsphack
+  \protected@write\@auxout{}%
+         {\string\newlabel{#1}%
+          {{\@currentlabel\string\make@josa{\@currentlabel}}%
+           {\thepage\string\make@josa{\thepage}}}}%
+  \@esphack}
+\def\ref#1{\let\protect\string
+        \expandafter\@setref\csname r@#1\endcsname\@firstoftwo{#1}}
+\def\pageref#1{\let\protect\string
+          \expandafter\@setref\csname r@#1\endcsname\@secondoftwo{#1}}
+\def\newlabel{\let\protect\string\@newl@bel r}%
+
+%%% 자동조사명령 및 글자체바꿈 우리말 명령:
+%%%   \은=\는 \이=\가 \을=\를 \와=\과 \으로=\로 (\으로서=\로서 \으로써=\로써)
+%%%   \ㅡ \ㅣ (koaunghi: 2004/04/07 추가)
+%%%   \옛글\외곽\명조\목각\고딕\그래픽\궁서\새명조\필기\펜글씨\펜흘림\봄글씨
+%%%   \필기a\디나루 (koaunghi: 2004/04/07 추가)
+%% 우리말 명령
+
+\let\@josa\@firstoftwo
+\def\^^c0{\@ifnextchar^^da\f@rj@mo\f@rjos@}
+\def\f@rjos@#1{%
+  \ifx#1^^cc\@josa{가}{이}\else%   이(C0CC)
+  \ifx#1^^ba\@josa{는}{은}\else%   은(C0BA)
+  \ifx#1^^bb\@josa{를}{을}\else%   을(C0BB)
+  \ifx#1^^b8\ㅡ%                   으(C0B8) 로(서/써)
+  \fi\fi\fi\fi}
+\def\f@rj@mo^^da모#1#2#3#4{%    자모(C0DAB8F0)
+  \ifx#1^^b8\hfontfamily{jmj}\else% 명조(B8EDC1B6)
+  \ifx#1^^b0\hfontfamily{jgt}\else% 고딕(B0EDB5F1)
+  \ifx#1^^b3\hfontfamily{jnv}\else% 노벨(B3EBBAA7)
+  \ifx#1^^bc\hfontfamily{jsr}%      소라(BCD2B6F3)
+  \fi\fi\fi\fi\ignorespaces}%
+\def\는{\은}%                                  는(B4C2)
+\def\로{\ㅡ로}% 로(B7CE) (서/써)
+\def\^^bf{%
+  \@ifnextchar^^cd{\@josa{와}{과}\@gobble}\yt@or@ol}% 와(BFCD)
+\def\yt@or@ol#1#2#3{%
+  \ifx#1^^be\hfontfamily{yt}\else%                    옛글(BFBDB1BD)
+  \ifx#1^^dc\hfontfamily{ol}\fi\fi\ignorespaces}%     외곽(BFDCB0FB)
+\def\^^b8{\@ifnextchar^^a6{\을\@gobble}\mj@or@mg}% 를(B8A6)
+\def\mj@or@mg#1#2#3{%
+  \ifx#1^^ed\hfontfamily{mj}\else%                 명조(B8EDC1B6)
+  \ifx#1^^f1\hfontfamily{mg}\fi\fi\ignorespaces}%  목각(B8F1B0A2)
+\def\^^b0{\@ifnextchar^^ed\only@gt\ga@or@gwa}
+\def\only@gt#1#2#3{%
+  \ifx#1^^ed\gtfamily\fi\ignorespaces}% 고딕(B0EDB5F1)
+\def\ga@or@gwa#1{%
+  \ifx#1^^a1\이\else%                   가(B0A1)
+  \ifx#1^^fa\@josa{와}{과}\fi\fi}%      과(B0FA)
+\def\^^b1{\@ifnextchar^^c3\gs@or@gh\only@gr}
+\def\gs@or@gh#1#2#3#4#5{%
+  \ifx#2^^bc\hfontfamily{gs}#4#5\else%         궁서(B1C3BCAD)
+  \hfontfamily{gh}\fi\ignorespaces}%           궁흘림(B1C3C8EAB8B2)
+\def\only@gr#1#2#3#4#5{%
+  \ifx#1^^d7\hfontfamily{gr}\fi\ignorespaces}% 그래픽(B1D7B7A1C7C8)
+%
+\def\새명조{\hfontfamily{sm}\ignorespaces}% 새명조(BBF5B8EDC1B6)
+% \필기!=\필기a 추가 (2005/04/07)
+\def\필기{%
+  \@ifnextchar a{\hfontfamily{pga}\@gobble}{\hfontfamily{pg}\ignorespaces}}
+%\def\필기{\hfontfamily{pg}\ignorespaces}%   필기  (C7CAB1E2)
+\def\펜#1#2#3#4{\ifx#1^^c8\hfontfamily{ph}% 펜흘림(C6E6C8EAB8B2)
+  \else\hfontfamily{pn}\fi\ignorespaces}%   펜글씨(C6E6B1DBBEBE)
+\def\봄글씨{\hfontfamily{bm}\ignorespaces}% 봄글씨(BABDB1DBBEBE)
+\def\타자{\hfontfamily{tz}\ignorespaces}%   타자  (C5B8C0DA)
+\def\신문{\hfontfamily{sh}\ignorespaces}%   신문  (BDC5B9AE)
+\def\바다{\hfontfamily{vd}\ignorespaces}%   바다  (B9D9B4D9)
+\def\디나루{\hfontfamily{dn}\ignorespaces}% 디나루 (B5EFB3AAB7E7)
+
+%%% 매개 모음 ``으'' (2005/04/07) {\ㅡ}
+%%% 지정사    ``이'' (2005/04/07) {\ㅣ}
+\def\^^a4#1{%
+  \ifx#1^^d1\if y\is@rieul\else\@josa{}{으}\fi% ㅡ(A4D1)
+  \else\@josa{}{이}\fi}%                        ㅣ(A4D3)
+
+%%% 드러냄표 (2005/04/10 koaunghi@kornet.net)
+\def\circemph@size#1{\leavevmode%
+  \setbox0\hbox{\fontencoding{OT1}\fontseries{m}\selectfont!}%
+  \dimen@\ht0\advance\dimen@-.3ex%
+  \rlap{\raise.7\dimen@\hbox{\fontencoding{OT1}\fontseries{m}\selectfont\rule{.3\dimen@}{0pt}\char'27}}#1}
+\def\dotemph@size#1{\leavevmode%
+  \setbox0\hbox{\fontencoding{OT1}\fontseries{m}\selectfont!}%
+  \dimen@\ht0\advance\dimen@-.3ex%
+  \rlap{\raise.7\dimen@\hbox{\fontencoding{OT1}\fontseries{m}\selectfont\rule{.7\dimen@}{0pt}\char'137}}#1}
+
+\def\circem{\let\hemph@size\circemph@size}
+\def\dotem#1{\let\hemph@size\dotemph@size}
+\def\circemph#1{{\let\hemph@size\circemph@size #1}}
+\def\dotemph#1{{\let\hemph@size\dotemph@size #1}}
+
+%% 첫 줄 들여쓰기: 2배각
+\settowidth{\parindent}{\reset@font 한글}
+
+%%% End of file `euc-kr.tex'.
