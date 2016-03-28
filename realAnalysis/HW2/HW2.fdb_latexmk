@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1459069548 "HW2.tex" "HW2.pdf" "HW2" 1459069548
+["pdflatex"] 1459149226 "HW2.tex" "HW2.pdf" "HW2" 1459149227
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -97,9 +97,9 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "HW2.aux" 1459069548 1768 b52ad80f31aac92cee3253d51cd561b0 ""
-  "HW2.tex" 1459069539 11337 aec77a5dcbc96a454b62a9bf5d80c1c7 ""
+  "HW2.aux" 1459149226 1768 28a5554aa1dd543dc1d9c05323e94b0e ""
+  "HW2.tex" 1459149224 17850 df21a0f94894b0d97650524b54fde363 ""
   (generated)
+  "HW2.aux"
   "HW2.log"
   "HW2.pdf"
-  "HW2.aux"

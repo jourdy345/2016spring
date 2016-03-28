@@ -159,7 +159,23 @@
    where the $I_{k}$'s are special rectangles.\\
    (HINT: If $A \subset \bigcup_{k=1}^{\infty} I_{k}$, the $\lambda^{*}\left(A\right)\leq \sum_{k=1}^{\infty}\lambda\left(I_{k}\right)$ (why?). This will establish that $\lambda^{*}\left(A\right) \leq \inf \left\{\; \right\}$. To establish the reverse inequality, consider a well chosen $G \supset A$, and apply Problem 9.)
    \begin{solution}
-
+   Let $I_{k}$ be nonoverlapping special rectangles. Then by *3,
+   $$
+   \lambda^{*}\left(A\right) \leq \lambda^{*}\left(\bigcup_{k=1}^{\infty}I_{k}\right).
+   $$
+   Since the measure of $\bigcup_{k=1}^{\infty}I_{k}$ is already defined in stage 1, the outer measure has to be the measure itself:
+   $$
+   \lambda^{*}\left(\bigcup_{k=1}^{\infty}I_{k}\right) = \lambda\left(\bigcup_{k=1}^{\infty}I_{k}\right)
+   $$
+   which is also $\sum_{k=1}^{\infty}\lambda\left(I_{k}\right)$. Therefore, we have obtained the first inequality
+   $$
+   \lambda^{*}\left(A\right) \leq \sum_{k=1}^{\infty}\lambda\left(I_{k}\right).
+   $$
+   Next, according to Problem 9, any nonempty open set $G \subset \mathbb{R}^{n}$ can be expressed as
+   $$
+   G = \bigcup_{k=1}^{\infty}I_{k},
+   $$
+   then, $A \subset G$. 
    \end{solution}
    \question
    Suppose that $A \cup B$ is measurable and that
@@ -168,7 +184,28 @@
    $$
    Prove that $A$ and $B$ are measurable.
    \begin{solution}
-
+   By M11,
+   \begin{align*}
+   \lambda^{*}\left(B\right) + \lambda_{*}\left(\left(A\cup B\right)\setminus B\right) &= \lambda\left(A\cup B\right)\\
+   &= \lambda^{*}\left(A\right) + \lambda^{*}\left(B\right).
+   \end{align*}
+   Note that $\left(A\cup B\right)\setminus B = A\setminus B$ using elementary set operations:
+   \begin{align*}
+      \left(A\cup B\right)\setminus B &= \left(A \cup B\right) \cap B^{\mathsf{c}}\\
+      &= \left(A \cap B^{\mathsf{c}}\right) \cup \left(B \cap B^{\mathsf{c}}\right)\\
+      &= \left(A \cap B^{\mathsf{c}}\right)\\
+      &= A \setminus B.
+   \end{align*}
+   Therefore, $\lambda_{*}\left(A\setminus B\right) = \lambda^{*}\left(A\right)$ which by definition is
+   $$
+      \sup \left\{\lambda\left(K\right): K\subset A\setminus B, \text{ $K$ compact} \right\} = \inf\left\{\lambda\left(G\right): A \subset G, \text{ $G$ open} \right\}.
+   $$
+   For every compact set $K\subset A\setminus B$, it is obvious that $K \subset A$. Therefore, $K \subset A \subset G$, which lends itself directly to the theorem on approximation. Therefore, $A$ is measurable. Now using M11 once more as
+   \begin{align*}
+   \lambda^{*}\left(A\right) + \lambda_{*}\left(\left(A \cup B\right)\setminus A\right) &= \lambda\left(A \cup B\right)\\
+   &= \lambda^{*}\left(A\right) + \lambda^{*}\left(B\right),
+   \end{align*}
+   we can arrive at the same conclusion for $B$.
    \end{solution}
    \question
    Prove that if $A$ and $B$ are measurable , then
@@ -176,7 +213,23 @@
    \lambda\left(A\right) + \lambda\left(B\right) = \lambda\left(A\cup B\right) + \lambda\left(A\cap B\right).
    $$
    \begin{solution}
-
+   By M3, $A\setminus B, B\setminus A \in \mathcal{L}$ and by corollary, $A\cap B \in \mathcal{L}$. According to the theorem of countable additivity,
+   \begin{align*}
+   \lambda\left(A\right) &= \lambda\left(A\setminus B\right) + \lambda\left(A \cap B\right)\\
+   \lambda\left(B\right) &= \lambda\left(B\setminus A\right) + \lambda\left(A \cap B\right)
+   \end{align*}
+   holds for disjoint sets $A\setminus B, A\cap B$ and $B\setminus A, A\cap B$. Therefore,
+   $$
+   \lambda\left(A\right) + \lambda\left(B\right) = \lambda\left(A\setminus B\right) + \lambda\left(B\setminus A\right) + 2\lambda\left(A\cap B\right).
+   $$
+   Because $A \setminus B, A \cap B, B\setminus A$ are all disjoint, the following holds:
+   $$
+   \lambda\left(\left(A\setminus B\right) \cup \left(B\setminus A\right) \cup \left(A\cap B\right) \right) = \lambda\left(A\setminus B\right) + \lambda\left(B\setminus A\right) + \lambda\left(A\cap B\right).
+   $$
+   Note that $\left(A\setminus B\right) \cup \left(B\setminus A\right) \cup \left(A\cap B\right) = A \cup B$. Therefore,
+   $$
+   \lambda\left(A\right) + \lambda\left(B\right) = \lambda\left(A \cup B\right) + \lambda\left(A\cap B\right).
+   $$
    \end{solution}
    \question
    Prove that in general
@@ -188,7 +241,19 @@
    \lambda_{*}\left(A\right) + \lambda_{*}\left(B\right) \leq \lambda_{*}\left(A\cup B\right)+\lambda_{*}\left(A \cap B\right).
    $$
    \begin{solution}
-
+   Recall the definition of an outer measure:
+   $$
+   \lambda^{*}\left(A\right) = \inf \left\{\lambda\left(G\right): A \subset G, \text{ $G$ open} \right\}.
+   $$
+   Then since $A \subset G$ and $G$ is open, *5 states that $G$ is measurable. Therefore, we can take 2 open sets $G_{1}, G_{2}$ for which
+   \begin{align*}
+   &A \subset G_{1}\\
+   &B \subset G_{2}.
+   \end{align*}
+   Then, it is obvious that $A \cup B \subset G_{1}\cup G_{2}$ and $A \cap B \subset G_{1}\cap G_{2}$. Now we will use the result from the previous problem for measurable sets that
+   $$
+   \lambda\left(G_{1}\right) + \lambda\left(G_{2}\right) = \lambda\left(G_{1}\cup G_{2}\right) + \lambda\left(G_{1}\cap G_{2}\right).
+   $$
    \end{solution}
    \question
    Prove that if $A$ is countable, then $\lambda\left(A\right)= 0$. (In particular, $\lambda\left(\mathbb{Q}\right)=0$.)
@@ -214,12 +279,12 @@
    Therefore, $\lambda\left(A\right) = 0$.
    \end{solution}
    \question
-   Let $A \in \mathbb{R}$ be fixed. Prove that
+   Let $a \in \mathbb{R}$ be fixed. Prove that
    $$
    \lambda\left(\left\{a \right\} \times \mathbb{R}^{n-1} \right) = 0.
    $$
    \begin{solution}
-
+   We will use problem 9 and problem 27 to solve this. According problem 9, $\mathbb{R}^{n}$ can be covered with special rectangles having  a side length of 1, putting each on the lattice of integer length cubes. Since the set of integers is countable, we can recast it into a sequence $\left\{x_{s} \right\}_{s=1}^{\infty}$. 
    \end{solution}
    \question
    Prove that if $E\subset \mathbb{R}^{n}$ and $\lambda^{*}\left(E\right)<\infty $, then a measurable set $A$ exists such that
@@ -229,12 +294,50 @@
    (The set $A$ is called a \emph{measurable hull} of E.)\\
    (HINT: Choose open sets $G_{k}$ such that $\lambda\left(G_{k}\right) < \lambda^{*}\left(E\right)+k^{-1}$ and $E \subset G_{k}$. Then let $A = \bigcap_{k=1}^{\infty}G_{k}$.)
    \begin{solution}
-
+   Using the hint, since $G_{k}$ are open sets, we can use property *5 and say
+   $$
+   \lambda\left(G_{k}\right) = \lambda^{*}\left(G_{k}\right) = \lambda_{*}\left(G_{k}\right).
+   $$
+   Because we chose $G_{k}$ such that $\lambda\left(G_{K}\right) < \lambda^{*}\left(E\right) + k^{-1}$, it is obvious that $\lambda\left(G\right) < \infty$. By definition, $G_{k} \in \mathcal{L}_{0}$ and thus $G_{k} \in \mathcal{L}$. Now we rely on the fact that $\mathcal{L}$ is a $\sigma$-algebra. Then,
+   $$
+   A = \bigcap_{k=1}^{\infty}G_{k} \in \mathcal{L}.
+   $$
+   Since $E \subset G_{k}$ for all $k$, it is obvious that $E \subset \bigcap_{k=1}^{\infty}G_{k}$. Therefore,
+   $$
+   \lambda\left(\bigcap_{k=1}^{\infty}G_{k}\right) \geq \lambda^{*}\left(E\right).
+   $$
+   For the other direction, we should note that $\lambda\left(\bigcap_{k=1}^{\infty}G_{k}\right) \leq \lambda\left(G_{k}\right)$ since $\bigcap_{k=1}^{\infty}G_{k} \subset G_{k}$ and *2. We have chosen $G_{k}$ such that $\lambda\left(G_{k}\right) < \lambda^{*}\left(E\right) +k^{-1}$, the following holds:
+   $$
+   \lambda\left(\bigcap_{k=1}^{\infty}G_{k}\right) \leq \lambda\left(G_{k}\right) < \lambda^{*}\left(E\right) + k^{-1}.
+   $$
+   Since $k^{-1} \to 0$ as $k \to \infty$, we can conclude that
+   $$
+   \lambda\left(\bigcap_{k=1}^{\infty}G_{k}\right) \leq \lambda^{*}\left(E\right).
+   $$
+   Combining both inequalities,
+   $$
+   \lambda\left(A\right) = \lambda^{*}\left(E\right).
+   $$
    \end{solution}
    \question
    Let $\lambda^{*}\left(E\right) < \infty$, $E \subset A \in \mathcal{L}$. Prove that $A$ is a measurable hull of $E \iff \lambda_{*}\left(A\setminus E\right) = 0$.
    \begin{solution}
-
+   $\left(\Rightarrow\right)$\\
+   If $A$ is a measurable hull of $E$, by M11 and the result of the previous problem,
+   \begin{align*}
+   \lambda^{*}\left(E\right) + \lambda_{*}\left(A\setminus E\right) &= \lambda\left(A\right)\\
+   \lambda\left(A\right) &= \lambda^{*}\left(E\right).
+   \end{align*}
+   Combining two equations, we obtain that
+   $$
+   \lambda_{*}\left(A\setminus E\right) = 0.
+   $$
+   $\left(\Leftarrow\right)$\\
+   If $\lambda_{*}\left(A\setminus E\right) = 0$, by M11
+   \begin{align*}
+   \lambda^{*}\left(E\right) = \lambda\left(A\right).
+   \end{align*}
+   By the result from the previous problem, we call this set $A$, the measurable hull of $E$.
    \end{solution}
    \question
    Prove that if $E_{1} \subset E_{2} \subset E_{3} \subset \cdots $, then
