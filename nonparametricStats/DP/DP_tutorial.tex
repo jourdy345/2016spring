@@ -117,7 +117,8 @@
   $$
     p\left(x_{1},x_{2},\ldots,x_{N}\right) = \int_{\Theta}p\left(\theta\right)\prod_{i=1}^{N}p\left(x_{i}\middle|\theta\right)\,d\theta.
   $$
-  일반적으로 De Finetti의 정리는 모수 공간 $\Theta$가 무한 차원의 확률 측도 공간(probability measure space)일 때만 보장된다. 이 때문에 베이지언 쪽으로 연구하는 사람들은 확률 측도(probability measure)의 분포를 만들어내곤 한다. 그중 Dirichlet process는 우리가 원하는 많은 특성을 지니고 있는 아주 좋은 확률 과정(stochastic process)이다.
+  일반적으로 De Finetti의 정리는 모수 공간 $\Theta$가 무한 차원의 확률 측도 공간(probability measure space)일 때만 보장된다. 이 때문에 베이지언 쪽으로 연구하는 사람들은 확률 측도(probability measure)의 분포를 만들어내곤 한다. 그중 Dirichlet process는 우리가 원하는 많은 특성을 지니고 있는 아주 좋은 확률 과정(stochastic process)이다. \par
+  쉽게 풀어서 설명하기 위해 베이지언에서 확률을 `자신감'으로 해석한다는 사실을 주지할 필요가 있다. 여기서 앞으로 많은 차이가 나게 되는데, 가장 대표적으로 베이지언에서는 확률을 부여할 때 우리가 `모르는 것'에 확률을 부여해야 한다고 믿는다. 그 미지의 수에 대해 내가 얼마나 `자신 있게' 말할 수 있는지가 바로 내가 부여한 확률값이 되는 것이다. 사전 분포를 주는 것 역시 마찬가지이다. 빈도주의적인 선형회귀 모형 $\bs{y} = \bs{X\beta} + \bs{\epsilon}$에서는 데이터가 랜덤으로 발생한다고 하여 데이터에 확률을 부여한다. 하지만 베이지언에서 확률은 내가 모르는 것에 대해 얼마나 자신 있는지를 나타내기 때문에 내가 모르는 모수 $\bs{\beta}$에 부여해야 한다. 지금까지 데이터인 $\bs{y}$와 내가 모르는 모수 $\bs{\beta}$가 선형 관계를 갖는다고 가정했지만 실제로는 어떠한 함수로 연관돼 있는지 모른다면? ($\bs{y}=f\left(\bs{X}\right) +\bs{\epsilon}$)  다시 말해 어떠한 함수 꼴을 갖는지 모른다면 어떻게 해야 할까? `모르는 것'에 분포를 줄 있다면 함수 꼴에도 분포를 줄 수 있지 않을까? 바로 여기서 가우시안 프로세스가 나오는 것이다. 더 나아가 $\bs{\epsilon}$이 정규 분포를 따르는지 모른다면? 정확히 어떤 분포를 따르는지 모른다면 여기에도 분포를 줄 수 있지 않을까? 이때 우리가 쓸 수 있는 것이 디리클레 프로세스이다. 이렇듯 베이지언에서는 모르는 것에 분포를 주고자 다양한 방법론을 생각해내고 실제로 꽤 괜찮은 성능을 보인다.
 \section{확률 측도의 분포}
   확률 과정(stochastic process)들은 무한 차원의 공간을 모델링하는 데 많이 쓰이고, 이를 위해 만들어지기도 한다. 베이지언 비모수 역시 무한 차원의 공간을 모델링하기 위해 확률 과정을 많이 쓰는데, 사실 무한 차원은 이해하기 어렵기 때문에 이 과정(process)들을 정의할 때 유한 개만 가져오면 무엇이 되는지로 정의할 때가 많다. 대표적인 것이 Gaussian process이다. Gaussian process는 주로 비선형 회귀 모형에서 함수의 꼴을 모르기 때문에 무한 차원의 함수 공간을 모델링하기 위해 쓰이는데 그 정의는 다음과 같다. 어떤 함수 $f\; : \; \mathcal{X}\mapsto \mathbb{R}$가 Gaussian process를 따른다 함은 $N$개의 $x_{i}\in \mathcal{X}$를 임의적으로 가져왔을 때 이들의 결합 분포 $p\left(f\left(x_{1}\right),\ldots ,f\left(x_{N}\right)\right)$가 정규분포를 따른다는 말과 동치이다. 이렇게 정의하게 되면 Gaussian process는 적절한 평균함수(mean function)과 공분산 함수(covariance function)로 정의될 수 있고, 이를 사용하였을 때 추정을 위한 계산이 쉬워진다. \par
   Gaussian process가 알지 못하는 함수를 모델링할 때 쓰인다면 Dirichlet process는 알지 못하는 확률 측도(probability measure) 혹은 적분했을 때 값이 1이 되는 0이 아닌 함수들의 분포를 모델링할 때 쓰인다. 모수 공간을 $\Theta$라고 했을 때 Dirichlet process는 $\Theta$에 대한 기저 측도(base measure) $H$와 집적 모수(concentration parameter) $\alpha$로 정의할 수 있다. 가우시안 프로세스가 임의로 뽑은 $N$개의 유한한 데이터가 어떤 분포를 가지는지로 정의되었던 것처럼, 디리클레 프로세스 역시 모수 공간 $\Theta$의 분할(partition)에 대해서 기저 측도가 어떤 분포를 만들어내는지로 정의할 수 있다.
@@ -184,15 +185,103 @@
   여기서 $N_{k}$는 $\theta_{k}'$의 값을 지니는 관측치의 개수이다.
   \begin{thm}
     $G\;\sim\;\mathcal{DP}\left(\alpha, H\right)$에서 기저 측도 $H$가 밀도함수 $h\left(\theta\right)$를 가지고, $N$개의 관측치 $\theta_{i}\;\sim\; G$가 $K$개의 서로 다른 값 $\left\{\theta_{k}'\right\}_{k=1}^{K}$를 가진다고 하자. 다음 관측치의 예측 분포는 다음과 같다.
-    $$
+    \begin{equation}
       p\left(\theta_{N+1}=\theta' \;|\; \theta_{1},\ldots , \theta_{N},\alpha, H\right)=\frac{1}{\alpha+N}\left(\alpha h\left(\theta'\right)+\sum_{k=1}^{K}N_{k}\delta\left(\theta',\theta'_{k}\right)\right)
-    $$
+    \end{equation}
     여기서 $N_{k}$ $\theta_{1},\ldots , \theta_{N}$에서 값 $\theta_{k}'$을 지니는 것들의 개수이다.
   \end{thm}
   
+  즉 (1.2)를 인간의 말로 풀면, 예측 분포는 이미 관측된 값들에서 나올 확률과 아예 새로운 값이 관측될 확률로 구성되어 있다. 그리고 이미 관측된 값에서 뽑힐 확률은 각 값이 이전에 얼마나 빈번하게 관측되었는지에 비례해서 더 많이 관측된 값이 이후에도 관측될 확률이 높아지게 된다. 이것을 디리클레 분포의 `빈익빈 부익부(The rich get richer)' 성질이라고 한다. 이후에 설명할 믹스쳐 모델(Mixture model)을 만들 때 바로 이 성질이 중요한 역할을 하게 된다. \par
   이러한 예측모형은 폴리아 항아리 모델의 일반화된 버전이라고 볼 수 있다. 하나의 항아리에는 그전까지의 관측치의 개수만큼 공이 있는데, 서로 다른 값은 서로 다른 색깔의 공으로 표시한다. 그러니까 서로 다른 색깔의 공이 그 값을 지니는 관측치 개수만큼 있다고 생각하면 된다. 그리고 마지막으로 $\frac{\alpha}{\alpha+N}$의 확률로 뽑히는 공이 하나 더 있는데 이 공은 뽑히는 순간 색깔이 결정되고, 그 색깔은 여태 보지 못한 색일 수 있다. 새로운 값을 지니는 관측치가 저 확률로 뽑히게 된다는 뜻이다. 이 이야기를 이용하면 명시적으로 $G\;\sim\;\mathcal{DP}\left(\alpha, H\right)$를 만들지 않고도 관측치들을 샘플링할 수 있다는 장점이 있다.
   \section{Chinese Restaurant Process}
+    디리클레 프로세스는 관측치 $\theta_{i}$에 값 $\theta_{k}'$를 부여함으로써 클러스터링 효과를 내게 된다. 왜냐하면 이산형 분포에서 샘플링하면 필연적으로 겹치는 값을 갖는 샘플이 존재하기 때문이다. 같은 값을 갖는 샘플을 `같은 클러스터에 속한다'고 생각하면 이게 바로 클러스터링이 된다. 만약 $K$개의 서로 다른 값을 지니는 값 $\left\{\theta_{k}'\right\}_{k=1}^{K}$가 있다면, $i$번째 관측치 $\theta_{i}$가 $K$개 군집 중 어디에 속하는지를 $z_{i}\in\left\{1,\ldots , K\right\}$로 나타낸다면 $\theta_{i}=\theta_{z_{i}}'$로 나타낼 수 있다. 이것을 이용해서 (2.1)을 다시 써보면
+    \begin{equation}
+    p\left(z_{N+1}=z\;|\;z_{1}, \ldots , z_{N},\alpha\right) = \frac{1}{\alpha+N}\left(\sum_{k=1}^{K}N_{k}\delta\left(z,k\right)+\alpha\delta\left(z,k'\right)\right)
+    \end{equation}
+    이 되고 여기서 $k'$는 이전에 관측되지 않은 완전히 새로운 값을 의미한다. 다시 말해 새로운 클러스터가 생긴 것이다. 이것을 스토리텔링 형태로 바꾼 것이 Chinese restaurant process인데 말하자면 이렇다. 손님을 끝도 없이 받을 수 있는 중국 음식점이 있다고 해보자. 손님들은 들어와서 테이블을 잡아서 앉을 텐데 여기서 테이블은 클러스터를 의미한다. 이 음식점의 손님들은 매우 사교적이어서 사람들이 많은 테이블에 가서 앉는 경향이 있다. 하지만 때때로 어떤 손님은 아무도 없는 테이블에 가서 앉는 경우도 있긴 하다. 여기서 주의해야 할 점은 아무도 앉지 않은 테이블은 구분 없이 그냥 다 똑같고, 손님이 새 테이블을 찾아 앉을 때는 아무 데나 가서 앉는다. 디리클레 프로세스의 클러스터링 효과를 아주 재미있게 표현한 이야기이다. 그리고 중요한 것은 이러한 예측 분포의 특징을 이용하면 몬테칼로 방법을 이용하여 추정하려고 할 때 명시적인 형태(explicit form)의 수식으로 표현이 가능해진다는 장점이 있다.
+  \chapter{Mixture Models}
+  \section{Finite Mixture Models(FMM)}
+    Dirichlet process mixtures로 넘어가기 전에 유한한 버전인 finite mixture models에 대해 먼저 설명하려고 한다. 다시 수리통계에서 많이 보았던 다음의 가정을 보자. 편의상 정규분포를 쓰기로 한다.
+    $$
+    X_{1},X_{2},\ldots , X_{n}\;|\;\mu\;\sim\; \mathcal{N}\left(\mu, \sigma^{2}\right)
+    $$
+    모든 관측치들이 하나의 공통된 정규분포에서 생성된다고 모델링한 것이다. 그런데 단 하나의 정규분포에서 모든 관측치들을 생성해낸다고 가정하는 것은 너무 큰 제약조건이다. 그래서 생각해낸 것이 여러 개의 정규분포에서 데이터들을 만들어내고 있다고 가정하고 거기서부터 추정을 하는 것이다. 모집단/표본으로 생각을 한다면 모집단이 하나가 아니라고 가정하는 것과 같다. 여러 개의 모집단에서 표본이 섞여서 관찰된다고 생각하면 쉽다. 처음부터 무한개의 모집단을 가정하면 골치 아프니까 먼저 $K$개의 정규분포가 있다고 생각해보자. (보통 정규분포로 하지만, 지수족(exponential family)의 믹스쳐로 확장해도 무방하다.) 여기서 분산은 알고 있다고 가정한다. 그러면 관측치의 가능도함수(likelihood function)은 다음과 같다.
+    \begin{equation}
+    p\left(x\;|\;\pi,\mu_{1},\ldots , \mu_{K}\right) = \sum_{k=1}^{K}\pi_{k}\mathcal{N}\left(x\;|\;\mu_{k},\sigma^{2}\right)
+    \end{equation}
+    여기서 $\pi_{k}$는 $k$번째 정규분포가 차지하는 비중을 의미한다. 그러니까 표본 중에서 $k$번째 정규분포에서 나온 애들의 비중, 혹은 하나의 관측치가 관측될 때 그것이 $k$번째 정규분포에서 나왔을 확률이다. $\mathcal{N}\left(x\;|\;\mu,\sigma^{2}\right)=f\left(x\;|\;\mu\right)$로 표기할 때, 이는 분포함수 $F\left(\mu\right)$를 가진다. 이것은 다음과 동치이다. 각각의 관측치 $x_{i}$는 $K$개 클러스터 중 하나에서 생성되는데, 각 클러스터가 뽑히는 사건은 multinomial(혹은 Discrete라고 표기하기도 함)을 따른다.
+    \begin{enumerate}
+      \item $z_{i}\;\sim\;\opn{Discrete}\left(\bs{\pi}\right), \qquad$ (클러스터를 뽑는다.)
+      \item $x_{i}\;\sim\;F\left(\mu_{z_{i}}\right), \qquad$ (해당되는 클러스터에서 관측치를 생성한다.)
+    \end{enumerate}
+    
+    이때 $z_{i}\in\left\{1,\ldots,K\right\}$이며 $x_{i}$이 엮여있는 클러스터를 나타낸다. 믹스쳐 모델은 관측된 데이터를 가까운 것끼리 하나의 군집으로 묶어 클러스터링하는 이른바 `비지도 학습(unsupervised learning)'에 자주 쓰인다. \par
+  \section{Gibbs Sampler for FMM}
+    이런 모델은 가정일 뿐이고, 실제로 관측되는 데이터는 어떠한 비율로 각각의 클러스터에서 생성되는지 알 턱이 없다. 그렇기 때문에 추정을 해야 하는데, 우리가 알고 싶은 것은 각 클러스터의 모수, $\theta_{k},$와 각 클러스터의 비중, 즉 $\bs{\pi}=\left(\pi_{1},\ldots , \pi_{K}\right)$이다. 모르는 것에 사전 분포를 할당해야 한다고 했으니, $\mu_{k}$에는 켤레사전분포(conjugate prior) $H\left(\lambda\right)$를 부여하고 $\bs{\pi}$역시 Discrete분포에 켤레인 디리클레 분포(Dirichlet distribution)을 부여하도록 하자. 그리고 각각의 관측치들이 어느 클로스터에 해당하는지를 indicator variable인 $z_{i}$로 표시한다고 하면, 이는 Discrete분포를 따르게 될 것이다.
+    \begin{align*}
+      \bs{\pi}\;&\sim\; \opn{Dir}\left(\alpha/K,\ldots ,\alpha/K\right)\\
+      \bs{z}\;|\;\bs{\pi} \;&\sim\; \opn{Discrete}\left(\bs{\pi}\right)\\
+      \theta \;&\sim\; H\left(\lambda\right)\\
+      x_{i}\;|\;\theta_{z_{i}}\;&\sim\; F\left(\theta_{z_{i}}\right)
+    \end{align*}
+    깁스 샘플러를 구하려면 각 모수의 full conditional을 구하면 된다. 그러니까 관측치와 모든 모수의 결합분포, 즉 가능도함수에 사전분포를 모두 곱한 것에서 각 모수가 들어있는 부분만 떼서 곱한 것이 full conditional의 정규화되지 않은 부분이다. 따라서 $i$번째 관측치가 들어있는 클러스터가 $k$번째일 확률의 full conditional은 구해보면
+    \begin{equation}
+    p\left(z_{i}=k\;|z_{\setminus i},\bs{x},\bs{\pi},\theta_{1},\ldots ,\theta_{K}\right) \propto \pi_{k}f\left(x_{i}\;|\; \theta_{k}\right)
+    \end{equation}
+    가 된다. 알고리즘을 구해보면 아래와 같다.
+    \begin{algorithm}
+      \caption{Gibbs sampler for FMM}
+      \begin{algorithmic}[1]
+      \Procedure{GSFMM}{$\bs{x},\text{sampleNumber}, \text{burnIn}, K, \lambda,\alpha$}\label{GSFMM}
+        \State $z_{i}^{\left(0\right)}, \bs{\pi}^{\left(0\right)}, \theta_{k}^{\left(0\right)}$ 초기화
+        \For{$v=1:\text{sampleNumber}$}
+          \For{$w=1:\text{burnIn}$}
+            \State $z_{i}^{\left(t\right)}\;\sim\;\dfrac{1}{Z_{i}}\sum_{k=1}^{K}\pi_{k}^{\left(t-1\right)}f\left(x_{i}\;\middle|\;\theta_{k}^{\left(t-1\right)}\right)\delta\left(z_{i},k\right), \qquad Z_{i}= \sum_{k=1}^{K}\pi_{k}^{\left(t-1\right)}f\left(x_{i}\;\middle|\;\theta_{k}^{\left(t-1\right)}\right)$
+            \State $\bs{\pi}^{\left(t\right)} \;\sim\;\opn{Dir}\left(N_{1}+\alpha/K, \ldots , N_{K}+\alpha/K\right),\qquad N_{k} = \sum_{i=1}^{N}\delta\left(z_{i}^{\left(t\right)},k\right)$
+            \State $\theta_{k}^{\left(t\right)}\;\sim\; p\left(\theta_{k}\;\middle|\;\left\{x_{i}\;|\;z_{i}^{\left(t\right)}=k\right\},\lambda\right)$
+          \EndFor
+          \State 각 모수를 저장한다.
+        \EndFor
+      \EndProcedure
+      \end{algorithmic}
+    \end{algorithm}
 
+    위 의사코드(pseudocode)의 5,6,7번째 줄을 해설하자면 이렇게 된다.
+    \begin{enumerate}
+      \item 모든 $N$개의 관측치 $x_{i}$에 새로운 클러스터를 할당한다. $z_{i}^{\left(t\right)}$는 이런 Discrete분포를 따른다.
+      \item 앞서 각 관측치에 새로운 클러스터를 부여했다면, 각 클러스터에 몇개씩 있는지 세서 디리클레 분포의 모수에 더해준다. 그리고 다시 샘플링한다.
+      \item 켤레사전분포를 썼기 때문에 이 사후분포는 closed form을 갖는다. 쉽게 구할 수 있다.
+    \end{enumerate}
+
+    위의 과정을 보게 되면 각 관측치 $x_{i}$에 새로운 클러스터를 부여해 주려고 할 때마다 $K$개 믹스쳐 컴포넌트에 해당하는 값 $f\left(x_{i}\;|\;\theta_{k}\right)$을 다 계산해야 하기 때문에 시간복잡도가 $\mathcal{O}\left(NK\right)$이다. 이런 연산비용을 줄이기 위해서 Rao-Blackwellized Sampling을 쓸 수 있다. 어렵게 말해서 Rao-Blackwellized Sampling이지 사실은 지수족의 가능도함수가 충분통계량(sufficient statistic)만 알면 업데이트가 가능하다는 데에 착안해서 계산량을 줄이려 한 것 뿐이다. 이에 대해서는 설명을 생략한다.
+  \section{Dirichlet Process Mixtures}
+    앞에서 설명한 FMM은 유한 개의 믹스쳐 컴포넌트가 있다고 가정했다. 하지만 실제 데이터를 관측했을 때는 바로 `아! 몇 개의 클러스터가 섞여있는 거구나!' 알 수 없다(단.호.). 그렇기 때문에 데이터가 알아서 `나 클러스터 몇 개예요!'하고 설명하게 해야 하는데, 이 때 등장하는 게 디리클레 프로세스이다. 데이터가 늘어감에 따라 클러스터도 늘어가게 세팅하는 것이다. 디리클레 프로세스는 근데 Chinese restaurant process에서 설명했듯이 애초에 더 많이 관측된 클러스터가 다시 관측될 확률이 높다. 다시 말해, 스스로 지나치게 많은 클러스터가 생기는 것을 방지하는 내부적인 속성이 있다. 넘나 좋다. \par
+    우리가 이미 믹스쳐 모델을 보았기 때문에 자연스럽게 디리클레 분포 자리에 디리클레 프로세스를 집어넣는 것을 상상하게 되지만, $x_{i}$들이 생성되는 분포를 `모른다'는 것을 비모수적으로 곧바로 모델링하는 사람이라면, $x_{i}$들이 $G\;\sim\;\mathcal{DP}\left(\alpha, H\right)$를 따른다고 해버리고 싶을 것이다. 아니어도 할 수 없다. 그럴 것이다. 그런데 여기서 문제가 발생한다. 일단 첫번째로 디리클레 프로세스의 샘플은 이산형 분포가 된다고 설명한 바 있다. 따라서 여기서 생성된 관측치 $x_{i}$들은 필연적으로 같은 값을 가지는 것들이 발생하고 이산형이 된다. 원래가 연속형이면 잘못된 모델을 적용하는 것이 된다. 이 문제를 해결하기 위해 연속형 분포와 합성을 하게 되면 자연스럽게 Dirichlet process mixture 모델이 된다. (근본적으로 DPM은 hierarchical model이다.)\par
+    FMM에서 보았듯이 이 모델은 다음과 같이 구성된다.
+    \begin{align*}
+      G \;&\sim\; \mathcal{GP}\left(\alpha, H\right)\\
+      \theta_{i}\;&\sim\; G\\
+      x_{i}\;&\sim\;F\left(\theta_{i}\right)
+    \end{align*}
+    여기에 stick-breaking construction을 적용하면
+    \begin{align*}
+      \beta_{k}\;&\sim\; \opn{Beta}\left(\alpha, 1\right)\\
+      \pi_{k}&= \beta_{k}\prod_{\ell=1}^{k-1}\left(1-\beta_{\ell}\right)\\
+      z_{i}\;&\sim\; \opn{Discrete}\left(\bs{\pi}\right)\\
+      \theta_{k}\;&\sim\; H\left(\lambda\right)\\
+      x_{i}\;|\;z_{i}\;&\sim\; F\left(\theta_{z_{i}}\right)
+    \end{align*}
+    $z_{i}$들을 적분해내버리고 나면 FMM의 무한대 꼴로 나타나게 됨을 볼 수 있다.
+    \begin{equation}
+      p\left(x\;|\;\bs{\pi},\theta_{1},\theta_{2},\ldots \right) = \sum_{k=1}^{\infty}\pi_{k}f\left(x\;|\;\theta_{k}\right)
+    \end{equation}
+    요롷게 하면 자동으로 몇 개의 클러스터가 존재하는지 추정해서 알려주는 모델을 만들 수 있고, 깁스 샘플링을 통해 데이터를 학습할 수 있게 된다.
+  \section{Gibbs Sampling for DPM}
+    우선 $N$개의 데이터 $\left(x_{1},\ldots , x_{N}\right)$가 있다고 하자. 위와 같은 DPM을 적용해서 숨어있는 클러스터가 몇 개인지를 알아내고자 한다. 이를 위해 collapsed Gibbs sampler라는 것을 사용해보자. (1.3)을 $z_{i}$에 대해서 쓰면 아래와 같다.
+    \begin{equation}
+      p\left(z_{i}\;|\;z_{\setminus i},\alpha\right)=\frac{1}{\alpha+N-1}\left(\sum_{k=1}^{K}N_{k}^{-i}\delta\left(z_{i},k\right)+\alpha\delta\left(z_{i},k'\right)\right)
+    \end{equation}
+    똑같이 여기서 $k'$는 지금까지 없었던 값이며 새로운 클러스터를 의미한다. 
 \end{document}
 
 
