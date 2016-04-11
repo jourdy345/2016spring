@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1460364543 "DP_tutorial.tex" "DP_tutorial.pdf" "DP_tutorial" 1460364546
+["pdflatex"] 1460383444 "DP_tutorial.tex" "DP_tutorial.pdf" "DP_tutorial" 1460383447
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -328,9 +328,9 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "DP_tutorial.aux" 1460364544 1290 3eccf624077bc9b5867123f0eda64bf2 ""
-  "DP_tutorial.tex" 1460364543 48307 5acab47d34dd66004465dbfe11ff964f ""
+  "DP_tutorial.aux" 1460383445 1621 97806f549078f00734f8edd884e6e14b ""
+  "DP_tutorial.tex" 1460383443 54937 08e484d113b400af9017874f9598ea4e ""
   (generated)
-  "DP_tutorial.log"
   "DP_tutorial.aux"
   "DP_tutorial.pdf"
+  "DP_tutorial.log"

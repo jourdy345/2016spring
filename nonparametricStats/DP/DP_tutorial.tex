@@ -247,7 +247,51 @@ Dirichlet distribution은 Peter Gustav Lejeune Dirichlet라는 독일 수학자�
 \section{Introduction}
   이전에도 말했듯이 베이지언은 가지고 있는 데이터를 바탕으로 추정하고자 하는 모수의 조건부 분포를 구하는 것이 추정의 핵심이다. 이를 위해 필요한 장치(machinery)로서 사전분포(prior distribution)가 필요하고, 매커니즘으로서 베이즈 정리가 필요하다. 그 과정에서 적분을 해야 하고 많은 경우 적분이 불가능하다. (이것은 적분값이 무한대이거나 적분이 아예 안되는 함수라는 뜻이 아니라, 정적분은 존재하지만 원시함수 혹은 부정적분이 초등함수(elementary function)의 결합으로 표현될 수 없다는 뜻이다. 이에 대해 더 궁금한 사람은 Liouville's theorem (1835)을 구글링해보기 바란다.) 대표적으로 적분값은 존재하지만 부정적분이 없는 함수가 가우스 함수 $f\left(x\right)= e^{-x^{2}}$이다. 아무튼 베이지언 추정에서 이 적분을 비껴가고자 갖은 노력을 다한다.\par
   그리고 마침내 세기의 알고리즘이 탄생하게 되는데 이름하여 MCMC(Markov Chain Monte Carlo)이다. 이 알고리즘은 원자폭탄 투하를 위해 중성자들이 원자들과 충돌할 확률을 추정하기 위해 미국에서 진행했던 ``Manhattan project''에서 개발되었다\cite{manhattanproject}. 당시 유명한 물리학자였던 Robert Oppenheimer는 젊은 물리학자였던 Nick Metropolis를 영입했고, Metropolis는 John von Neumann(그 폰노이만 맞다), Stanislaw Ulam, Robert Richtmyer와 함께 컴퓨터를 이용한 새로운 알고리즘을 개발한다. 그래서 MCMC 중에 Metropolis-Hastings 알고리즘이 있다.\par
-  MCMC 중에 가장 대표적인 알고리즘이 Gibbs sampling이란 건데 이는 Metropolis-Hastings 알고리즘의 특별한 형태이다. 이것 역시 물리학자였던 Josiah Willard Gibbs라는 사람의 이름을 땄고, Gibbs sampling은 Gibbs가 죽고 80년이 흐른 뒤 Geman 형제에 의해 재발견되어 논문에 게재된다. 아무튼 역사 이야기는 재미로 읽는 것으로 하고 그 원리에 대해서 설명해보자.
+  MCMC 중에 가장 대표적인 알고리즘이 Gibbs sampling이란 건데 이는 Metropolis-Hastings 알고리즘의 특별한 형태이다. 이것 역시 물리학자였던 Josiah Willard Gibbs라는 사람의 이름을 땄고, Gibbs sampling은 Gibbs가 죽고 80년이 흐른 뒤 Geman 형제에 의해 재발견되어 논문에 게재된다. 아무튼 역사 이야기는 재미로 읽는 것으로 하고 그 원리에 대해서 설명해보자. \par
+  이번 장은 Markov chain에 대해서 기본적인 지식이 있다고 가정하고 시작한다. Markov chain을 처음 듣는 사람은 다시 구글의 힘을 빌려 공부하는 것이 좋겠다. 먼저 MCMC의 기본적인 아이디어는 사후분포(posterior)를 명시적으로 구할 수 없으니, 어떤 Markov chain을 잘 만들어서 그 stationary distribution(혹은 invariant distribution)이 posterior가 되어 초기값을 주고 chain을 끝없이 돌리면 우리가 원하는 posterior로 수렴하도록 하는 것이다. 그중에서도 Gibbs sampling은 제일 단순하면서도 강력한 형태인데, 각 변수의 posterior는 못 구해도 full conditional은 구할 수 있을 때 쓸 수 있다. 여기서 full conditional이라 함은 자기 자신을 제외한 모든 변수에 conditioning된 형태를 말한다. 따라서 $X_{1}, X_{2}, X_{3}$ 세 개 변수가 있다면 다음과 같이 Gibbs sampler를 짤 수 있다.
+  \begin{enumerate}
+  \item $X_{1}^{\left(t+1\right)}\sim p\left(X_{1}|X_{2}^{t}, X_{3}^{t}\right)$
+  \item $X_{2}^{\left(t+1\right)}\sim p\left(X_{2}|X_{1}^{t+1}, X_{3}^{t}\right)$
+  \item $X_{3}^{\left(t+1\right)}\sim p\left(X_{3}|X_{1}^{t+1}, X_{2}^{t+1}\right)$
+  \end{enumerate}
+  Full conditional은 간편하게 $p\left(X_{i}|X_{-i}\right)$로 표기한다. 이런 식으로 끝없이 chain을 돌리면 posterior로 수렴하게 되는데, 우리가 짠 것은 sampler이기 때문에 분포의 꼴은 나오지 않고 posterior에서 추출한 샘플이 모이게 된다. 표본을 가지고 강대수의 법칙을 따라 posterior mean을 구하는 등 추정에 이용할 수 있다.
+
+  \chapter{Dirichlet process mixture}
+  \section{Model specification}
+  이번 장에서는 최근에 각광받고 있는 clustering 기법 중 generative한 모델인 Dirichlet process mixture에 대해서 알아보도록 하자. 지금까지 관측치들이 하나의 모수적인 분포에서 전부 생성되었다고 모델링하였으나 이것은 매우 강한 제약 조건이다. 왜냐하면 실제 데이터를 봤을 때 우리는 그 데이터가 어떤 분포에서 생성되었는지 모르기 때문이다. 분포를 모를 때 Dirichlet process를 사용할 수 있다고 들었으니 데이터 $\left\{x_{1},\ldots x_{N}\right\}$가 $G$라는 분포에서 생겨났고 그 $G$는 또 $\mathcal{DP}\left(\alpha, H\right)$에서 추출된 분포라고 가정을 할 수 있겠다. 하지만 이 또한 문제인 것이 Dirichlet process에서 생성된 분포는 almost surely discrete, 그러니까 이산형 분포가 되고 관측치가 완전히 이산형 분포에서 나왔다고 가정하는 것 역시 너무 강한 제약조건이며, 이런 가정을 할 경우 사후분포가 inconsistent하다는 논문이 있다. 따라서 위와 같은 문제를 피해가기 위해 연속형 분포와 Dirichlet process를 `convolve'한다고 하는데 우리말로 하면 합성한다고 보면 되겠다. 모델을 설명하자면 아래와 같다.
+  \begin{align*}
+    \bs{\pi} &\sim \opn{GEM}\left(\alpha\right)\\
+    z_{i} &\sim \opn{Discrete}\left(\bs{\pi}\right)\\
+    \theta_{k} &\sim H\left(\lambda\right)\\
+    \bs{x}_{i} &\sim F\left(\theta_{z_{i}}\right)
+  \end{align*}
+  여기서 $H$는 $G \sim \mathcal{DP}\left(\alpha, H\right)$의 기저분포로서의 $H$이다. Stick-breaking construction을 쓴 것이다. 그러니까 각 데이터 관측치 $\bs{x}_{i}$들이 어떤 분포의 패밀리($F$)에서 생성되는데 그 모수는 다를 수 있다고 가정하고, 서로 다른 $F$가 이론상 무한 개로 늘어날 수 있지만 실질적으로는 데이터의 개수인 $N$개까지 늘어날 수 있도록 하는 것이다. Finite mixture model에서는 서로 다른 $F$의 개수(=클러스터의 개수)를 $K$개라고 정하고 시작했지만 여기서는 수집된 데이터에 맞게 알아서 스스로 적합되도록 모델링한 것이다.
+  \section{Gibbs sampler for DPM}
+  Dirichlet process mixture 모델에서 Gibbs sampler는 어떻게 계산하는지 보자. 위의 모델에서 우리가 추정해야 하는 모수는 
+  \begin{equation}
+    \mathcal{V}=\left\{z_{1},\ldots, z_{N}, \theta_{1},\ldots, \right\}
+  \end{equation}
+  인데 일반적인 Gibbs sampler보다 collapsed Gibbs sampler가 더 수렴속도가 빠르므로 collapsed Gibbs sampler를 계산해보도록 하자. Collapsed Gibbs sampler는 \emph{Rao-Blackwellization}을 통해 조건부로 걸려있는 변수를 marginalize out한 Gibbs sampler를 말한다. 예를 들어 일반적인 Gibbs sampler가 다음처럼 생겼다면
+  \begin{enumerate}
+    \item $\xi^{\left(t\right)} \sim p\left(\xi|\mu^{\left(t-1\right)}, X\right)$
+    \item $\mu^{\left(t\right)} \sim p\left(\mu|\xi^{\left(t\right)},X\right)$
+  \end{enumerate}
+  
+  collapsed Gibbs sampler는 아래와 같이 생겼다.
+  \begin{enumerate}
+    \item $\xi^{\left(t\right)}\sim p\left(\xi|\mu^{\left(t-1\right)},X\right)$
+    \item $\mu^{\left(t\right)}\sim p\left(\mu|X\right)$
+  \end{enumerate}
+  
+  Collapsed Gibbs sampler는 이 경우 $\mu$의 주변 사후분포(marginal posterior distribution)으로부터 곧바로 샘플링해낸다. 이렇게 하는 이유는 수렴 속도가 확실히 빨라지기 때문이지만 대신에 $\xi$와 $\mu$ 사이의 종속관계는 깨진다. 아무튼 이 문제는 나중에 다루도록 하고, DPM에서의 collapsed Gibbs sampler를 구하기 위해 $\theta$를 적분해서 버리도록 하자(marginalize out). 그럼 결국 남는 것은 $z_{1}, z_{2}, \ldots , z_{N}$들이다. 따라서 다음의 확률을 구해야 한다.
+  \begin{equation}
+    p\left(z_{i}=k|z_{-i}, \bs{x}, \alpha, \lambda\right)
+  \end{equation}
+  위의 확률은 다음과 같이 분해될 수 있다.
+  \begin{equation}
+    p\left(z_{i}=k|z_{-i}, \bs{x}, \alpha, \lambda\right) \propto p\left(z_{i}=k|z_{-i}, \alpha\right)p\left(\bs{x}_{i}|\bs{x}_{-i}, z_{i}=k, z_{-i}, \lambda\right)
+  \end{equation}
+  왜 이렇게 분해될 수 있는지는 모델을 세울 때 이미 나온다. $\bs{x}_{i}$와 $z_{i}$들은 서로 독립일 수가 없다. 세팅 상 $z_{i}$가 $\bs{x}_{i}$가 어느 클러스터에 속하는지를 나타내는 indicator variable이라서 서로 독립이 아니다. 반면 $z_{i}$와 $\theta_{k}$들은 서로 독립이다. 그렇기 때문에 $\theta_{k}$의 hyperparameter인 $\lambda$는 $z_{i}$와 전혀 무관하다. 이런 모수들의 관계는 Graphical model 도표를 보면 더 직관적으로 이해할 수 있다. 이를 위해서는 다른 참조 문헌을 참조하는 것이 좋겠다.
 % \section{폴리아 항아리\\(Pólya Urns)}
 %   디리클레 프로세스의 표본은 이산형 분포가 되기 때문에 필연적으로 이 분포의 샘플은 같은 값을 가지는 관측치가 생기게 된다. 따라서 $N$개의 관측치 $\theta_{1},\ldots , \theta_{N}$를 관측했다 하더라도 이들이 지니는 값은 모두 다르면 $N$개, 겹치는 게 있으면 $N$보다 작아지게 된다. 따라서 이 서로 다른 값을 $\left\{\theta_{k}'\right\}_{k=1}^{K},\; K\leq N$라고 쓰면 (1.1)을 아래와 같이 다시 쓸 수 있게 된다.
 %   $$
