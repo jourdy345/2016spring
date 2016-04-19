@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  7 APR 2016 13:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  18 APR 2016 21:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -887,32 +887,47 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip59
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/local/texlive/2015/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2014/09/25 3.9l The Babel package
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2012/08/20 v3.3p English support from the babel system
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2014/09/25 3.9l Babel common definitions
+\babel@savecnt=\count146
+\U@D=\dimen209
 )
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
 \dlf=\skip60
-\c@thm=\count146
- (./midterm_report.aux)
+\c@thm=\count147
+
+(./midterm_report.aux)
 \openout1 = `midterm_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for LUC/nanummj/m/n on input line 87.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for LUC/nanummj/m/n on input line 88.
 LaTeX Font Info:    Try loading font information for LUC+nanummj on input line 
-87.
+88.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/nanumtype1/lucnanummj.fd
 File: lucnanummj.fd 2013/02/12 v0.1 Nanum Myeongjo font definitions
 )
-LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    ... okay on input line 88.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -950,16 +965,16 @@ LaTeX Font Info:    ... okay on input line 87.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count147
-\scratchdimen=\dimen209
+\scratchcounter=\count148
+\scratchdimen=\dimen210
 \scratchbox=\box45
-\nofMPsegments=\count148
-\nofMParguments=\count149
+\nofMPsegments=\count149
+\nofMParguments=\count150
 \everyMPshowfont=\toks48
-\MPscratchCnt=\count150
-\MPscratchDim=\dimen210
-\MPnumerator=\count151
-\makeMPintoPDFobject=\count152
+\MPscratchCnt=\count151
+\MPscratchDim=\dimen211
+\MPnumerator=\count152
+\makeMPintoPDFobject=\count153
 \everyMPtoPDFconversion=\toks49
 ) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -1005,15 +1020,15 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\Hy@linkcounter=\count153
+\Hy@linkcounter=\count154
 
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 92.
+LaTeX Font Info:    Try loading font information for U+msa on input line 93.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 92.
+LaTeX Font Info:    Try loading font information for U+msb on input line 93.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1021,114 +1036,113 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <exp_mosaic.png, id=4, 254.9525pt x 240.9pt>
 File: exp_mosaic.png Graphic file (type png)
  <use exp_mosaic.png>
-Package pdftex.def Info: exp_mosaic.png used on input line 103.
+Package pdftex.def Info: exp_mosaic.png used on input line 104.
 (pdftex.def)             Requested size: 105.5124pt x 99.69594pt.
 
 <exponential.png, id=6, 958.58125pt x 463.7325pt>
 File: exponential.png Graphic file (type png)
  <use exponential.png>
-Package pdftex.def Info: exponential.png used on input line 113.
+Package pdftex.def Info: exponential.png used on input line 114.
 (pdftex.def)             Requested size: 263.78506pt x 127.6082pt.
 
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./exp_m
-osaic.png>] [2 <./exponential.png>] [3] [4] [5] (./midterm_report.aux) ) 
+osaic.png>] [2 <./exponential.png>] [3] [4] [5] [6] (./midterm_report.aux) ) 
 Here is how much of TeX's memory you used:
- 15546 strings out of 493089
- 291637 string characters out of 6134842
- 350254 words of memory out of 5000000
- 18609 multiletter control sequences out of 15000+600000
- 43163 words of font info for 154 fonts, out of 8000000 for 9000
+ 15933 strings out of 493089
+ 296614 string characters out of 6134842
+ 361222 words of memory out of 5000000
+ 18990 multiletter control sequences out of 15000+600000
+ 41678 words of font info for 149 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,9n,54p,1581b,321s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/loca
-l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/201
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015/texmf-di
-st/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2015/texm
-f-dist/fonts/type1/public/nanumtype1/nanummjbac.pfb></usr/local/texlive/2015/te
-xmf-dist/fonts/type1/public/nanumtype1/nanummjbae.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/public/nanumtype1/nanummjbb2.pfb></usr/local/texlive/201
-5/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb5.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb7.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb8.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb9.pfb></usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbba.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbbc.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc0.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc2.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc5.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc6.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc7.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc8.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc9.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbce
+ 55i,9n,54p,1581b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
+</u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbac.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbae.pfb></usr/local/tex
+live/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb2.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb5.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb7.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb8.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbb9.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbba.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbbc.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc0.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc2.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjbc5
 .pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjb
-d1.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanumm
-jbd5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanu
-mmjmac.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/na
-nummjmad.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/
-nanummjmae.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype
-1/nanummjmaf.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumty
-pe1/nanummjmb0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanum
-type1/nanummjmb1.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nan
-umtype1/nanummjmb2.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/n
-anumtype1/nanummjmb3.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/nanumtype1/nanummjmb4.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
-ic/nanumtype1/nanummjmb5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
-blic/nanumtype1/nanummjmb6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-public/nanumtype1/nanummjmb7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/nanumtype1/nanummjmb8.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
-pe1/public/nanumtype1/nanummjmb9.pfb></usr/local/texlive/2015/texmf-dist/fonts/
-type1/public/nanumtype1/nanummjmba.pfb></usr/local/texlive/2015/texmf-dist/font
-s/type1/public/nanumtype1/nanummjmbb.pfb></usr/local/texlive/2015/texmf-dist/fo
-nts/type1/public/nanumtype1/nanummjmbc.pfb></usr/local/texlive/2015/texmf-dist/
-fonts/type1/public/nanumtype1/nanummjmbd.pfb></usr/local/texlive/2015/texmf-dis
-t/fonts/type1/public/nanumtype1/nanummjmbe.pfb></usr/local/texlive/2015/texmf-d
-ist/fonts/type1/public/nanumtype1/nanummjmbf.pfb></usr/local/texlive/2015/texmf
--dist/fonts/type1/public/nanumtype1/nanummjmc0.pfb></usr/local/texlive/2015/tex
-mf-dist/fonts/type1/public/nanumtype1/nanummjmc1.pfb></usr/local/texlive/2015/t
-exmf-dist/fonts/type1/public/nanumtype1/nanummjmc2.pfb></usr/local/texlive/2015
-/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc3.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc4.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc5.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc6.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc7.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc8.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc9.pfb></usr/loca
-l/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmca.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmcc.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmcd.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmce.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmcf.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd0.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd1.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd
-2.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummj
-md3.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanum
-mjmd4.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nan
-ummjmd5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/n
-anummjmd6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1
-/nanummjmd7.pfb>
-Output written on midterm_report.pdf (5 pages, 3420419 bytes).
+c6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanumm
+jbc7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanu
+mmjbc8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/na
+nummjbc9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/
+nanummjbce.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype
+1/nanummjbd1.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumty
+pe1/nanummjbd5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanum
+type1/nanummjbd6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nan
+umtype1/nanummjmac.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/n
+anumtype1/nanummjmad.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
+/nanumtype1/nanummjmae.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/nanumtype1/nanummjmaf.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
+blic/nanumtype1/nanummjmb0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
+public/nanumtype1/nanummjmb1.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
+1/public/nanumtype1/nanummjmb2.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
+pe1/public/nanumtype1/nanummjmb3.pfb></usr/local/texlive/2015/texmf-dist/fonts/
+type1/public/nanumtype1/nanummjmb4.pfb></usr/local/texlive/2015/texmf-dist/font
+s/type1/public/nanumtype1/nanummjmb5.pfb></usr/local/texlive/2015/texmf-dist/fo
+nts/type1/public/nanumtype1/nanummjmb6.pfb></usr/local/texlive/2015/texmf-dist/
+fonts/type1/public/nanumtype1/nanummjmb7.pfb></usr/local/texlive/2015/texmf-dis
+t/fonts/type1/public/nanumtype1/nanummjmb8.pfb></usr/local/texlive/2015/texmf-d
+ist/fonts/type1/public/nanumtype1/nanummjmb9.pfb></usr/local/texlive/2015/texmf
+-dist/fonts/type1/public/nanumtype1/nanummjmba.pfb></usr/local/texlive/2015/tex
+mf-dist/fonts/type1/public/nanumtype1/nanummjmbb.pfb></usr/local/texlive/2015/t
+exmf-dist/fonts/type1/public/nanumtype1/nanummjmbc.pfb></usr/local/texlive/2015
+/texmf-dist/fonts/type1/public/nanumtype1/nanummjmbd.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/public/nanumtype1/nanummjmbe.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmbf.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc0.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc1.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc2.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc3.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc4.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc5.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc6.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc7.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc8.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc9.pf
+b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmca.
+pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmc
+c.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummj
+mcd.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanum
+mjmce.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nan
+ummjmcf.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/n
+anummjmd0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1
+/nanummjmd1.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumtyp
+e1/nanummjmd2.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanumt
+ype1/nanummjmd3.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/nanu
+mtype1/nanummjmd4.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/na
+numtype1/nanummjmd5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
+nanumtype1/nanummjmd6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publi
+c/nanumtype1/nanummjmd7.pfb>
+Output written on midterm_report.pdf (6 pages, 3457573 bytes).
 PDF statistics:
- 350 PDF objects out of 1000 (max. 8388607)
- 256 compressed objects within 3 object streams
+ 349 PDF objects out of 1000 (max. 8388607)
+ 255 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

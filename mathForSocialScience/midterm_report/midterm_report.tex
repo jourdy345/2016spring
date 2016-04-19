@@ -19,6 +19,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{tikz}
+\usepackage[english]{babel}
 
 \linespread{1.5}
 
@@ -170,24 +171,52 @@ $$
       \State $\epsilon \gets p_{\text{new}}-p_{\text{old}} $
       \State $p_{\text{old}} \gets p_{\text{new}}$
     \EndWhile
+    \State $p_{\text{new}} \gets 4 \times p_{\text{new}}$
   \EndProcedure
   \end{algorithmic}
 \end{algorithm}
 
-이 방법은 의사코드(pseudocode)이며 어떤 언어로도 옮길 수 있지만 효율적인 코드는 아니다.  그렇다면 이 방법은 좋은 알고리즘인가? 그렇지 않다. 수렴속도가 굉장히 느리다. 매우 흥미로운 근사 방법이긴 하지만 $\pi$의 소숫점 전개를 구할 때 몬테칼로 방법을 쓰지는 않는다. 컴퓨터가 없던 시절, 몬테칼로와 비슷한 방법으로 $\pi$를 구하려고 했던 사람이 있었다. 이를 `뷔퐁의 바늘(Buffon's needle)' 문제라고 부르는데 1901년 이탈리아의 수학자 마리오 라차리니는 똑같은 실험으로 $355/113$이라는 매우 근사한 추정치를 구하였다. 몬테칼로 방법이 지니는 의미는 무리수인 $\pi$를 유리수로 근사시켜 나가는 이른바 `코쉬수열(Cauchy sequence)'의 예로 볼 수 있기 때문이다. 이로써 유리수 집합은 실수 집합에 대해 조밀(dense)하다는 것이 경험적으로 증명된다.
+이 방법은 의사코드(pseudocode)이며 어떤 언어로도 옮길 수 있지만 효율적인 코드는 아니다. 각 언어마다 더 효율적인 기능을 제공하니 그것을 이용하여 다시 짤 수는 있다. 그렇다면 속도의 측면에서 이 방법은 좋은 알고리즘인가? 그렇지 않다. 수렴속도가 굉장히 느리다. 매우 흥미로운 근사 방법이긴 하지만 $\pi$의 소숫점 전개를 구할 때 몬테칼로 방법을 쓰지는 않는다. 컴퓨터가 없던 시절, 몬테칼로와 비슷한 방법으로 $\pi$를 구하려고 했던 사람이 있었다. 이를 `뷔퐁의 바늘(Buffon's needle)' 문제라고 부르는데 1901년 이탈리아의 수학자 마리오 라차리니는 똑같은 실험으로 $355/113$이라는 매우 근사한 추정치를 구하였다. 몬테칼로 방법이 느린 수렴 속도에도 의미가 있는 이유는 무리수인 $\pi$를 유리수로 근사시켜 나가는 이른바 `코쉬수열(Cauchy sequence)'의 예로 볼 수 있기 때문이다. 이로써 유리수 집합은 실수 집합에 대해 조밀(dense)하다는 것이 경험적으로 증명된다.
 
 \subsubsection{라마누잔의 방법}
-이번에 소개할 알고리즘은 인도의 위대한 수학자 라마누잔이 쓴 방법이며 실제로 PiFast라는 프로그램에서 사용하고 있는 알고리즘이다.
+이번에 소개할 알고리즘은 인도의 위대한 수학자 라마누잔이 쓴 방법이다. 라마누잔이 제시한 식은 다음과 같다.
+$$
+  \frac{1}{\pi} = \frac{\sqrt{8}}{9801}\sum_{n=0}^{\infty}\frac{\left(4n\right)!}{\left(n!\right)^{4}}\frac{26390n+1103}{396^{4n}}
+$$
+
+라마누잔은 그의 논문\cite{ramanujan}에서 위의 알고리즘 도출 과정에 대해 딱히 설명을 하지 않기 때문에 이런 알고리즘을 어떻게 발견했고 저러한 상수 $k_{1},\ldots , k_{3}$까지 어떤 방법으로 생각해냈는지 알 턱이 없다. 알고리즘의 형태로 옮기게 되면 아래와 같다.
 \begin{algorithm}
   \caption{Ramanujan's algorithm for $\pi$}
   \begin{algorithmic}[1]
-  \Procedure{RJpi}{$\tau$}\label{RMpi}\Comment{$\tau$ is the tolerance}
+  \Procedure{RJpi}{$\tau$}\label{RJpi}\Comment{$\tau$ is the tolerance}
+    \State $k_{1} \gets 26390, \; k_{2} \gets 1103, \; k_{3} \gets 396$
+    \State $n \gets 0$
+    \State $ \opn{RJpi} \gets 0$
+    % \State $\opn{RJpi\_new} \gets 0$
+    \State $\epsilon \gets \tau + 1$
+    \While{$\epsilon > \tau$}
+      \State $\epsilon \gets \dfrac{\left(4n\right)!}{\left(n!\right)^{4}}\dfrac{k_{1}n+k_{2}}{\left(k_{3}\right)^{4n}}$
+      \State $\opn{RJpi} \gets \opn{RJpi} + \epsilon$
+      \State $n \gets n + 1$
+    \EndWhile
+    \State $\opn{RJpi} \gets \dfrac{9801}{\sqrt{8}\opn{RJpi}}$
+  \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+\subsubsection{Chudnovsky 형제의 방법}
+위에서 설명했던 라마누잔의 방법을 조금 개량한 것이 바로 Chudnovsky 형제가 생각해낸 알고리즘인데, 이것이 가장 최근까지 가장 빨리 $\pi$로 수렴하는 알고리즘이다. 매 반복시행마다 소숫점 아래 약 14자리씩 정확히 맞아떨어져 나간다고 하니 정말 빛의 속도가 아닐 수 없다.
+\begin{algorithm}
+  \caption{Chudnovsky brothers' algorithm for $\pi$}
+  \begin{algorithmic}[1]
+  \Procedure{CBpi}{$\tau$}\label{CBpi}\Comment{$\tau$ is the tolerance}
     \State $k_{1} \gets 545140134,\; k_{2} \gets 13591409,\; k_{3} \gets 640320, \; k_{4}\gets 100100025, \; k_{5} \gets 327843840, \; k_{6} \gets 53360 $
     \State $\opn{RJpi} \gets 0$
     \State $n \gets 0$
     \State $\epsilon \gets \tau + 1$
     \While{$\epsilon > \tau$}
-      \State $\epsilon \gets \left(-1\right)^{n}\frac{\left(6n\right)!\left(k_{2}+nk_{1}\right)}{\left(n!\right)^{3}\left(3n\right)!\left(8k_{4}k_{5}\right)^{n}}$
+      \State $\epsilon \gets \left(-1\right)^{n}\dfrac{\left(6n\right)!\left(k_{2}+nk_{1}\right)}{\left(n!\right)^{3}\left(3n\right)!\left(8k_{4}k_{5}\right)^{n}}$
       \State $\opn{RJpi} \gets \opn{RJpi} + \epsilon$
       \State $n \gets n + 1$
     \EndWhile
@@ -196,7 +225,13 @@ $$
   \end{algorithmic}
 \end{algorithm}
 
-라마누잔은 그의 논문 \emph{Modular equations and approximations to} $\boldsymbol{p}$, Quart.J.Pure Appl. Math., (1914), vol. 45, p.350-372에서 위의 알고리즘 도출 과정에 대해 딱히 설명을 하지 않기 때문에 이런 알고리즘을 어떻게 발견했고 저러한 상수 $k_{1},\ldots , k_{6}$까지 어떤 방법으로 생각해냈는지 알 턱이 없다. 하지만 이 알고리즘은 빛의 속도로 $\pi$에 수렴한다. 매 반복시행마다 약 소숫점 아래 14개 자리씩 정확해진다고 하니 놀라울 따름이다.
+\pagebreak
+\begin{thebibliography}{9}
+\bibitem{ramanujan}
+\textit{Modular equations and approximations to \textbf{p}}, Quart.J.Pure Appl. Math., (1914), vol. 45, p.350-372
+\end{thebibliography}
 \end{document}
+
+
 
 
