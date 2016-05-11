@@ -20,6 +20,46 @@
 \usepackage{algpseudocode}
 \usepackage{tikz}
 \usepackage[english]{babel}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{courier}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         % Java
+         Python
+ }
+
+
 
 \linespread{1.5}
 
@@ -223,7 +263,7 @@ $$
     \State $\epsilon \gets \tau + 1$
     \While{$\epsilon > \tau$}
       \State $\epsilon \gets \left(-1\right)^{n}\dfrac{\left(6n\right)!\left(k_{2}+nk_{1}\right)}{\left(n!\right)^{3}\left(3n\right)!\left(8k_{4}k_{5}\right)^{n}}$
-      \State $\opn{RJpi} \gets \opn{RJpi} + \epsilon$
+      \State $\opn{CBpi} \gets \opn{CBpi} + \epsilon$
       \State $n \gets n + 1$
     \EndWhile
     \State $\opn{CBpi} \gets \dfrac{k_{6}\sqrt{k_{3}}}{\opn{CBpi}}$ 
@@ -256,6 +296,16 @@ J. M. Borwein, P. B. Borwein, and D. H. Bailey. 1989. Ramanujan, modular equatio
 \bibitem{normalnumbers}
 Ferdinánd Filip, Jan Šustek (2010). ``An elementary proof that almost all real numbers are normal'', Acta universitatis sapientiae. Mathematica 2(1), 99-110, \texttt{http://www.emis.de/journals/AUSM/C2-1/math21-8.pdf}
 \end{thebibliography}
+
+\newpage
+\appendix
+\section{Python code for algorithms}\label{AppA}
+\subsection{Monte-Carlo algorithm for $\pi$}
+\lstinputlisting[label=MCpicode,caption=Monte-Carlo algorithm]{MCpi.py}
+\subsection{Ramanujan algorithm for $\pi$}
+\lstinputlisting[label=RJpicode, caption=Ramanujan's algorithm]{RJpi.py}
+\subsection{Chudnovsky brothers' algorithm for $\pi$}
+\lstinputlisting[label=CDpicode, caption=Chudnovsky brothers' algorithm]{cbpi.py}
 \end{document}
 
 

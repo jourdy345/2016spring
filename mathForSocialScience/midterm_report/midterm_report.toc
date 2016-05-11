@@ -9,3 +9,7 @@
 \contentsline {subsection}{\numberline {3.2}기타}{8}
 \contentsline {section}{\numberline {4}$\pi $는 정말 신비로울까}{8}
 \contentsline {section}{\numberline {5}$\pi $와 철학}{9}
+\contentsline {section}{\numberline {A}Python code for algorithms}{11}
+\contentsline {subsection}{\numberline {A.1}Monte-Carlo algorithm for $\pi $}{11}
+\contentsline {subsection}{\numberline {A.2}Ramanujan algorithm for $\pi $}{11}
+\contentsline {subsection}{\numberline {A.3}Chudnovsky brothers' algorithm for $\pi $}{11}
