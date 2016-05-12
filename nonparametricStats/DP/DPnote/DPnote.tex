@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=0.6in]{geometry} % set the margins to 1in on all sides
+\usepackage{graphicx} % to include figures
+\usepackage{amsmath} % great math stuff
+\usepackage{amsfonts} % for blackboard bold, etc
+\usepackage{amsthm} % better theorem environments
+% various theorems, numbered by section
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{courier}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{titlesec}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{times}
+\usepackage{newtxmath}
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bd}[1]{\mathbf{#1}} % for bolding symbols
+\newcommand{\RR}{\mathbb{R}} % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}} % for Integers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+\begin{document}
+\nocite{*}
+\fontfamily{ptm}
+\title{Dirichlet process note}
+
+\author{Daeyoung Lim\thanks{Prof. Taeryon Choi} \\
+Department of Statistics \\
+Korea University}
+
+\maketitle
+\section{Dirichlet Distribution}
+  As Dirichlet process is the infinite-dimensional generalization of the Dirichlet distribution, we should first take a look at what Dirichlet distribution is and what properties it possesses. Afterwards, it will be quite straightforward to make the stochastic process have those properties as we construct it. The Dirichlet distribution of dimension $D$ is a continuous probability measure on $\Delta_{D}$ having the density function
+  \begin{equation}
+    p\left(\bs{\pi}|\beta_{1}, \ldots , \beta_{D}\right) = \frac{\Gamma\left(\sum_{i}\beta_{i}\right)}{\prod_{i}\Gamma\left(\beta_{i}\right)} \prod_{i=1}^{D}\pi_{i}^{\beta_{i}-1}
+  \end{equation}
+  where the parameters $\beta_{i} \geq 0, \forall i$. In preparation of the generalization to Dirichlet process, let us reparameterize the distribution as
+  \begin{equation}
+    p\left(\bs{\pi}|\alpha g_{01}, \ldots, \alpha g_{0D}\right) = \frac{\Gamma\left(\alpha\right)}{\prod_{i}\Gamma\left(\alpha g_{0i}\right)}\prod_{i=1}^{D}\pi_{i}^{\alpha g_{0i}-1}
+  \end{equation}
+  where $\alpha = \sum_{i} \beta_{i}$ and $g_{0i}=\beta_{i}/\left(\sum_{i}\beta_{i}\right)$. We will hereafter denote the distribution by $\bs{\pi} \sim \opn{Dir}\left(\alpha g_{0}\right)$; the mean and variance of such a reparameterized Dirichlet random variable are
+  \begin{equation}
+    \mathbb{E}\left[\pi_{i}\right]= g_{0i}, \hfill \opn{Var}\left[\pi_{i}\right] = \frac{g_{0i}\left(1-g_{0i}\right)}{\alpha+1}.
+  \end{equation}
+\section{How to interpret Dirichlet distribution}
+It is a well-known fact that the sum of all elements in a Dirichlet random vector is unity. Therefore, it is not difficult to admit that somehow a Dirichlet random vector is a realization of some sort of discrete distribution with a finite number of possible values. In other words, we also refer to a Dirichlet distribution as a distribution on a probability simplex, which is basically the same thing. 
+\begin{equation}
+  X_{n+1}|X_{1},\ldots , X_{n} \sim \sum_{i=1}^{n}\frac{1}{\alpha\left(\mathcal{X}\right)+n}\delta_{X_{i}} + \frac{1}{\alpha\left(\mathcal{X}\right)+n}\alpha
+\end{equation}
+
+\section{DPM: Rao-Blackwellized MCMC}
+$c_{i}$ is the cluster to which $y_{i}$ belongs. Fast MCMC algorithm integrates out $\theta$ and only constructs a chain for the categorical variable $c$.
+\begin{itemize}
+  \item If $c = c_{j}$ for some $j \neq i$:
+    \begin{equation}
+      \opn{P}\left(c_{i}=c\;|\;c_{-i}, y_{i}\right) = b\frac{n_{-i,c}}{n-1+M} \int F\left(y_{i}, \theta\right)\,dH_{-i,c}\left(\theta\right).
+    \end{equation}
+  \item Otherwise,
+    \begin{equation}
+      \opn{P}\left(c_{i}\neq c_{j}\text{ for all } j\neq i\;|\; c_{-i}, y_{i}\right) = b\frac{M}{n-1+M}\int F\left(y_{i}, \theta\right)\,dG_{0}\left(\theta\right).
+    \end{equation}
+\end{itemize}
+Now let $G_{0} \equiv \opn{N}\left(\mu_{0}, \sigma_{0}^{2}\right)$ and $F \equiv \opn{N}\left(\theta, \sigma^{2}\right)$.
+\begin{align}
+  p\left(\theta\;|\;\left\{y_{j}\;|\; j\neq i, c_{j}=c\right\}, G_{0}\right) &\equiv \opn{N}\left(\frac{\sigma_{0}^{2}\sum_{c_{j}=c}y_{j} + \mu_{0}\sigma^{2}}{n_{c}\sigma_{0}^{2}}, \frac{\sigma^{2}\sigma_{0}^{2}}{n_{c}\sigma_{0}^{2} + \sigma^{2}} \right)\\
+  \int F\left(y_{i},\theta\right)\,dH_{-i,c}\left(\theta\right) &\equiv \opn{N}\left(y_{i}\middle| \mu_{\theta}, \sigma_{\theta}^{2} + \sigma_{y}^{2}\right)
+\end{align}
+where the mean of (7) is $\mu_{\theta}$ in (8) and the same for $\sigma_{\theta}^{2}$. $\sigma_{y}^{2}$ in (8) is simply $\sigma^{2}$ but the subscript was attached to make the distinction clear.
+
+\section{DPM: Latent variable MCMC}
+We have marginalized out $\theta$ in the previous section, which is also called \emph{Rao-Blackwellization}. We examine another form of MCMC which also has a chain with respect to $\theta$ along with the categorical variable $c$.
+\begin{itemize}
+  \item If $c = c_{j}$ for some $j \neq i$,
+    \begin{equation}
+      \opn{P}\left(c_{i}=c\;|\; c_{-i}, y_{i}, \theta\right) = b\frac{n_{-i,c}}{n-1+M}F\left(y_{i}, \theta_{c}\right).
+    \end{equation}
+  \item Otherwise,
+    \begin{equation}
+      \opn{P}\left(c_{i}\neq c_{j}\text{ for all }j \neq i\;|\; c_{-i}, y_{i}, \theta\right) = b\frac{M}{n-1+M}\int F\left(y_{i},\theta\right)\,dG_{0}\left(\theta\right).
+    \end{equation}
+\end{itemize}
+In Neal's paper, the Gibbs sampler construction is summerized as follows:
+\begin{itemize}
+  \item For $i=1,\ldots , n$: If the present value of $c_{i}$ is associated with no other observation (i.e., $n_{-i,c_{i}}=0$), remove $\theta_{c_{i}}$ from the state. Draw a new value for $c_{i}$ from $c_{i}\;|\; c_{-i}, y_{i}, \theta$ as defined above. If the new $c_{i}$ is not associated with any other observation, draw a value for $\theta_{c_{i}}$ from $H_{i}$ and add it to the state. $H_{i}$ is the posterior distribution based on the prior $G_{0}$ and the single observation $y_{i}$.
+  \item For all $c \in \left\{c_{1},\ldots , c_{n}\right\}$: Draw a new value from $\theta_{c}\;|\;\text{all $y_{i}$}$ for which $c_{i}=c$--- that is, from the posterior distribution based on the prior $G_{0}$ and all the data points currently associated with latent class $c$.
+\end{itemize}
+\end{document}

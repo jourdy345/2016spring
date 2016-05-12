@@ -1,0 +1,186 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{times}
+\usepackage{newtxmath}
+\addtolength{\evensidemargin}{-.5in}
+\addtolength{\oddsidemargin}{-.5in}
+\addtolength{\textwidth}{0.8in}
+\addtolength{\textheight}{0.8in}
+\addtolength{\topmargin}{-.4in}
+\newtheoremstyle{quest}{\topsep}{\topsep}{}{}{\bfseries}{}{ }{\thmname{#1}\thmnote{ #3}.}
+\theoremstyle{quest}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{question}{Question}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{challengeproblem}{Challenge Problem}
+\newcommand{\name}{%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% put your name here, so we know who to give credit to %%
+Daeyoung Lim
+}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \newcommand{\hw}{%%%%%%%%%%%%%%%%%%%%
+% %% and which homework assignment is it? %%%%%%%%%
+% %% put the correct number below              %%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1
+% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\vspace{-50pt}
+\huge Real Analysis\hfill Solutions}
+\author{Daeyoung Lim}
+\date{}
+\pagestyle{myheadings}
+% \markright{\name\hfill Homework \hw\qquad\hfill}
+
+%% If you want to define a new command, you can do it like this:
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+%% If you want to use a function like ''sin'' or ''cos'', you can do it like this
+%% (we probably won't have much use for this)
+% \DeclareMathOperator{\sin}{sin}   %% just an example (it's already defined)
+
+
+\begin{document}
+\maketitle
+\fontfamily{ptm}
+\section*{Chapter 6}
+\begin{question}[6-9]
+  Assume $f$ is measurable. Prove that $f \in L^{1} \iff |f| \in L^{1}$. Also prove that
+  $$
+    | \int f \,d\lambda \;| \leq \int |f|\,d\lambda.
+  $$
+\end{question}
+\begin{proof}
+  By definition, $f$ is integrable if both $\int f_{+} \, d\lambda$ and $\int f_{-}\,d\lambda$ are finite. Note that
+    \begin{align*}
+      \int f \, d\lambda &= \int f_{+}\, d\lambda - \int f_{-}\,d\lambda\\
+      \int |f| \, d\lambda &= \int f_{+}\, d\lambda + \int f_{-}\,d\lambda .
+    \end{align*}
+    It is trivial that if one is finite, so is the other.\\
+    To prove the inequality, note that $-|f| \leq f \leq |f|$. Then by property 3 and 5 in p.124,
+    $$
+      -\int |f|\,d\lambda \leq \int f\,d\lambda \leq \int |f|\, d\lambda.
+    $$
+    We have obtained the desired inequality.
+\end{proof}
+
+\begin{question}[6-10]
+  Assume $f$ and $g$ are measurable, $g \in L^{1}$, and $|f| \leq |g|$. Prove that $f \in L^{1}$.
+\end{question}
+\begin{proof}
+  By virtue of problem 6-9, $|g| \in L^{1}$. Along with property 5 in p.124,
+  $$
+    \int |f|\,d\lambda \leq \int |g|\, d\lambda < \infty.
+  $$
+  Therefore, $|f| \in L^{1}$ which is equivalent to $f \in L^{1}$.
+\end{proof}
+
+\begin{question}[6-11]
+  Assume $f \in L^{1}\left(\R^{n}\right)$. Define
+  \begin{align*}
+    f_{k}\left(x\right) = \begin{cases}\; f\left(x\right) & \text{if $|f\left(x\right)|\leq k$ and $|x| \leq k$} \\ \; 0 & \text{otherwise.}  \end{cases}
+  \end{align*}
+  Prove that
+  $$
+    \lim_{k\to\infty} \int f_{k}\,d\lambda = \int f\,d\lambda.
+  $$
+\end{question}
+\begin{proof}
+  This question is asking us to verify the conditions for \emph{Lebesgue's Dominated Convergence Theorem}. The two conditions are 
+  \begin{itemize}
+    \item $\lim_{k\to\infty} f_{k}\left(x\right)$ exists for all $x\in \R^{n}$.
+    \item $|f_{k}\left(x\right)|\leq g\left(x\right)$ for all $x \in \R^{n}$.
+  \end{itemize}
+  The condition for $f_{k}$ to be $f$ will always be true and thus renders the case separation pointless if $k \to \infty$. Therefore, $\lim_{k\to\infty}f_{k} = f$ for all $x \in \R^{n}$. The second condition is easily satisfied if we choose $g$ to be $g\left(x\right) = |f\left(x\right)|$. We are now fully capable of applying LDCT and the desired result is obtained.
+\end{proof}
+
+\begin{question}[6-12]
+  Assume $f \in L^{1}\left(\R^{n}\right)$. Prove that
+  $$
+    \lim_{k\to\infty}\int f\left(x\right)e^{-|x|^{2}/k}\,dx = \int f\left(x\right)\,dx .
+  $$
+\end{question}
+\begin{proof}
+  The question is, as is the previous one, asking us to check if we can apply LDCT and explicitly prove it for this specific function. To prove the first condition, first note that $0 < e^{-|x|^{2}/k} \leq 1$. 
+\end{proof}
+
+You can copy-and-paste this block as many times as you need.
+$$
+  \left\{x\in \R^{n}| f\left(x\right) < \infty\right\}
+$$
+
+%%%% for the homework, you can delete everything from here to the end
+%%%% (except for the last line ''\end{document}'', don't delete that).
+
+
+\section*{For the journal}
+
+We have similar environments for Theorems, Exercises, and Challenge Problems.
+
+\begin{theorem}[1.32]
+  You should restate the theorem here.
+\end{theorem}
+\begin{proof}
+  Insert your proof here.
+\end{proof}
+
+
+\begin{exercise}[1.22]
+
+\end{exercise}
+\begin{proof}
+
+\end{proof}
+
+
+\begin{challengeproblem}[1.14]
+
+\end{challengeproblem}
+\begin{proof}
+
+\end{proof}
+
+
+
+
+\section*{Writing in math mode}
+When you want to write something in ``math mode'', you should enclose it in dollar signs: $x+y=a^2+b^2$.
+If it's an important equation and you want to set it off, you can do it like this: \[x = \frac{-b \pm \sqrt{b^2-4ac} }{2a}\]
+If you have a chain of deductions, you can line them up like this. (The ampersand \& tells it where to line up---usually you will want it right before the equals sign. You should have an ampersand in each line. The double-backslash $\backslash\backslash$ tells it to move to the next line.)
+\begin{align*}
+  2x &= 2y-10&\\
+  x &=y-5 &\\
+  z+x &= y-5+z
+\end{align*}
+If you want to include justifications, one way is like this:
+\begin{align*}
+  2x &= 2y-10 & (A5)\\
+  x &=y-5  & (A4)\\
+  z+x &= y-5+z & (W)
+\end{align*}
+You can also include words:
+
+\begin{align*}
+  2x &= 2y-10 & \text{by commutativity} \\
+  x &=y-5  & \text{since $y$ is the GCD}\\
+  z+x &= y-5+z & \text{because 2 is prime}
+\end{align*}
+
+Here are some symbols that might come up in the homeworks and journals (but remember you can view the source of the scripts and homeworks on the course webpage).
+
+Let $x\in \Z[i]$ and $y\in \Q[i]$. Then $x^2+y^2\in \Q[i]$. If you have two numbers $n_1\in \Z$ and $n_2\in \Z$, then you should be satisfied. Many students don't have it so good. You can ask whether $n_1 < n_2$, or even if $n_1 \leq n_2$. I wonder if $a|b$? Greek letters: $\alpha$, $\beta$, $\gamma$, $\pi$, $\Gamma$, $\Delta$.
+
+Maybe you want to talk about the set $S=\{ x\in \Z | x^2 = 2\}$, or maybe the set $T=\{ x\in \Z | x^2 \text{ is even}\}$. Did you notice that $S\subseteq T$? It's also true that $S \neq T$.
+
+You might need to write fractions like $\frac{p}{q}$, or even $\frac{a}{a^2+b^2}$. If this fractions are too small, you can display them like this (see how I made those big parentheses?):
+\[\left(\frac{p}{q}\right)\cdot \left(\frac{t}{u}\right) = \frac{a}{a^2+b^2}\]
+If you can't figure out a symbol, you should google ``Detexify''. All you have to do is draw the symbol using your mouse, and it tells you the latex command.
+%%%% don't delete the last line!
+\end{document}
