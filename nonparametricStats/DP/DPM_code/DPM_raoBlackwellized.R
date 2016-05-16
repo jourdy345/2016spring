@@ -38,13 +38,13 @@ generate_sample = function(N, M, mu0, sigma0) {
 DPM_raoBlackwellized = function(iter_num, M, N, mu0, sigma0, sigma) {
 
   ### Generate simulation data
-  components = sample(1:3, prob = c(0.3, 0.5, 0.2), size = N, replace = TRUE)
-  mu = c(0, 10, 3)
+  components = sample(1:4, prob = c(0.3, 0.4, 0.2, 0.1), size = N, replace = TRUE)
+  mu = c(0, 10, 3, 5)
   samples = rnorm(n = N, mean = mu[components], sd = 1)
   original = data.table(y = samples, category = components)
 
   ### Sample G from DP(M, G0)
-  v = rbeta(N, 1, M)
+  v = rbeta(N, 1, M+1)
   prob_vector = c(v[1], v[-1] * cumprod(1-v[-N]))
   thetas = rnorm(N, mu0, sigma0)
   
