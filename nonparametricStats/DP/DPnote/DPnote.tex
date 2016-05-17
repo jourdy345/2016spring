@@ -120,7 +120,7 @@ $c_{i}$ is the cluster to which $y_{i}$ belongs. Fast MCMC algorithm integrates 
 \end{itemize}
 Now let $G_{0} \equiv \opn{N}\left(\mu_{0}, \sigma_{0}^{2}\right)$ and $F \equiv \opn{N}\left(\theta, \sigma^{2}\right)$.
 \begin{align}
-  p\left(\theta\;|\;\left\{y_{j}\;|\; j\neq i, c_{j}=c\right\}, G_{0}\right) &\equiv \opn{N}\left(\frac{\sigma_{0}^{2}\sum_{c_{j}=c}y_{j} + \mu_{0}\sigma^{2}}{n_{c}\sigma_{0}^{2}}, \frac{\sigma^{2}\sigma_{0}^{2}}{n_{c}\sigma_{0}^{2} + \sigma^{2}} \right)\\
+  p\left(\theta\;|\;\left\{y_{j}\;|\; j\neq i, c_{j}=c\right\}, G_{0}\right) &\equiv \opn{N}\left(\frac{\sigma_{0}^{2}\sum_{c_{j}=c}y_{j} + \mu_{0}\sigma^{2}}{n_{c}\sigma_{0}^{2} + \sigma^{2}}, \frac{\sigma^{2}\sigma_{0}^{2}}{n_{c}\sigma_{0}^{2} + \sigma^{2}} \right)\\
   \int F\left(y_{i},\theta\right)\,dH_{-i,c}\left(\theta\right) &\equiv \opn{N}\left(y_{i}\middle| \mu_{\theta}, \sigma_{\theta}^{2} + \sigma_{y}^{2}\right)
 \end{align}
 where the mean of (7) is $\mu_{\theta}$ in (8) and the same for $\sigma_{\theta}^{2}$. $\sigma_{y}^{2}$ in (8) is simply $\sigma^{2}$ but the subscript was attached to make the distinction clear.
@@ -142,4 +142,31 @@ In Neal's paper, the Gibbs sampler construction is summerized as follows:
   \item For $i=1,\ldots , n$: If the present value of $c_{i}$ is associated with no other observation (i.e., $n_{-i,c_{i}}=0$), remove $\theta_{c_{i}}$ from the state. Draw a new value for $c_{i}$ from $c_{i}\;|\; c_{-i}, y_{i}, \theta$ as defined above. If the new $c_{i}$ is not associated with any other observation, draw a value for $\theta_{c_{i}}$ from $H_{i}$ and add it to the state. $H_{i}$ is the posterior distribution based on the prior $G_{0}$ and the single observation $y_{i}$.
   \item For all $c \in \left\{c_{1},\ldots , c_{n}\right\}$: Draw a new value from $\theta_{c}\;|\;\text{all $y_{i}$}$ for which $c_{i}=c$--- that is, from the posterior distribution based on the prior $G_{0}$ and all the data points currently associated with latent class $c$.
 \end{itemize}
+\subsection{Gaussian mixtures}
+Let's play with an actual example. Recall
+\begin{align}
+  y_{i}|\theta_{i} &\sim \opn{N}\left(\theta_{i},\sigma^{2}\right)\\
+  \theta_{i}|G &\sim G\\
+  G &\sim \opn{DP}\left(M, G_{0}\right)\\
+  G_{0} &\equiv \opn{N}\left(\mu_{0},\sigma_{0}^{2}\right).
+\end{align}
+And
+\begin{align}
+  p\left(s_{i}=j|s^{-},{\theta^{*}}^{-}, y\right) &\propto \begin{cases}n_{j}^{-}p\left(y_{i}|{\theta_{j}^{*}}^{-}\right) & j = 1, \ldots k^{-}\\ M\int p\left(y_{i}|\theta_{i}\right)\,dG_{0}\left(\theta_{i}\right) & j = k^{-}+1 \end{cases}\\
+  p\left(\theta_{i}|s_{i}=j, s^{-}, {\theta^{*}}^{-}, y\right) &= \begin{cases}\delta_{{\theta_{j}^{*}}^{-}} & j = 1, \ldots , k^{-}\\ p\left(\theta_{i}|y_{i}, G_{0}\right) & j = k^{-} + 1 \end{cases}.
+\end{align}
+\begin{align}
+  \int p\left(y_{i}|\theta_{i}\right)\,dG_{0}\left(\theta_{i}\right) &= \frac{1}{2\pi\sqrt{\sigma^{2}\sigma_{0}^{2}}}\int \exp \left\{-\frac{1}{2\sigma^{2}}\left(y_{i}-\theta_{i}\right)^{2} -\frac{1}{2\sigma_{0}^{2}}\left(\theta_{i}-\mu_{0}\right)^{2} \right\}\, d\theta_{i}\\
+  &= \frac{1}{2\pi\sqrt{\sigma^{2}\sigma_{0}^{2}}}\int \exp\left\{-\frac{\left(\sigma_{0}^{2}+\sigma^{2}\right)\theta_{i}^{2} - 2\left(y_{i}\sigma_{0}^{2}+\mu_{0}\sigma^{2}\right) + y_{i}^{2}\sigma_{0}^{2}+\mu_{0}^{2}\sigma^{2}}{2\sigma^{2}\sigma_{0}^{2}} \right\}\,d\theta_{i}\\
+  &= \frac{1}{2\pi\sqrt{\sigma_{0}^{2}\sigma^{2}}}\int \exp \left\{-\frac{\sigma_{0}^{2}+\sigma^{2}}{2\sigma^{2}\sigma_{0}^{2}}\left(\theta_{i}^{2} -2\frac{y_{i}\sigma_{0}^{2}+\mu_{0}\sigma^{2}}{\sigma_{0}^{2}+\sigma^{2}}\theta_{i}\right) - \frac{y_{i}^{2}\sigma_{0}^{2}+\mu_{0}^{2}\sigma^{2}}{2\sigma^{2}\sigma_{0}^{2}} \right\}\,d\theta_{i}\\
+  &= \frac{1}{2\pi\sqrt{\sigma_{0}^{2}\sigma^{2}}}\exp\left\{-\frac{y_{i}^{2}\sigma_{0}^{2}+\mu_{0}^{2}\sigma^{2}}{2\sigma^{2}\sigma_{0}^{2}}+\frac{\left(y_{i}\sigma_{0}^{2} + \mu_{0}\sigma^{2}\right)^{2}}{2\sigma^{2}\sigma_{0}^{2}\left(\sigma_{0}^{2}+\sigma^{2}\right)} \right\} \int \exp\left\{-\frac{\sigma_{0}^{2}+\sigma^{2}}{2\sigma^{2}\sigma_{0}^{2}}\left(\theta_{i}-\frac{y_{i}\sigma_{0}^{2} + \mu_{0}\sigma^{2}}{\sigma_{0}^{2}+\sigma^{2}}\right)^{2}\,d\theta_{i} \right\}\\
+  &= \frac{1}{2\pi\left(\sigma_{0}^{2}+\sigma^{2}\right)}\exp\left\{-\frac{\left(y_{i}-\mu_{0}\right)^{2}}{2\left(\sigma_{0}^{2}+\sigma^{2}\right)} \right\}\\
+  &\equiv \opn{N}\left(y_{i}| \mu_{0}, \sigma^{2}+\sigma_{0}^{2}\right)
+\end{align}
+And then for the posterior,
+\begin{align}
+  p\left(\theta_{i}|y_{i},G_{0}\right) &= \frac{p\left(y_{i}|\theta_{i}\right)\,dG_{0}\left(\theta_{i}\right)}{\int p\left(y_{i}|\theta_{i}\right)\,dG_{0}\left(\theta_{i}\right)}\\
+  &= \frac{\opn{N}\left(y_{i}|\theta_{i}, \sigma^{2}\right)\opn{N}\left(\theta_{i}|\mu_{0}, \sigma_{0}^{2}\right)}{\opn{N}\left(y_{i}|\mu_{0}, \sigma^{2}+\sigma_{0}^{2}\right)}\\
+  &\sim \opn{N}\left(\frac{y_{i}\sigma_{0}^{2} + \mu_{0}\sigma^{2}}{\sigma_{0}^{2}+\sigma^{2}}, \frac{\sigma^{2}\sigma_{0}^{2}}{\sigma^{2}+\sigma_{0}^{2}}\right)
+\end{align}
 \end{document}

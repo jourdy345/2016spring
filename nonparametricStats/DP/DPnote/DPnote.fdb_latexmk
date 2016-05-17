@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1463057863 "DPnote.tex" "DPnote.pdf" "DPnote" 1463057863
+["pdflatex"] 1463450474 "DPnote.tex" "DPnote.pdf" "DPnote" 1463450475
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -93,6 +93,7 @@
   "/usr/local/texlive/2015/texmf-dist/fonts/vf/public/newtx/ntxmi7.vf" 1369087201 2172 bd6bdae04f1ced768cfe77eb9a3016e5 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/vf/public/newtx/ntxmia.vf" 1423952494 2144 3598effb9d6d8c691a0d5ef651d99089 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/vf/public/newtx/ntxsy.vf" 1392162224 1060 bc9a875e15a5b07c2ea078e4b92a38b9 ""
+  "/usr/local/texlive/2015/texmf-dist/fonts/vf/public/newtx/ntxsy5.vf" 1392162224 1060 bc9a875e15a5b07c2ea078e4b92a38b9 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/vf/public/newtx/ntxsy7.vf" 1392162224 1176 9d0b60ef1277ea7fd0f77dd9fabbcda4 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/vf/public/newtx/ntxsym.vf" 1427059306 2000 d7a42ca292ca5e46d4e61f1dc11fba7e ""
   "/usr/local/texlive/2015/texmf-dist/fonts/vf/public/txfonts/txmi.vf" 1232065820 960 cfcc9d587b40b769f64408b3ca115941 ""
@@ -227,9 +228,9 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "DPnote.aux" 1463057863 382 9f23d2d7c5a74aaa6988610a5b0349df ""
-  "DPnote.tex" 1463057862 7923 8126c76a0ad6a9629e1b7a6675bce62c ""
+  "DPnote.aux" 1463450474 466 8a9c8373272be191e9c4472f4f6cb799 ""
+  "DPnote.tex" 1463450473 10922 5f9a1ca8eb8e0a5a359c4abba609cf3d ""
   (generated)
   "DPnote.log"
-  "DPnote.aux"
   "DPnote.pdf"
+  "DPnote.aux"
