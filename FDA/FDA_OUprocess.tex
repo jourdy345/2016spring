@@ -1,0 +1,158 @@
+\documentclass[11pt]{article}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=0.6in]{geometry} % set the margins to 1in on all sides
+\usepackage{graphicx} % to include figures
+\usepackage{amsmath} % great math stuff
+\usepackage{amsfonts} % for blackboard bold, etc
+\usepackage{amsthm} % better theorem environments
+% various theorems, numbered by section
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{courier}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{titlesec}
+\usepackage{empheq}
+\usepackage{tikz}
+% \usepackage{pslatex}
+
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bd}[1]{\mathbf{#1}} % for bolding symbols
+\newcommand{\RR}{\mathbb{R}} % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}} % for Integers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+\begin{document}
+\nocite{*}
+% \fontfamily{ptm}
+% \renewcommand\rmdefault{ptm}
+
+\title{Rosen's paper review}
+
+\author{Daeyoung Lim\thanks{Prof. Taeryon Choi} \\
+Department of Statistics \\
+Korea University}
+
+\maketitle
+\section{Model Specifications}
+  \begin{equation}
+    \bs{y}_{i}\left(t_{ij}\right) = \bs{X}_{ij}\bs{\mu}\left(t_{ij}\right) + \bs{Z}_{ij}\bs{g}_{i}\left(t_{ij}\right) + \bs{\delta}_{i}\left(t_{ij}\right)
+  \end{equation}
+  where
+  \begin{align}
+    \bs{y}_{i}\left(t_{ij}\right)&:\; p\times 1 \qquad i=1,\ldots, n, \; j = 1,\ldots, m_{i}\\
+    \bs{\mu}\left(t\right) &= \left(\bs{\mu}'_{1}\left(t\right), \ldots , \bs{\mu}'_{p}\left(t\right)\right)'\\
+    \bs{\mu}'_{k}\left(t\right) &= \left(\mu_{k1}\left(t\right),\ldots , \mu_{kr}\left(t\right) \right)' : &r\times 1\\
+    \bs{g}_{i}\left(t\right) &= \left(\bs{g}'_{i1}\left(t\right),\ldots , \bs{g}'_{ip}\left(t\right)\right)'\\
+    \bs{g}_{ik}\left(t\right) &= \left(g_{ij1}\left(t\right),\ldots, g_{iks}\left(t\right)\right)':  &s \times 1\\
+    \bs{x}_{ij}&:\; r \times 1\\
+    \bs{z}_{ij}&:\; s\times 1\\
+    \bs{X}_{ij} &= \bs{I}_{p} \otimes \bs{x}_{ij}'\\
+    \bs{Z}_{ij} &= \bs{I}_{p} \otimes \bs{z}_{ij}'\\
+    \bs{\delta}_{i}\left(t_{ij}\right) &\sim \text{Ornstein-Uhlenbeck process}
+  \end{align}
+\section{Ornstein-Uhlenbeck process}
+An Ornstein-Uhlenbeck process is the second-order stationary process $\left\{X_{t}\right\}$, that satisfies the following differential equation:
+\begin{equation}
+  dX\left(t\right) = -aX\left(t\right)\,dt + \sigma\,dB\left(t\right), \quad t\geq 0
+\end{equation}
+where $\left\{B\left(t\right)\right\}$ is standard Brownian motion, and $a$ and $\sigma > 0$ are parameters and $X_{0}$ is a random variable that is independent of $\left\{B\left(t\right) \right\}$.
+\subsection{Multivariate Ornstien-Uhlenbeck process}
+The univariate version of the OU process naturally evolves to a multivariate form which reads as follows:
+\begin{equation}
+  d\bs{X}\left(t\right) = -\bs{A}\bs{X}\left(t\right)\,dt + \bs{B}\,d\bs{W}\left(t\right),
+\end{equation}
+where $\bs{A}, \bs{B}$ are constant matrices. The solution for this SDE is
+\begin{equation}
+  \bs{X}\left(t\right) = \exp\left(-\bs{A}t\right)\bs{X}_{0} + \int_{0}^{t}\exp\left\{-\bs{A}\left(t-t'\right) \right\}\bs{B}\,d\bs{W}\left(t\right).
+\end{equation}
+The properties of such an OU process are as folows:
+\begin{itemize}
+  \item If $\bs{A}$ has only eigenvalues with positive real part, a stationary solution exists of the form
+  \begin{equation}
+    \bs{X}_{s}\left(t\right) = \int_{-\infty}^{t}\exp\left\{-\bs{A}\left(t-t'\right) \right\}\bs{B}\,d\bs{W}\left(t\right).
+  \end{equation}
+  The expected value $\opn{E}\left[\bs{X}_{s}\left(t\right)\right] = 0$ and the covariance matrix
+  \begin{equation}
+    \bs{\Sigma} = \opn{Cov}\left(\bs{X}_{s}\left(t\right), \bs{X}_{s}'\left(s\right)\right) = \int_{-\infty}^{\min\left(t,s\right)}\exp\left\{-\bs{A}\left(t-t'\right) \right\}\bs{BB}'\exp\left\{-\bs{A}'\left(s-t'\right) \right\}\,dt'.
+  \end{equation}
+  \item The stationary covariance matrix satisfies the following equation:
+  \begin{equation}
+    \bs{A\Sigma} + \bs{\Sigma A}' = \bs{BB}'.
+  \end{equation}
+  The solution to this equation is given by
+  \begin{equation}
+    \bs{\Sigma} = \frac{\left|\bs{A}\right|\bs{BB}' + \left[\bs{A}-\Tr\left(\bs{A}\right)\bs{I} \right]\bs{BB}'\left[\bs{A}-\Tr\left(\bs{A}\right)\bs{I}\right]}{2\left(\Tr\left(\bs{A}\right)\right)\left|\bs{A}\right|}
+  \end{equation}
+  \item \emph{(Time Correlation Matrix in the Stationary State)} The following relations hold.
+  \begin{align}
+    \opn{Cov}\left(\bs{X}_{s}\left(t\right), \bs{X}'_{s}\left(s\right)\right) &= \exp\left\{-\bs{A}\left(t-s\right) \right\}\bs{\Sigma}, & t>s \\
+    &= \bs{\Sigma}\exp\left\{-\bs{A}'\left(s-t\right) \right\}, & t<s
+  \end{align}
+  \item If all its transition densities depend only on the time differences, then the Markov process is \emph{homogeneous}. OU process is homogeneous. Therefore, the transition probabiliy of an OU process is given by
+  \begin{equation}
+    \opn{P}\left(\bs{X}_{s}\left(t\right)|\bs{X}_{s}\left(s\right), t-s\right) = \left|2\pi\bs{\Omega}\right|^{-1/2}\exp\left\{-\frac{1}{2}\bs{\gamma}'\bs{\Omega}^{-1}\bs{\gamma} \right\}
+  \end{equation}
+  where
+  \begin{align}
+    \bs{\gamma} &= \bs{X}_{s}\left(t\right) -\exp\left(-\bs{A}\left(t-s\right)\right)\bs{X}_{s}\left(s\right) \\
+    \bs{\Omega} &=  \bs{\Sigma} -\exp\left\{-\bs{A}\left(t-s\right) \right\}\bs{\Sigma}\exp\left\{-\bs{A}'\left(t-s\right)\right\}.
+  \end{align}
+\end{itemize}
+\section{Cubic Spline}
+\end{document}
