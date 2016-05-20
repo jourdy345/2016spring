@@ -121,7 +121,7 @@ where $\bs{A}, \bs{B}$ are constant matrices. The solution for this SDE is
 \begin{equation}
   \bs{X}\left(t\right) = \exp\left(-\bs{A}t\right)\bs{X}_{0} + \int_{0}^{t}\exp\left\{-\bs{A}\left(t-t'\right) \right\}\bs{B}\,d\bs{W}\left(t\right).
 \end{equation}
-The properties of such an OU process are as folows:
+The properties of such an OU process are as follows:
 \begin{itemize}
   \item If $\bs{A}$ has only eigenvalues with positive real part, a stationary solution exists of the form
   \begin{equation}
@@ -154,5 +154,40 @@ The properties of such an OU process are as folows:
     \bs{\Omega} &=  \bs{\Sigma} -\exp\left\{-\bs{A}\left(t-s\right) \right\}\bs{\Sigma}\exp\left\{-\bs{A}'\left(t-s\right)\right\}.
   \end{align}
 \end{itemize}
-\section{Cubic Spline}
+\section{Cubic Spline Interpolation}
+When the data come in the form of pairs $\left(x_{i},y_{i}\right)$, it is often our interest to find out what underlying \emph{function} they fall onto. There are many ways of achieving such a goal but one of the most popular methods is called \emph{the cubic spline}. It is a nonparametric way of intepolation guaranteeing the continuous twice-differentiability. Unlike linear interpolation, the cubic spline is differentiable even at the end point of each interval. Let's pick an arbitrary interval between $x_{j}$ and $x_{j+1}$. Following the notation of the book \emph{Numerical Recipes in C}, $y_{i} = y\left(x_{i}\right),\; i = 1,\ldots , N$. It is proven that the function can be uniquely constructed as
+\begin{equation}
+  y = Ay_{j} + By_{j+1} + Cy''_{j} + Dy''_{j+1}
+\end{equation}
+where $A,B,C,D$ are
+\begin{align}
+  &A \equiv \frac{x_{j+1}-x}{x_{j+1}-x_{j}} &B \equiv \frac{x-x_{j}}{x_{j+1}-x_{j}}\\
+  &C \equiv \frac{1}{6}\left(A^{3}-A\right)\left(x_{j+1}-x_{j}\right)^{2} &D \equiv \frac{1}{6}\left(B^{3}-B\right)\left(x_{j+1}-x_{j}\right)^{2}.
+\end{align}
+The first and second derivatives of $y$ with respect to $x$ are given by
+\begin{align}
+  \frac{dy}{dx} &= \frac{y_{j+1}-y_{j}}{x_{j+1}-x_{j}} - \frac{3A^{2}-1}{6}\left(x_{j+1}-x_{j}\right)y''_{j}+\frac{3B^{2}-1}{6}\left(x_{j+1}-x_{j}\right)y''_{j+1}\\
+  \frac{d^{2}y}{dx^{2}} &= Ay''_{j} + By''_{j+1}.
+ \end{align}
+ \subsection{Technical details regarding cubic splines}
+ Accepting that the above equations are given, the only problem left for us is that we actually do not know $y''_{i}$ yet assumed them to be known when modeling. It is also given for $j=2, \ldots , N-1$
+ \begin{equation}
+  \frac{x_{j}-x_{j-1}}{6}y''_{j-1} + \frac{x_{j+1}-x_{j-1}}{3}y''_{j} + \frac{x_{j+1}-x_{j}}{6}y''_{j+1} = \frac{y_{j+1}-y_{j}}{x_{j+1}-x_{j}} - \frac{y_{j}-y_{j-1}}{x_{j}-x_{j-1}}.
+ \end{equation}
+ In order to uniquely determine the curve, 2 more conditions need to be made. The most common ways of doing this are
+ \begin{itemize}
+  \item set one or both of $y''_{1}$ and $y''_{N}$ equal to zero, giving the so-called \emph{natural cubic spline}, which has zero second derivative on one or both of its boundaries, or
+  \item set either of $y''_{1}$ and $y''_{N}$ to values calculated from equation (27) so as to make the first derivative of the interpolating function have a specified value on either or both boundaries.
+ \end{itemize}
+Part of cubic splines' popularity is due to the linearity of the equations as well as the tridiagonality. In particular, the tridiagonality makes the computation so much easier, enabling it to be solved in $O\left(N\right)$ operations instead of $O\left(N^{3}\right)$ for the general linear problem. Refer to \emph{tridiagonal matrix algorithm} or equivalently \emph{Thomas algorithm} for further details.
+\subsection{Cubic spline in the paper}
+Cubic splines can be rewritten as a specific case of B-splines. In the paper, the author constructs a general setting where the model is
+\begin{equation}
+  y_{i} = f\left(x_{i}\right) + \epsilon_{i},
+\end{equation}
+where $\opn{E}\left(\epsilon_{i}\right) = 0$ and $f$ is an unknown smooth function. Upon choosing the knots $\kappa_{1}, \ldots , \kappa_{K}$, the cubic spline is reexpressed as a linear combination of the basis functions $1, x, \left|x-\kappa_{1}\right|^{3}, \ldots , \left|x-\kappa_{K}\right|^{3}$:
+\begin{equation}
+  f\left(x\right) = \beta_{0} + \beta_{1}x + \sum_{k=1}^{K}u_{k}\left|x-\kappa_{k}\right|^{3}.
+\end{equation}
+It is, at all times, not a good idea to overload a notation for multiple different things but the author does not seem to care. Hence, again uses $\bs{\Omega}_{K}$ whose $\left(k,\ell\right)$th element is $\left|\kappa_{k}-\kappa_{\ell}\right|^{3}$.
 \end{document}
