@@ -189,5 +189,53 @@ where $\opn{E}\left(\epsilon_{i}\right) = 0$ and $f$ is an unknown smooth functi
 \begin{equation}
   f\left(x\right) = \beta_{0} + \beta_{1}x + \sum_{k=1}^{K}u_{k}\left|x-\kappa_{k}\right|^{3}.
 \end{equation}
-It is, at all times, not a good idea to overload a notation for multiple different things but the author does not seem to care. Hence, again uses $\bs{\Omega}_{K}$ whose $\left(k,\ell\right)$th element is $\left|\kappa_{k}-\kappa_{\ell}\right|^{3}$.
+It is, at all times, not a good idea to overload a notation for multiple different things but the author does not seem to care. Hence, again uses $\bs{\Omega}_{K}$ whose $\left(k,\ell\right)$th element is $\left|\kappa_{k}-\kappa_{\ell}\right|^{3}$. The author of the paper draws another representation of the fitting problem in the form of a mixed model by recasting the function in a matrix form and writing down the frequentist loss function. The loss function is
+\begin{equation}
+  L\left(\bs{y},\bs{x},\bs{\theta}\right) = \sum_{i=1}^{n}\left(y_{i}-f\left(x_{i}\right)\right)^{2} + \frac{1}{\lambda}\bs{\theta}'\bs{D\theta}
+\end{equation}
+where $\bs{\theta}= \left(\beta_{0},\beta_{1}, u_{1}, \ldots, u_{K}\right)'$ and the matrix $\bs{D}$ is
+\begin{equation}
+  \bs{D} = \begin{bmatrix}\bs{0}_{2\times 2} & \bs{0}_{2\times K}\\ \bs{0}_{K \times 2} & \bs{\Omega}_{K}  \end{bmatrix}.
+\end{equation}
+Now let's define $\bs{X} = \begin{bmatrix} \bs{1} & \bs{x}\end{bmatrix}$ and $\bs{Z}_{K} = \begin{bmatrix} \left|x_{i}-\kappa_{1}\right|^{3} & \ldots & \left|x_{i} - \kappa_{K}\right|^{3}\end{bmatrix}_{1\leq i \leq n}$. Now we can reformulate the equation (32):
+\begin{equation}
+  \frac{1}{\sigma_{\epsilon}^{2}}\left\|\bs{y}-\bs{X\beta}-\bs{Z}_{K}\bs{u}\right\|^{2} + \frac{1}{\lambda\sigma_{\epsilon}^{2}}\bs{u}'\bs{\Omega}_{K}\bs{u}
+\end{equation}
+where $\bs{\beta}=\left(\beta_{0},\beta_{1}\right)'$ and $\bs{u}=\left(u_{1},\ldots , u_{K}\right)'$. We have just converted the cubic spline fitting problem into an equivalent linear mixed model fitting problem with a common setting of
+\begin{equation}
+  \bs{y}=\bs{X\beta}+\bs{Z}_{K}\bs{u} + \bs{\epsilon}, \qquad \opn{Cov}\left(\bs{u}\right) = \sigma_{\bs{u}}^{2}\bs{\Omega}_{K}^{-1}.
+\end{equation}
+Furthermore, by defining $\bs{b}=\bs{\Omega}_{K}^{1/2}\bs{u}$ and $\bs{Z}=\bs{Z}_{K}\bs{\Omega}_{K}^{-1/2}$, the equation (35) is the same as
+\begin{equation}
+  \bs{y}=\bs{X\beta} + \bs{Zb}+\bs{\epsilon}, \qquad \opn{Cov}\begin{pmatrix}\bs{b}\\ \bs{\epsilon} \end{pmatrix}=\begin{pmatrix} \sigma_{\bs{b}}^{2}\bs{I}_{K} & \bs{0}\\ \bs{0} & \sigma_{\epsilon}^{2}\bs{I}_{n}\end{pmatrix}.
+\end{equation}
+\section{Priors and sampling}
+Recall the original setting:
+\begin{equation}
+  \bs{y}_{i}\left(t_{ij}\right) = \bs{X}_{ij}\bs{\mu}\left(t_{ij}\right) + \bs{Z}_{ij}\bs{g}_{i}\left(t_{ij}\right) + \bs{\delta}_{i}\left(t_{ij}\right).
+\end{equation}
+Using the above cubic spline approach, we have two coefficient functions to estimate: $\bs{\mu}\left(t_{ij}\right)$ and $\bs{g}_{i}\left(t_{ij}\right)$. Thus, we will, as we have above, transform them into matrix multiplications:
+\begin{align}
+  \mu_{k\ell}\left(t_{ij}\right) &= \bs{\phi}'_{ij}\bs{\beta}_{k\ell} + \bs{\psi}'_{ij}\bs{v}_{k\ell}\\
+  g_{ikm}\left(t_{ij}\right) &= \bs{\phi}'_{ij}\bs{w}_{ikm} + \bs{\psi}'_{ij}\bs{u}_{ikm}
+\end{align}
+where $k = 1,\ldots , p$, $\ell = 1, \ldots , r$, $m = 1,\ldots, s$, $i = 1,\ldots , n$ and $\kappa_{1},\ldots , \kappa_{K}$ are knots which are sample quantiles of $t_{ij}$ ($j=1,\ldots , m_{i}$). Let $\bs{\Lambda}_{K}$ take the place of $\bs{\Omega}_{K}$ in the previous section. Therefore,
+\begin{equation}
+  \bs{\Lambda}_{K} = \begin{bmatrix} \left| \kappa_{k}-\kappa_{\ell}\right|^{3}\end{bmatrix}_{1\leq k, k'\leq K}.
+\end{equation}
+And the other parameters are given by
+\begin{align}
+  \bs{\phi}'_{ij} &= \begin{bmatrix}1 & t_{ij} \end{bmatrix}\\
+  \bs{\xi}'_{ij} &= \begin{bmatrix} \left|t_{ij}-\kappa_{1}\right|^{3} & \ldots  & \left|t_{ij}-\kappa_{K}\right|^{3}\end{bmatrix}\\
+  \bs{\psi}'_{ij} &= \bs{\xi}'_{ij}\bs{\Lambda}_{K}^{-1/2}.
+\end{align}
+Then the priors are
+\begin{align}
+  \bs{\beta}_{k\ell} &\sim \mathcal{N}\left(\bs{0}, \sigma_{\bs{\beta}_{k\ell}}^{2}\bs{I}_{2}\right)\\
+  \bs{v}_{k\ell} &\sim \mathcal{N}\left(\bs{0}, \sigma_{\bs{v}_{k\ell}}^{2}\bs{I}_{K}\right)\\
+  \bs{w}_{ikm} &\sim \mathcal{N}\left(\bs{0}, \opn{diag}\left(\sigma_{\bs{w}_{km0}}^{2}, \sigma_{\bs{w}_{km1}}^{2}\right)\right)\\
+  \bs{u}_{ikm} &\sim \mathcal{N}\left(\bs{0}, \sigma_{\bs{u}_{km}}^{2}\bs{I}_{K} \right)
+\end{align}.
+\subsection{OU process priors}
+It is very unfamiliar for one to have OU process applied to a statistical model since we have thus far only considered Gaussian error terms. The paper states that the parameters that define an OU process are $\bs{A}$ and $\bs{BB}'$. 
 \end{document}
