@@ -237,5 +237,21 @@ Then the priors are
   \bs{u}_{ikm} &\sim \mathcal{N}\left(\bs{0}, \sigma_{\bs{u}_{km}}^{2}\bs{I}_{K} \right)
 \end{align}.
 \subsection{OU process priors}
-It is very unfamiliar for one to have OU process applied to a statistical model since we have thus far only considered Gaussian error terms. The paper states that the parameters that define an OU process are $\bs{A}$ and $\bs{BB}'$. 
+It is very unfamiliar for one to have OU process applied to a statistical model since we have thus far only considered Gaussian error terms. The paper states that the parameters that define an OU process are $\bs{A}$ and $\bs{BB}'$.
+\begin{itemize}
+  \item Eigendecompose $\bs{A}$ as $\bs{A} = \bs{S\Psi S}^{-1}$. $\bs{S} = \left(s_{ij}\right), \; i,j=1,\ldots , p$, with unit diagonal elements. The off-diagonal elemtns of $\bs{S}$ and the logarithm of the diagonal elements of $\bs{\Psi}$ follow independent $\mathcal{N}\left(0, \sigma_{a}^{2}\right)$.
+  \item $\bs{BB}'$ is positive definite. Decompose into $\bs{C}=\bs{LDL}'$ where $\bs{L}$ is unit lower triagular and $\bs{D}$ is diagonal. The off-diagonal elements of $\bs{L}$ follow independent $\mathcal{N}\left(0,\sigma_{L}^{2}\right)$ and the logarithm of the diagonal elements of $\bs{D}$ follow independent $\mathcal{N}\left(0,\sigma_{D}^{2}\right)$.
+\end{itemize}
+\subsection{Sampling scheme}
+\begin{align}
+  \bs{\theta}_{k} &= \left(\bs{\beta}'_{k1}, \bs{v}'_{k1}, \ldots , \bs{\beta}'_{kr}, \bs{v}'_{kr}\right), \; k=1,\ldots , p\\
+  \bs{\theta} &= \left(\bs{\theta}'_{1},\ldots , \bs{\theta}'_{p}\right)\\
+  \bs{\eta}_{ik} &= \left(\bs{w}'_{ik1}, \bs{u}'_{ik1}, \ldots , \bs{w}'_{iks},\bs{u}'_{iks}\right), \; k=1,\ldots , p\\
+  \bs{\eta} &= \left(\bs{\eta}'_{i1}, \ldots , \bs{\eta}'_{ip}\right), \; i=1,\ldots , n
+\end{align}
+Then equation (1) can be recast as
+\begin{equation}
+  \bs{y}_{i}\left(t_{ij}\right) = \bs{\chi}_{ij}\bs{\theta} + \bs{E}_{ij}\bs{\eta}_{i} + \bs{\delta}_{i}\left(t_{ij}\right)
+\end{equation}
+where $\bs{\chi}_{ij}=\bs{I}_{p} \otimes \left(\bs{x}'_{ij}\Gamma_{rij}\right)$, $\bs{E}_{ij}=\bs{I}_{p}\otimes \left(\bs{z}'_{ij}\Gamma_{sij}\right)$, $\Gamma_{rij}=\bs{I}_{r} \otimes \left(\bs{\phi}'_{ij}, \bs{\psi}'_{ij}\right)$, and $\Gamma_{sij}=\bs{I}_{s} \otimes \left(\bs{\phi}'_{ij}, \bs{\psi}'_{ij}\right)$.
 \end{document}
