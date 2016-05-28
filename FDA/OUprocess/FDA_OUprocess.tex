@@ -254,4 +254,44 @@ Then equation (1) can be recast as
   \bs{y}_{i}\left(t_{ij}\right) = \bs{\chi}_{ij}\bs{\theta} + \bs{E}_{ij}\bs{\eta}_{i} + \bs{\delta}_{i}\left(t_{ij}\right)
 \end{equation}
 where $\bs{\chi}_{ij}=\bs{I}_{p} \otimes \left(\bs{x}'_{ij}\Gamma_{rij}\right)$, $\bs{E}_{ij}=\bs{I}_{p}\otimes \left(\bs{z}'_{ij}\Gamma_{sij}\right)$, $\Gamma_{rij}=\bs{I}_{r} \otimes \left(\bs{\phi}'_{ij}, \bs{\psi}'_{ij}\right)$, and $\Gamma_{sij}=\bs{I}_{s} \otimes \left(\bs{\phi}'_{ij}, \bs{\psi}'_{ij}\right)$.
+\subsubsection{$\bs{\theta}$}
+Combining the priors given in section 4, $\bs{\theta} \sim \mathcal{N}\left(\bs{0},\bs{G}^{-1}\right)$ where
+\begin{equation}
+  \bs{G}=\opn{blockdiag}\left(\sigma_{\beta_{k11}}^{-2}\bs{I}_{2},\sigma_{v_{11}}^{-2}\bs{I}_{K}, \ldots , \sigma_{\beta_{1r}^{-2}}\bs{I}_{2}, \sigma_{v_{1r}}^{-2}\bs{I}_{K}, \ldots , \sigma_{\beta_{p1}}^{-2}\bs{I}_{2}, \sigma_{v_{p1}}^{-2}\bs{I}_{K}, \ldots , \sigma_{\beta_{pr}}^{-2}\bs{I}_{2}, \sigma_{v_{pr}}^{-2}\bs{I}_{K}\right).
+\end{equation}
+Therefore, the full conditional of $\bs{\theta}$ is given by
+\begin{equation}
+  \opn{P}\left(\bs{\theta}|\text{rest}\right) \propto \prod_{i=1}^{n}\prod_{j=1}^{m_{i}}\exp\left\{-\frac{1}{2}\bs{\gamma}_{t_{ij}}'\bs{\Omega}_{\Delta t_{ij}}^{-1}\bs{\gamma}_{t_{ij}} \right\}\exp\left\{-\frac{1}{2}\bs{\theta}'G\bs{\theta} \right\}.
+\end{equation}
+We should convert $\bs{\gamma}_{t_{ij}}$ into a term including $\bs{y}_{i}\left(t_{ij}\right)$.
+\begin{align}
+  \bs{\gamma}_{t_{ij}} &= \bs{\delta}_{i}\left(t_{ij}\right) - \exp\left(-\bs{A}\Delta t_{ij}\right)\bs{\delta}_{i}\left(t_{i,j-1}\right)\\
+  \bs{\delta}_{i}\left(t_{ij}\right) &= \bs{y}_{i}\left(t_{ij}\right) -\bs{\chi}_{ij}\bs{\theta} - \bs{E}_{ij}\bs{\eta}_{i}\\
+  \bs{\delta}_{i}\left(t_{i,j-1}\right) &= \bs{y}_{i}\left(t_{i,j-1}\right) -\bs{\chi}_{i,j-1}\bs{\theta} - \bs{E}_{i,j-1}\bs{\eta}_{i}
+\end{align}
+Plugging in equation (56), (57) to (55) gives
+\begin{equation}
+  \bs{\gamma}_{t_{ij}} = \bs{y}_{i}\left(t_{ij}\right) - \bs{\chi}_{ij}\bs{\theta}-\bs{E}_{ij}\bs{\eta}_{i}-\exp\left(-\bs{A}\Delta t_{ij}\right)\left\{\bs{y}_{i}\left(t_{i,k-1}\right) -\bs{\chi}_{i,j-1}\bs{\theta}-\bs{E}_{i,j-1}\bs{\eta}_{i} \right\}.
+\end{equation}
+To separate the terms that include $\bs{\theta}$ from those that don't, we define
+\begin{align}
+  \bs{\zeta}_{i}\left(t_{ij}, t_{i,j-1}\right) &= \bs{y}_{i}\left(t_{ij}\right)-\bs{E}_{ij}\bs{\eta}_{i} - \exp\left(-\bs{A}\Delta t_{ij}\right)\left(\bs{y}_{i}\left(t_{i,j-1}\right)-\bs{E}_{i,j-1}\bs{\eta}_{i}\right)\\
+  \bs{\chi}_{i}\left(t_{ij},t_{i,j-1}\right) &= \bs{\chi}_{ij} - \exp\left(-\bs{A}\Delta t_{ij}\right)\bs{\chi}_{i,j-1}.
+\end{align}
+Then, $\bs{\gamma}_{t_{ij}} = \bs{\zeta}_{i}\left(t_{ij}, t_{i,j-1}\right) - \bs{\chi}_{i}\left(t_{ij},t_{i,j-1}\right)\bs{\theta}$. Plugging this back to equation (54),
+\begin{align*}
+  \opn{P}\left(\bs{\theta}|\text{rest}\right) &\propto \exp\left[-\frac{1}{2}\left( \bs{\theta}'\bs{G}\bs{\theta}+\sum_{i=1}^{n}\sum_{j=1}^{m_{i}}\left(\bs{\zeta}_{i}\left(t_{ij}, t_{i,j-1}\right) - \bs{\chi}_{i}\left(t_{ij},t_{i,j-1}\right)\bs{\theta}\right)'\bs{\Omega}_{\Delta t_{ij}}\left(\bs{\zeta}_{i}\left(t_{ij}, t_{i,j-1}\right) - \bs{\chi}_{i}\left(t_{ij},t_{i,j-1}\right)\bs{\theta}\right)\right)\right]\\
+  &\propto \exp\left[-\frac{1}{2}\left\{\bs{\theta}'\left( \bs{G} + \sum_{i=1}^{n}\sum_{j=1}^{m_{i}}\bs{\chi}_{i}'\bs{\Omega}_{\Delta t_{ij}}^{-1}\bs{\chi}_{i}\right)\bs{\theta} -2\bs{\theta}'\sum_{i=1}^{n}\sum_{j=1}^{m_{i}}\bs{\chi}'_{i}\bs{\Omega}_{\Delta t_{ij}}^{-1}\bs{\zeta}_{i}\right\} \right]
+\end{align*}
+Therefore, $\bs{\theta}|\text{rest} \sim \mathcal{N}\left(\bs{\mu}_{\bs{\theta}}, \bs{\Sigma}_{\bs{\theta}}\right)$ where
+\begin{align*}
+  \bs{\Sigma}_{\bs{\theta}} &= \left(\bs{G} + \sum_{i=1}^{m}\sum_{j=1}^{m_{i}} \bs{\chi}'_{i}\bs{\Omega}_{\Delta t_{ij}}^{-1}\bs{\chi}_{i}\right)^{-1}\\
+  \bs{\mu}_{\bs{\theta}} &= \bs{\Sigma}_{\bs{\theta}}\left[\sum_{i=1}^{n}\sum_{j=1}^{m_{i}}\bs{\chi}_{i}'\bs{\Omega}_{\Delta t_{ij}}^{-1}\bs{\zeta}_{i} \right]
+\end{align*}
+Some consideration that should be taken in this step is that calculation of $\bs{\Sigma}$ when computing $\bs{\Omega}_{\Delta t_{ij}}$. The dimension of covariates will most likely exceed two which disables the closed form solution to the equation $\bs{A\Sigma} + \bs{\Sigma A}' = \bs{BB}'$. Therefore, the equation must be solved numerically. Equations of the following form are referred to as the \emph{Sylvester equation}. 
+\begin{equation}
+  \bs{AX} + \bs{XB} = \bs{C}
+\end{equation}
+given matrices $\bs{A},\bs{B}$ and $\bs{C}$, the problem is to find the possible matrices $\bs{X}$ that satisfy the equation.
+Since most computer programming languages call Fortran subroutines in LAPACK or BLAS for matrix operations, either use \texttt{ZTGSYL} from Fortran or equivalent function calls in other languages. \texttt{C++ Armadillo} has the function \texttt{syl} that serves the same purpose.
 \end{document}

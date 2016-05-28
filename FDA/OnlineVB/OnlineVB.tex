@@ -1,0 +1,138 @@
+\documentclass[11pt]{article}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=0.6in]{geometry} % set the margins to 1in on all sides
+\usepackage{graphicx} % to include figures
+\usepackage{amsmath} % great math stuff
+\usepackage{amsfonts} % for blackboard bold, etc
+\usepackage{amsthm} % better theorem environments
+% various theorems, numbered by section
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{courier}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{titlesec}
+\usepackage{empheq}
+\usepackage{tikz}
+% \usepackage{mtpro2}
+% \usepackage{pslatex}
+
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bd}[1]{\mathbf{#1}} % for bolding symbols
+\newcommand{\RR}{\mathbb{R}} % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}} % for Integers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+\begin{document}
+\nocite{*}
+% \fontfamily{ptm}
+% \renewcommand\rmdefault{ptm}
+
+\title{Online Variational Bayes Inference for High-Dimensional Correlated Data Review}
+
+\author{Daeyoung Lim\thanks{Prof. Taeryon Choi} \\
+Department of Statistics \\
+Korea University}
+
+\maketitle
+\section{Model specification}
+  The mdoel that was proposed in this paper naturally assumes image data that consist of voxels where a voxel represents a single sample, or a data point, on a regularly spaced, three-dimensional grid. This data point can consist of a single piece of data such as an opacity or multiple pieces of data, such as a color in addition to opacity. The model is as follows:
+  \begin{equation}
+    \mathbf{Y}_{it} = \bs{\eta}_{i}\bs{\mu}_{it} + \mathbf{X}_{it}\bs{\beta}_{i} + \bs{\epsilon}_{it}
+  \end{equation}
+  where
+  \begin{align}
+    \mathbf{Y}_{it} &: K \times 1\\
+    \mathbf{X}_{it} &: K \times g\\
+    \bs{\mu}_{it} &: m \times 1 \, (m < K)\\
+    \bs{\eta}_{i} &: K \times m\\
+    \bs{\beta}_{i} &: g \times 1.
+  \end{align}
+  \subsection{Priors}
+  The priors are as follows:
+  \begin{align}
+    \bs{\mu}_{it} &\sim \mathcal{N}\left(\bs{\mu}_{i,t-1}, \theta_{i}^{-1}\mathbf{I}_{m}\right), \; \bs{\mu}_{i0} \sim \mathcal{N}\left(\bs{\mu}_{0}, v\mathbf{I}_{m}\right)\\
+    \bs{\epsilon}_{it} &\sim \mathcal{N}\left(\bs{0}, \sigma^{-2}\mathbf{I}_{K}\right)\\
+    \bs{\eta}_{ij} &\sim \mathcal{N}\left(\bs{0}, \tau^{-1}\left(\mathbf{I}_{K}-\rho \mathbf{C}\right)^{-1}\bs{\Omega}\right)^{\textbf{*}}\\
+    \left(\bs{\beta}_{i}, \theta_{i}\right) &\sim G, \; G \sim \opn{DP}\left(\alpha, \mathcal{N}\left(\bs{\beta}_{0r}, \bs{\Sigma}_{0r}\right)\opn{Ga}\left(a_{\theta}, b_{\theta}\right)\right)\\
+    \sigma^{2} &\sim \opn{Ga}\left(a_{\sigma}, b_{\sigma}\right)\\
+    \tau &\sim \opn{Ga}\left(a_{\tau}, b_{\tau}\right)\\
+    \rho_{\ell}&= \frac{\ell}{M}, \; \ell = 0, 1, \ldots , M-1, M-\epsilon\\
+    \phi_{\ell} &= \opn{P}\left(\rho = \rho_{\ell}\right) = \frac{1}{M+1}
+  \end{align}
+in which elements in \textbf{*} need clarification as below.
+\begin{align}
+  \bs{\Omega} &= \opn{Diag}\left(\frac{1}{d_{1+}}, \ldots , \frac{1}{d_{K+}}\right), \; d_{r+} = \sum_{s} d_{rs}\\
+  \mathbf{C}&:K \times K, \; c_{rs} = \frac{d_{rs}}{d_{r+}}, \quad \mathbf{D} = \left(d_{rs}\right): \text{proximity matrix}\\
+  d_{rs} &= \begin{cases}0 & \text{if $r=s$}\\ \left\| \varphi_{r}-\varphi_{s}\right\|^{-\phi},\; \phi > 0 & \text{otherwise}  \end{cases}.
+\end{align}
+\section{Variational Bayes}
+Instead of directly dealing with the Dirichlet process itself, we will use the stick-breaking representation and reformulate it as follows. If we let $\Theta_{i}=\left(\bs{\beta}_{i}', \theta_{i}'\right)'$,
+\begin{align}
+  &\Theta_{i} \sim G, \quad G =\sum_{r=1}^{\infty}\pi_{r}\delta_{\Theta_{r}^{*}}, \quad \pi_{r} = v_{r}\prod_{\ell < r}\left(1-v_{\ell}\right), \quad \Theta_{r}^{*} = \left({\bs{\beta}_{r}^{*}}', {\theta_{r}^{*}}'\right)'\\
+  &v_{r} \sim \opn{Be}\left(1,\alpha\right), \quad \alpha \sim \opn{Ga}\left(a_{\alpha}, b_{\alpha}\right), \bs{\beta}_{r}^{*}\sim \mathcal{N}\left(\bs{\beta}_{0r}, \bs{\Sigma}_{0r}\right), \; \theta_{r}^{*}\sim \opn{Ga}\left(a_{\theta}, b_{\theta}\right).
+\end{align}
+Then the parameters of interest are $\mathbf{W}=\left(V, \bs{\Theta^{*}}, \bs{z}, \bs{\eta}, \bs{\mu}, \rho, \tau, \sigma^{2}, \alpha\right)$. Then by mean-field assumption, 
+\begin{align*}
+  q\left(\mathbf{W}\right) &= q\left(\sigma^{2}\right)q\left(\alpha\right)q\left(\rho\right)q\left(\tau\right)\left(\prod_{r=1}^{R}q\left(\theta_{r}^{*}\right)q\left(\bs{\beta}_{r}^{*}\right)q\left(v_{r}\right)\right)\left(\prod_{i=1}^{n}q\left(z_{i}\right)\right)\\
+  &\times \left(\prod_{i=1}^{n}\prod_{i=1}^{T}q\left(\mu_{it}\right)\right)\left(\prod_{i=1}^{n}q\left(\bs{\eta}_{i}\right)\right)
+\end{align*}
+where $R$ is the truncation point of the Dirichlet process.
+\subsection{Online Variational Bayes}
+Online variational Bayes only considers one data point at a time which makes it much more practical for large datasets. Sato presented a discount term for the parameters that depend on the $i^{\text{th}}$ subject or observation. The only modification occurs here where the variational objective function embraces the discount term and also when updating the variational parameters, we do so by updating the 
+\end{document}
