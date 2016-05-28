@@ -133,6 +133,11 @@ Then the parameters of interest are $\mathbf{W}=\left(V, \bs{\Theta^{*}}, \bs{z}
   &\times \left(\prod_{i=1}^{n}\prod_{i=1}^{T}q\left(\mu_{it}\right)\right)\left(\prod_{i=1}^{n}q\left(\bs{\eta}_{i}\right)\right)
 \end{align*}
 where $R$ is the truncation point of the Dirichlet process.
-\subsection{Online Variational Bayes}
-Online variational Bayes only considers one data point at a time which makes it much more practical for large datasets. Sato presented a discount term for the parameters that depend on the $i^{\text{th}}$ subject or observation. The only modification occurs here where the variational objective function embraces the discount term and also when updating the variational parameters, we do so by updating the 
+\subsection{Updating variational distributions}
+The joint distribution of $\mathbf{Y}_{it}$ and $\mathbf{W}$ is
+\begin{align*}
+  p\left(\mathbf{Y}_{it}, \mathbf{W}\right) &= \left(\prod_{i=1}^{n}\prod_{t=1}^{T}p\left(\mathbf{Y}_{it}|\bs{\mu}_{it}, \bs{\eta}_{i}, \sigma^{2}, A\right)\right)p\left(\sigma^{2}\right)p\left(\alpha\right)p\left(\rho\right)p\left(\tau\right)\left(\prod_{r=1}^{R}p\left(\theta_{r}^{*}\right)p\left(\bs{\beta}_{r}^{*}\right)p\left(v_{r}\right)\right)\left(\prod_{i=1}^{n}p\left(z_{i}\right)\right)\\
+  &\times \left(\prod_{i=1}^{n}\prod_{t=1}^{T}p\left(\bs{\mu}_{it}\right)\right)\left(\prod_{i=1}^{n}p\left(\bs{\eta}_{i}\right)\right).
+\end{align*}
+
 \end{document}
