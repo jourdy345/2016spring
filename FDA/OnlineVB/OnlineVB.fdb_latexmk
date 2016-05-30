@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1464442176 "OnlineVB.tex" "OnlineVB.pdf" "OnlineVB" 1464442177
+["pdflatex"] 1464594168 "OnlineVB.tex" "OnlineVB.pdf" "OnlineVB" 1464594169
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1246382020 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1246382020 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -54,6 +54,7 @@
   "/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy8.pfb" 1248133631 29407 8c6dfc0f2d83bfc4807c3b1dc90ef23e ""
+  "/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb" 1248133631 35479 892d27442ef9ef29ce1ee57aa0e8a665 ""
   "/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
@@ -171,8 +172,8 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "OnlineVB.aux" 1464442177 355 7d18fbb8c4b3c3516ed5f008ffeb986c ""
-  "OnlineVB.tex" 1464442176 7112 6a5ba04aa87a9c7a621e73f8f7ed7b35 ""
+  "OnlineVB.aux" 1464594169 449 1a63970063833dddf9de95b577d97250 ""
+  "OnlineVB.tex" 1464594168 11020 0dd67e46e6ae44505a869e949c6dfd6f ""
   (generated)
   "OnlineVB.aux"
   "OnlineVB.pdf"

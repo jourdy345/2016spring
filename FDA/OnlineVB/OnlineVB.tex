@@ -139,5 +139,26 @@ The joint distribution of $\mathbf{Y}_{it}$ and $\mathbf{W}$ is
   p\left(\mathbf{Y}_{it}, \mathbf{W}\right) &= \left(\prod_{i=1}^{n}\prod_{t=1}^{T}p\left(\mathbf{Y}_{it}|\bs{\mu}_{it}, \bs{\eta}_{i}, \sigma^{2}, A\right)\right)p\left(\sigma^{2}\right)p\left(\alpha\right)p\left(\rho\right)p\left(\tau\right)\left(\prod_{r=1}^{R}p\left(\theta_{r}^{*}\right)p\left(\bs{\beta}_{r}^{*}\right)p\left(v_{r}\right)\right)\left(\prod_{i=1}^{n}p\left(z_{i}\right)\right)\\
   &\times \left(\prod_{i=1}^{n}\prod_{t=1}^{T}p\left(\bs{\mu}_{it}\right)\right)\left(\prod_{i=1}^{n}p\left(\bs{\eta}_{i}\right)\right).
 \end{align*}
-
+\subsubsection{$\bs{\eta}$}
+We should recall that
+\begin{align*}
+  \bs{\eta}_{i} &= \begin{bmatrix} \vdots & \vdots & \hdots & \vdots \\ \bs{\eta}_{i1} & \bs{\eta}_{i2} & \hdots & \bs{\eta}_{im}\\ \vdots & \vdots & \hdots & \vdots \end{bmatrix}
+\end{align*}
+and thus $\bs{\eta}_{i}\bs{\mu}_{it} = \sum_{\ell=1}^{m}\mu_{it,\ell}\bs{\eta}_{i\ell}$.
+\begin{align*}
+  \log q\left(\bs{\eta}_{ij}\right) &\propto \opn{E}\left[\sum_{i=1}^{n}\sum_{t=1}^{T}-\frac{\sigma^{2}}{2}\left(\mathbf{Y}_{it}- \bs{\eta}_{i}\bs{\mu_{it}}-\mathbf{X}_{it}\bs{\beta}_{i}\right)'\left(\mathbf{Y}_{it}- \bs{\eta}_{i}\bs{\mu_{it}}-\mathbf{X}_{it}\bs{\beta}_{i}\right) + \sum_{i=1}^{n}\sum_{j=1}^{m}-\frac{\tau}{2}\bs{\eta}'_{ij}\bs{\Omega}^{-1}\left(\mathbf{I}_{K}- \rho \mathbf{C}\right)\bs{\eta}_{ij}\right]\\
+  &\propto \sum_{i=1}^{n}\sum_{t=1}^{T}-\frac{1}{2}\frac{\widetilde{a}_{\sigma}}{\widetilde{b}_{\sigma}}\opn{E}\left[\left(\mathbf{Y}_{it}-\sum_{j=1}^{m}\mu_{it,j}\bs{\eta}_{ij}-\mathbf{X}_{it}\bs{\beta}_{i}\right)'\left(\mathbf{Y}_{it}-\sum_{j=1}^{m}\mu_{it,j}\bs{\eta}_{ij}-\mathbf{X}_{it}\bs{\beta}_{i} \right) \right]\\
+  &\quad +\sum_{i=1}^{n}\sum_{j=1}^{m}-\frac{1}{2}\frac{\widetilde{a}_{\tau}}{\widetilde{b}_{\tau}}\opn{E}\left[\bs{\eta}_{ij}'\bs{\Omega}^{-1}\left(\mathbf{I}_{K}-\rho\mathbf{C}\right)\bs{\eta}_{ij}\right]\\
+  &\propto \sum_{i=1}^{n}\sum_{t=1}^{T}-\frac{1}{2}\frac{\widetilde{a}_{\sigma}}{\widetilde{b}_{\sigma}}\opn{E}\left[\left(\mathbf{Y}_{it}-\mu_{it,j}\bs{\eta}_{ij}-\sum_{\ell \neq j}\mu_{ij,\ell}\bs{\eta}_{i\ell} -\mathbf{X}_{it}\bs{\beta}_{i}\right)'\left(\mathbf{Y}_{it}-\mu_{it,j}\bs{\eta}_{ij}-\sum_{\ell \neq j}\mu_{ij,\ell}\bs{\eta}_{i\ell} -\mathbf{X}_{it}\bs{\beta}_{i} \right) \right]\\
+  &\quad +\sum_{i=1}^{n}-\frac{1}{2}\frac{\widetilde{a}_{\tau}}{\widetilde{b}_{\tau}}\opn{E}\left[\bs{\eta}'_{ij}\bs{\Omega}^{-1}\left(\mathbf{I}_{K}-\rho\mathbf{C}\right)\bs{\eta}_{ij}\right]\\
+  &\propto \sum_{i=1}^{n}\sum_{t=1}^{T}-\frac{1}{2}\frac{\widetilde{a}_{\sigma}}{\widetilde{b}_{\sigma}}\left(\opn{E}\left[\mu_{it,j}^{2}\right]\bs{\eta}'_{ij}\bs{\eta}_{ij} - 2\opn{E}\left[\mu_{it,j}\right]\bs{\eta}_{ij}'\left(\mathbf{Y}_{it}-\sum_{\ell\neq j}\opn{E}\left[\mu_{it,\ell}\right]\opn{E}\left[\bs{\eta}_{i\ell}\right]-\mathbf{X}_{it}\opn{E}\left[\bs{\beta}_{i}\right]\right) \right)\\
+  &\quad +\sum_{i=1}^{n}-\frac{1}{2}\left(\frac{\widetilde{a}_{\tau}}{\widetilde{b}_{\tau}}\bs{\eta}'_{ij}\bs{\Omega}^{-1}\left(\mathbf{I}_{K}-\opn{E}\left[\rho\right]\mathbf{C}\right)\bs{\eta}_{ij} \right)\\
+  &\propto -\frac{1}{2}\bs{\eta}'_{ij}\left(\frac{\widetilde{a}_{\sigma}}{\widetilde{b}_{\sigma}}\left(\sum_{t=1}^{T}\opn{E}\left[\mu_{it,j}^{2}\right]\right)\mathbf{I}_{K}+\frac{\widetilde{a}_{\tau}}{\widetilde{b}_{\tau}}\bs{\Omega}^{-1}\left(\mathbf{I}_{K}-\opn{E}\left[\rho\right]\mathbf{C}\right)\right)\bs{\eta}_{ij}\\
+  &\quad +\frac{\widetilde{a}_{\tau}}{\widetilde{b}_{\tau}}\bs{\eta}'_{ij}\sum_{t=1}^{T}\left(\opn{E}\left[\mu_{it,j}\right]\left(\mathbf{Y}_{it}-\sum_{\ell \neq j}\opn{E}\left[\mu_{it,\ell}\right]\opn{E}\left[\bs{\eta}_{i\ell}\right]-\mathbf{X}_{it}\opn{E}\left[\bs{\beta}_{i}\right]\right)\right)
+\end{align*}
+Therefore, $q\left(\bs{\eta}_{ij}\right)\sim \mathcal{N}\left(\mu_{\eta_{ij}}, \Sigma_{\eta_{ij}}\right)$ where
+\begin{align*}
+  \Sigma_{\eta_{ij}} &= \left(\frac{\widetilde{a}_{\sigma}}{\widetilde{b}_{\sigma}}\left(\sum_{t=1}^{T}\opn{E}\left[\mu_{it,j}^{2}\right]\right)\mathbf{I}_{K}+\frac{\widetilde{a}_{\tau}}{\widetilde{b}_{\tau}}\bs{\Omega}^{-1}\left(\mathbf{I}_{K}-\opn{E}\left[\rho\right]\mathbf{C}\right)\right)^{-1}\\
+  \mu_{\eta_{ij}} &= \Sigma_{\eta_{ij}}\frac{\widetilde{a}_{\tau}}{\widetilde{b}_{\tau}}\sum_{t=1}^{T}\left(\opn{E}\left[\mu_{it,j}\right]\left(\mathbf{Y}_{it}-\sum_{\ell \neq j}\opn{E}\left[\mu_{it,\ell}\right]\opn{E}\left[\bs{\eta}_{i\ell}\right]-\mathbf{X}_{it}\opn{E}\left[\bs{\beta}_{i}\right]\right)\right).
+\end{align*}
 \end{document}
