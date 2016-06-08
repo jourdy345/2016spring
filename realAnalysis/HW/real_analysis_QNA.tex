@@ -2,6 +2,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{times}
 \usepackage{newtxmath}
+\usepackage[utf8]{inputenc}
 \addtolength{\evensidemargin}{-.5in}
 \addtolength{\oddsidemargin}{-.5in}
 \addtolength{\textwidth}{0.8in}
@@ -50,75 +51,109 @@ Daeyoung Lim
 \begin{document}
 \maketitle
 \fontfamily{ptm}
-\section*{Chapter 6}
-\begin{question}[6-9]
-  Assume $f$ is measurable. Prove that $f \in L^{1} \iff |f| \in L^{1}$. Also prove that
-  $$
-    | \int f \,d\lambda \;| \leq \int |f|\,d\lambda.
-  $$
+\section*{Chapter 10. $L^{p} Spaces$}
+\begin{question}[10-1]
+  If $1 < p < \infty$ and $a \geq 0$, $b \geq 0$, prove that
+  \begin{equation}
+    ab \leq \frac{a^{p}}{p} + \frac{b^{q}}{q},
+  \end{equation}
+  with equality if and only if $a^{p}=b^{q}$.
 \end{question}
-\begin{proof}
-  By definition, $f$ is integrable if both $\int f_{+} \, d\lambda$ and $\int f_{-}\,d\lambda$ are finite. Note that
-    \begin{align*}
-      \int f \, d\lambda &= \int f_{+}\, d\lambda - \int f_{-}\,d\lambda\\
-      \int |f| \, d\lambda &= \int f_{+}\, d\lambda + \int f_{-}\,d\lambda .
-    \end{align*}
-    It is trivial that if one is finite, so is the other.\\
-    To prove the inequality, note that $-|f| \leq f \leq |f|$. Then by property 3 and 5 in p.124,
-    $$
-      -\int |f|\,d\lambda \leq \int f\,d\lambda \leq \int |f|\, d\lambda.
-    $$
-    We have obtained the desired inequality.
-\end{proof}
 
-\begin{question}[6-10]
-  Assume $f$ and $g$ are measurable, $g \in L^{1}$, and $|f| \leq |g|$. Prove that $f \in L^{1}$.
-\end{question}
 \begin{proof}
-  By virtue of problem 6-9, $|g| \in L^{1}$. Along with property 5 in p.124,
-  $$
-    \int |f|\,d\lambda \leq \int |g|\, d\lambda < \infty.
-  $$
-  Therefore, $|f| \in L^{1}$ which is equivalent to $f \in L^{1}$.
-\end{proof}
-
-\begin{question}[6-11]
-  Assume $f \in L^{1}\left(\R^{n}\right)$. Define
+  Let $b$ be fixed and define a function
+  \begin{equation}
+    f\left(a\right) = ab-\frac{a^{p}}{p}
+  \end{equation}
+  and maximize the function using elementary calculus.
   \begin{align*}
-    f_{k}\left(x\right) = \begin{cases}\; f\left(x\right) & \text{if $|f\left(x\right)|\leq k$ and $|x| \leq k$} \\ \; 0 & \text{otherwise.}  \end{cases}
+    f'\left(a\right) &= b - a^{p-1}=0\\
+    a &= b^{1/\left(p-1\right)}
   \end{align*}
-  Prove that
-  $$
-    \lim_{k\to\infty} \int f_{k}\,d\lambda = \int f\,d\lambda.
-  $$
-\end{question}
-\begin{proof}
-  This question is asking us to verify the conditions for \emph{Lebesgue's Dominated Convergence Theorem}. The two conditions are 
-  \begin{itemize}
-    \item $\lim_{k\to\infty} f_{k}\left(x\right)$ exists for all $x\in \R^{n}$.
-    \item $|f_{k}\left(x\right)|\leq g\left(x\right)$ for all $x \in \R^{n}$.
-  \end{itemize}
-  The condition for $f_{k}$ to be $f$ will always be true and thus renders the case separation pointless if $k \to \infty$. Therefore, $\lim_{k\to\infty}f_{k} = f$ for all $x \in \R^{n}$. The second condition is easily satisfied if we choose $g$ to be $g\left(x\right) = |f\left(x\right)|$. We are now fully capable of applying LDCT and the desired result is obtained.
+  Therefore, the function is maximized when $a = b^{1/\left(p-1\right)}$. Plugging in,
+  \begin{align*}
+    f\left(b^{1/\left(p-1\right)}\right) &= b^{p/\left(p-1\right)} - \frac{b^{p/\left(1-p\right)}}{p}\\
+    &= \frac{p-1}{p}b^{\frac{p}{p-1}}
+  \end{align*}
+  is the maximum value. Therefore, we can conclude that
+  \begin{equation}
+    ab-\frac{a^{p}}{p} \leq \frac{b^{q}}{q}
+  \end{equation}
+  by defining $q = p/\left(p-1\right)$.
 \end{proof}
 
-\begin{question}[6-12]
-  Assume $f \in L^{1}\left(\R^{n}\right)$. Prove that
-  $$
-    \lim_{k\to\infty}\int f\left(x\right)e^{-|x|^{2}/k}\,dx = \int f\left(x\right)\,dx .
-  $$
+\begin{question}[10-2]
+  Assume $1 < p_{k} < \infty$ for $k=1, \ldots , N$, and $\sum_{k=1}^{N}1/p_{k}=1$. Prove that
+  \begin{equation}\label{prob10-2}
+    \left| \int_{\mathcal{X}} f_{1}f_{2}\cdots f_{N}\,d\mu \right| \leq \left\|f_{1}\right\|_{p_{1}} \left\|f_{2}\right\|_{p_{2}}\cdots \left\|f_{N}\right\|_{p_{N}}.
+  \end{equation}
 \end{question}
 \begin{proof}
-  The question is, as is the previous one, asking us to check if we can apply LDCT and explicitly prove it for this specific function. To prove the first condition, first note that $0 < e^{-|x|^{2}/k} \leq 1$. 
+  If $N=2$, the problem is reduced to the classical Hölder's inequality. Therefore, we will assume \ref{prob10-2} holds for some $N > 2$ and then show that it also holds for $N +1$. First, let us define
+  $$
+    q^{N+1} = \frac{p_{N+1}}{p_{N+1}-1}
+  $$
+  and for $i = 1, \dots , N$, define
+  $$
+    r_{i} = p_{i} \cdot \left(1-\frac{1}{p_{N+1}}\right).
+  $$
+  Then
+  \begin{align*}
+    \frac{1}{p_{N+1}} + \frac{1}{q_{N+1}} &= 1\\
+    \sum_{i=1}^{N}\frac{1}{r_{i}} &= 1\\
+    q_{N+1}\cdot r_{i} &= p_{i}.
+  \end{align*}
+
+  Applying Hölder's inequality to $f = \prod_{i=1}^{N}f_{i}$ and $g=f_{N+1}$, we find:
+  \begin{align}
+    \int_{\mathcal{X}}\left|\prod_{i=1}^{N+1}f_{i}\right|\,d\mu &\leq \left\|f_{N+1}\right\|_{p_{N+1}}\cdot \left\|\prod_{i=1}^{N}f_{i}\right\|_{q_{n}}\\
+    &= \left\|f_{n}\right\|p_{n} \cdots \left(\int_{\mathcal{X}}\prod_{i=1}^{N}\left|f_{i}^{q_{N+1}}\right| \, d\mu\right)^{1/q_{N+1}}\\
+    &\leq \left\|f_{N+1}\right\|_{p_{N+1}}\cdot \left(\prod_{i=1}^{N}\left\|f_{i}^{q_{N+1}}\right\|_{r_{i}}\right)^{1/q_{N+1}}\\
+    =\prod_{i=1}^{N+1}\left\|f_{i}\right\|_{p_{i}}
+  \end{align}
 \end{proof}
 
-You can copy-and-paste this block as many times as you need.
-$$
-  \left\{x\in \R^{n}| f\left(x\right) < \infty\right\}
-$$
+\begin{question}[10-3]
+  Assume in Hölder's inequality $f \geq 0, \, g \leq 0$, and 
+  $$\label{prob10-3}
+    \int_{\mathcal{X}}fg\,d\mu = \left\|f\right\|_{p}\left\|g\right\|_{q}.
+  $$
+  Prove that $f\left(x\right)^{p}=g\left(x\right)^{q}$ $\mu$-a.e., to within a multiplicative constant.
+\end{question}
+\begin{proof}
+  If \ref{prob10-3} is true, then it also indicates
+  $$
+    \int_{\mathcal{X}}\bar{f}\bar{g}\,d\mu = 1
+  $$
+  where $\bar{f}=\frac{f}{\left\|f\right\|_{p}}$ and $\bar{g}=\frac{g}{\left\|g\right\|_{q}}$. It also translates to
+  $$
+    \int_{\mathcal{X}}\bar{f}\bar{g}\,d\mu = \frac{1}{p}\int_{\mathcal{X}}\bar{f}^{p}\,d\mu + \frac{1}{q}\int_{\mathcal{X}}\bar{g}^{q}\,d\mu.
+  $$
+  Therefore, $\bar{f}\bar{g}=\bar{f^{p}}/p + \bar{g^{q}}/q$ $\mu$-a.e. Since this is a case of \emph{Young's inequality}, the equality holds if and only if $\bar{f}^{p}=\bar{g}_{q}$ $\mu$-a.e. 
+\end{proof}
 
-%%%% for the homework, you can delete everything from here to the end
-%%%% (except for the last line ''\end{document}'', don't delete that).
-
+\begin{question}[10-7]
+  Suppose $1 \leq p < r < q < \infty$. Prove that $L^{p} \cap L^{q} \subset L^{r}$.
+\end{question}
+\begin{proof}
+  Since $\frac{1}{q} < \frac{1}{r} < \frac{1}{p}$, there exists a unique $\theta$ such that
+  $$
+    \frac{1}{r} = \frac{\theta}{p} + \frac{1-\theta}{q}.
+  $$
+  The number $\theta$ satisfies $0 < \theta < 1$ and equals
+  $$
+    \theta = \dfrac{\dfrac{1}{r} - \dfrac{1}{q}}{\dfrac{1}{p}-\dfrac{1}{q}}, \qquad 1-\theta = \dfrac{\dfrac{1}{r}-\dfrac{1}{r}}{\dfrac{1}{p}-\dfrac{1}{q}}.
+  $$
+  It follows that $1 = \frac{r\theta}{p}+\frac{r\left(1-\theta\right)}{q}$ which indicates that $p/\left(r\theta\right)$ and $q/\left(r\left(1-\theta\right)\right)$ are conjugate exponents. Thus by Hölder's inequality,
+  \begin{align}
+    \left\|f\right\|_{r} &= \left\|f^{\theta}f^{1-\theta}\right\|_{r}\\
+    &=\left\|f^{r\theta}f^{r\left(1-\theta\right)}\right\|_{1}^{1/r}\\
+    &\leq \left(\left\|f^{r\theta}\right\|_{\frac{p}{r\theta}}\left\|f^{r\left(1-\theta\right)}\right\|_{\frac{q}{r\left(1-\theta\right)}}\right)^{1/r}\\
+    &= \left(\left\|f\right\|_{p}^{r\theta}\left\|f\right\|_{q}^{r\left(1-\theta\right)}\right)^{1/r}\\
+    &=\left\|f\right\|_{p}^{\theta}\left\|f\right\|_{q}^{1-\theta} < \infty.
+  \end{align}
+Therefore, $L^{r}$ norm is also finite for all $f \in L^{p}\cap L^{q}$.
+\end{proof}
 
 \section*{For the journal}
 
