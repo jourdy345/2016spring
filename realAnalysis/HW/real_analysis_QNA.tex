@@ -155,6 +155,25 @@ Daeyoung Lim
 Therefore, $L^{r}$ norm is also finite for all $f \in L^{p}\cap L^{q}$.
 \end{proof}
 
+\begin{question}[10-13]
+  Suppose $1 \leq p < r< \infty$. Prove that $L^{p} \cap L^{\infty} \subset L^{r}$. Moreover, show that if $f \in L^{p}\cap L^{\infty}$, then
+  $$
+    \left\|f\right\|_{r} \leq \left\|f\right\|_{p}^{p/r}\left\|f\right\|_{\infty}^{1-p/r}.
+  $$
+\end{question}
+
+\begin{proof}
+  By the definition of $\left\|f\right\|_{\infty}$, $\left|f\left(x\right)\right|\leq \left\|f\right\|_{\infty}$ $\mu$-a.e.. Therefore,
+  \begin{align*}
+    \left|f\left(x\right)\right|^{r-p} &\leq \left\|f\right\|_{\infty}^{r-p}\\
+    \left|f\right|^{r-p}\left|f\right|^{p} &\leq \left\|f\right\|_{\infty}^{r-p}\left|f\right|^{p}\\
+    \int \left|f\right|^{r-p}\left|f\right|^{p}\,d\mu &\leq \left\|f\right\|_{\infty}^{r-p}\int \left|f\right|^{p}\,d\mu \\
+    \left(\int \left|f\right|^{r}\,d\mu \right)^{1/r} &\leq \left\|f\right\|_{\infty}^{1-p/r}\left\{\left(\int \left|f\right|^{p}\,d\mu \right)^{1/p} \right\}^{p/r}\\
+    \left\|f\right\|_{r} &\leq \left\|f\right\|_{\infty}^{1-p/r}\left\|f\right\|_{p}^{p/r}.
+  \end{align*}
+\end{proof}
+
+
 \section*{For the journal}
 
 We have similar environments for Theorems, Exercises, and Challenge Problems.
